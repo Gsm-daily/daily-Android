@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Daily"
 include(":app")
 include(":domain")
+include(":data")

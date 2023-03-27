@@ -11,6 +11,7 @@ object Dependency {
         const val CORE_SPLASH_SCREEN = "androidx.core:core-splashscreen:${Versions.CORE_SPLASH_SCREEN}"
         const val COMPOSE_RUNTIME = "androidx.compose.runtime:runtime:${Versions.COMPOSE_RUNTIME}"
         const val COMPOSE_MATERIAL3 = "androidx.compose.material3:material3:${Versions.COMPOSE_MATERIAL3}"
+        const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:${Versions.ACTIVITY_COMPOSE}"
     }
 
     object Google {

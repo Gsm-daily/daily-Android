@@ -23,6 +23,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    buildFeatures {
+        compose = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -38,6 +41,7 @@ dependencies {
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.AndroidX.CORE_SPLASH_SCREEN)
     implementation(Dependency.Google.MATERIAL)
+    implementation(Dependency.AndroidX.COMPOSE_RUNTIME)
     implementation(Dependency.UnitTest.JUNIT)
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)

@@ -6,6 +6,7 @@ object Versions {
     const val APP_COMPAT = "1.6.1"
     const val CORE_SPLASH_SCREEN = "1.1.0-alpha01"
     const val COMPOSE_RUNTIME = "1.3.3"
+    const val COMPOSE_MATERIAL3 = "1.0.1"
 
     const val MATERIAL = "1.8.0"
 

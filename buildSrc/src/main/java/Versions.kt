@@ -4,7 +4,7 @@ object Versions {
 
     const val CORE_KTX = "1.9.0"
     const val APP_COMPAT = "1.6.1"
-    const val CORE_SPLASH_SCREEN = "1.1.0-alpha01"
+    const val CORE_SPLASH_SCREEN = "1.0.0"
     const val COMPOSE_RUNTIME = "1.3.3"
     const val COMPOSE_MATERIAL3 = "1.0.1"
     const val ACTIVITY_COMPOSE = "1.6.1"

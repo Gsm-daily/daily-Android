@@ -1,16 +1,16 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id(Dependency.GradlePlugin.ANDROID_APPLICATION)
+    id(Dependency.GradlePlugin.KOTLIN_ANDROID)
 }
 
 android {
     namespace = "com.daily.daily"
-    compileSdk = 33
+    compileSdk = Versions.COMPILE_SDK
 
     defaultConfig {
         applicationId = "com.daily.daily"
-        minSdk = 21
-        targetSdk = 33
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
         versionCode = 1
         versionName = "1.0"
 
@@ -34,10 +34,10 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(Dependency.AndroidX.CORE_KTX)
+    implementation(Dependency.AndroidX.APP_COMPAT)
+    implementation(Dependency.Google.MATERIAL)
+    implementation(Dependency.UnitTest.JUNIT)
+    implementation(Dependency.AndroidTest.ANDROID_JUNIT)
+    implementation(Dependency.AndroidTest.ESPRESSO_CORE)
 }

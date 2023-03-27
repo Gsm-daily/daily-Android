@@ -36,6 +36,7 @@ dependencies {
 
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
+    implementation(Dependency.AndroidX.CORE_SPLASH_SCREEN)
     implementation(Dependency.Google.MATERIAL)
     implementation(Dependency.UnitTest.JUNIT)
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)

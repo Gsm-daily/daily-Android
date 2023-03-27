@@ -8,8 +8,8 @@ object Dependency {
     object AndroidX {
         const val CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
         const val APP_COMPAT = "androidx.appcompat:appcompat:${Versions.APP_COMPAT}"
+        const val CORE_SPLASH_SCREEN = "androidx.core:core-splashscreen:${Versions.CORE_SPLASH_SCREEN}"
     }
-
 
     object Google {
         const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"

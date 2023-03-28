@@ -35,6 +35,7 @@ dependencies {
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.Google.MATERIAL)
+    implementation(Dependency.AndroidX.COMPOSE_RUNTIME)
     implementation(Dependency.AndroidX.COMPOSE_MATERIAL3)
     implementation(Dependency.AndroidX.COMPOSE_TOOLING)
     implementation(Dependency.UnitTest.JUNIT)

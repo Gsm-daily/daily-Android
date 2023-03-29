@@ -8,6 +8,7 @@ object Versions {
     const val COMPOSE_RUNTIME = "1.3.3"
     const val COMPOSE_MATERIAL3 = "1.0.1"
     const val ACTIVITY_COMPOSE = "1.6.1"
+    const val COMPOSE_TOOLING = "1.5.0-alpha01"
 
     const val MATERIAL = "1.8.0"
 

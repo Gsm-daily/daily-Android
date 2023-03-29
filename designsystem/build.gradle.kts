@@ -44,6 +44,7 @@ dependencies {
     implementation(Dependency.AndroidX.COMPOSE_RUNTIME)
     implementation(Dependency.AndroidX.COMPOSE_MATERIAL3)
     implementation(Dependency.AndroidX.COMPOSE_TOOLING)
+    implementation(Dependency.AndroidX.COMPOSE_UI)
     implementation(Dependency.UnitTest.JUNIT)
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)

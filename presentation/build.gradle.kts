@@ -37,6 +37,8 @@ android {
 
 dependencies {
 
+    implementation(project(":designsystem"))
+
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.Google.MATERIAL)

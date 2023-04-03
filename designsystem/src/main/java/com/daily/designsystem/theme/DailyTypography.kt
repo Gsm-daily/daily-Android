@@ -70,6 +70,7 @@ object DailyTypography {
     val caption2 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Bold,
+        fontSize = 12.sp,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 }

@@ -1,6 +1,7 @@
 package com.daily.designsystem.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -21,38 +22,45 @@ object DailyTypography {
     val h1 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Bold,
-        fontSize = 32.sp
+        fontSize = 32.sp,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
     val subtitle1 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp
+        fontSize = 16.sp,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
     val body1 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
-        lineHeight = 1.5f.sp
+        lineHeight = 1.5f.sp,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
     val body2 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontSize = 16.sp,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
     val body3 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        lineHeight = 1.3f.sp
+        lineHeight = 1.3f.sp,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
     val caption1 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
+        fontSize = 12.sp,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
     val caption2 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Bold,
+        platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 }
 

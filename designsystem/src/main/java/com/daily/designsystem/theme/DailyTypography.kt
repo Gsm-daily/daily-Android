@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.daily.designsystem.R
 import com.daily.designsystem.modifier.dailyClickable
@@ -44,7 +45,7 @@ object DailyTypography {
         fontFamily = notosanskr,
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
-        lineHeight = 1.5f.sp,
+        lineHeight = (16 * 1.5f).sp,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
     val body2 = TextStyle(
@@ -57,7 +58,7 @@ object DailyTypography {
         fontFamily = notosanskr,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        lineHeight = 1.3f.sp,
+        lineHeight = (14 * 1.3f).sp,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
     val caption1 = TextStyle(
@@ -69,6 +70,7 @@ object DailyTypography {
     val caption2 = TextStyle(
         fontFamily = notosanskr,
         fontWeight = FontWeight.Bold,
+        fontSize = 12.sp,
         platformStyle = PlatformTextStyle(includeFontPadding = false)
     )
 }
@@ -149,6 +151,7 @@ fun Body1(
     text: String,
     textColor: Color = DailyTheme.color.Black,
     textAlign: TextAlign = TextAlign.Start,
+    letterSpacing: TextUnit = TextUnit.Unspecified,
     textDecoration: TextDecoration? = null,
     textOverflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
@@ -170,6 +173,7 @@ fun Body1(
         style = DailyTypography.body1,
         color = textColor,
         textAlign = textAlign,
+        letterSpacing = letterSpacing,
         textDecoration = textDecoration,
         overflow = textOverflow,
         softWrap = softWrap,

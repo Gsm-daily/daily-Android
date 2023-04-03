@@ -2,6 +2,6 @@
     <string name="description_title">매일매일 성장하는 일기장</string>
     <string name="description_subtitle">매일 일기를 작성하고\n점점 꾸며지는 테마를 감상해 보세요!</string>
     <string name="sign_up">회원가입</string>
-    <string name="login">&#160;로그인</string>
+    <string name="login">로그인</string>
     <string name="already_have_an_account">계정이 있으신가요?</string>
 </resources>

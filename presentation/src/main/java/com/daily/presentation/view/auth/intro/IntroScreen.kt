@@ -3,10 +3,6 @@ package com.daily.presentation.view.auth.intro
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,13 +13,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.daily.designsystem.component.DailyButton
+import com.daily.designsystem.theme.*
 import com.daily.presentation.R
 
 @Composable
@@ -62,18 +55,15 @@ fun IntroScreen(modifier: Modifier = Modifier) {
                 contentDescription = null,
                 modifier = modifier.offset(y = offsetAnimation),
             )
-            Text(
+            Subtitle1(
                 text = stringResource(R.string.description_title),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
+                textColor = DailyTheme.color.White
             )
             Spacer(modifier = modifier.height(16.dp))
-            Text(
+            Body1(
                 text = stringResource(R.string.description_subtitle),
-                fontSize = 16.sp,
                 textAlign = TextAlign.Center,
-                color = Color.White
+                textColor = DailyTheme.color.White
             )
         }
         Spacer(modifier = modifier.weight(1f))
@@ -84,38 +74,23 @@ fun IntroScreen(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .padding(bottom = 114.dp)
         ) {
-            Button(
-                onClick = { },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF5F8F)),
-                shape = RoundedCornerShape(20.dp),
-                modifier = modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = stringResource(R.string.sign_in),
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.White,
-                    modifier = modifier.padding(vertical = 10.dp)
+            DailyButton(
+                text = stringResource(R.string.sign_up),
+                modifier = modifier.fillMaxWidth(),
+                onClick = {}
+            )
+            Spacer(modifier = modifier.height(16.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Caption1(
+                    text = stringResource(R.string.already_have_an_account),
+                    textColor = DailyTheme.color.White
+                )
+                Spacer(modifier = modifier.width(8.dp))
+                Caption2(
+                    text = stringResource(R.string.login),
+                    textColor = DailyTheme.color.Primary20
                 )
             }
-            Spacer(modifier = modifier.height(16.dp))
-            Text(
-                buildAnnotatedString {
-                    withStyle(style = SpanStyle(color = Color.White, fontSize = 16.sp)) {
-                        append(stringResource(R.string.already_have_an_account))
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = Color(0xFFFF5F8F),
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    ) {
-                        append(stringResource(R.string.login))
-                    }
-                }
-            )
         }
     }
 }

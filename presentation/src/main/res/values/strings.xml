@@ -7,8 +7,14 @@
     <string name="welcome_to_back">돌아오신걸 환영합니다.</string>
     <string name="enter_the_email">이메일을 입력해 주세요.</string>
     <string name="enter_the_password">비밀번호를 입력해 주세요.</string>
+    <string name="enter_the_confirm_password">비밀번호를 다시 입력해 주세요.</string>
+    <string name="confirm_password_does_not_match">재입력한 비밀번호가 일치하지 않습니다.</string>
     <string name="forgot_password">비밀번호를 잊으셨나요?</string>
     <string name="first_time_to_daily">Daily가 처음이라면,</string>
     <string name="email_format_not_valid">이메일 형식이 올바르지 않습니다.</string>
     <string name="password_is_blank">비밀번호가 입력되지 않았습니다.</string>
+    <string name="email_authentication">이메일로 인증번호가 발송됩니다.</string>
+    <string name="get_verification_code">인증번호 받기</string>
+    <string name="next">다음</string>
+    <string name="enter_the_nickname">사용하실 닉네임을 입력해 주세요.</string>
 </resources>

@@ -2,10 +2,8 @@ package com.daily.presentation.view.auth.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -14,10 +12,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.util.PatternsCompat.EMAIL_ADDRESS
 import com.daily.designsystem.component.DailyTextField
 import com.daily.designsystem.modifier.dailyClickable
-import com.daily.designsystem.R
 import com.daily.designsystem.component.DailyButton
-import com.daily.designsystem.theme.Caption1
-import com.daily.designsystem.theme.DailyTheme
+import com.daily.designsystem.theme.*
 
 @Composable
 fun LoginField(
@@ -32,13 +28,18 @@ fun LoginField(
     DailyTextField(
         value = email,
         hint = stringResource(com.daily.presentation.R.string.enter_the_email),
-        leadingIcon = { Icon(painter = painterResource(R.drawable.ic_mail), contentDescription = null) },
+        leadingIcon = {
+            IcMail(
+                contentDescription = "email",
+                tint = DailyTheme.color.Black
+            )
+        },
         trailingIcon = {
             if (email.isNotEmpty()) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_delete),
-                    contentDescription = null,
-                    modifier = modifier.dailyClickable(rippleEnable = false) { email = "" }
+                IcDelete(
+                    contentDescription = "delete",
+                    modifier = modifier.dailyClickable(rippleEnable = false) { email = "" },
+                    tint = DailyTheme.color.Neutral40
                 )
             }
         },
@@ -62,14 +63,30 @@ fun LoginField(
         hint = stringResource(com.daily.presentation.R.string.enter_the_password),
         visualTransformation = if (isPasswordShowed) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        leadingIcon = { Icon(painter = painterResource(R.drawable.ic_lock), contentDescription = null) },
+        leadingIcon = {
+            IcLock(
+                contentDescription = "password",
+                tint = DailyTheme.color.Black
+            )
+        },
         trailingIcon = {
             if (password.isNotEmpty()) {
-                Icon(
-                    painter = painterResource(if (isPasswordShowed) R.drawable.ic_eye_close else R.drawable.ic_eye_open),
-                    contentDescription = null,
-                    modifier = modifier.dailyClickable(rippleEnable = false) { isPasswordShowed = !isPasswordShowed }
-                )
+                when (isPasswordShowed) {
+                    true -> {
+                        IcEyeClose(
+                            contentDescription = "hidePassword",
+                            tint = DailyTheme.color.Neutral40,
+                            modifier = modifier.dailyClickable(rippleEnable = false) { isPasswordShowed = !isPasswordShowed }
+                        )
+                    }
+                    false -> {
+                        IcEyeOpen(
+                            contentDescription = "showPassword",
+                            tint = DailyTheme.color.Neutral40,
+                            modifier = modifier.dailyClickable(rippleEnable = false) { isPasswordShowed = !isPasswordShowed }
+                        )
+                    }
+                }
             }
         },
         onValueChanged = { password = it }

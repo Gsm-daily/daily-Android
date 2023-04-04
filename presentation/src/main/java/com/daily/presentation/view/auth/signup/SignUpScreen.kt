@@ -46,15 +46,9 @@ fun SignUpScreen(
         Spacer(modifier = modifier.height(24.dp))
 
         when (step) {
-            EmainInput -> {
-                SignUpEmail { step = step.next() }
-            }
-            NicknameInput -> {
-                SignUpNickname { step = step.next() }
-            }
-            PasswordInput -> {
-                SignUpPassword { step = step.next() }
-            }
+            EmainInput -> EmailInput { step = step.next() }
+            NicknameInput -> NicknameInput { step = step.next() }
+            PasswordInput -> PasswordInput { step = step.next() }
         }
 
         Spacer(modifier = modifier.height(16.dp))

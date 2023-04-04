@@ -13,7 +13,7 @@ import com.daily.designsystem.theme.IcDelete
 import com.daily.presentation.R
 
 @Composable
-fun SignUpNickname(
+fun NicknameInput(
     modifier: Modifier = Modifier,
     onNext: () -> Unit
 ) {

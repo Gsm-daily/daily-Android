@@ -4,4 +4,11 @@
     <string name="sign_up">회원가입</string>
     <string name="login">로그인</string>
     <string name="already_have_an_account">계정이 있으신가요?</string>
+    <string name="welcome_to_back">돌아오신걸 환영합니다.</string>
+    <string name="enter_the_email">이메일을 입력해 주세요.</string>
+    <string name="enter_the_password">비밀번호를 입력해 주세요.</string>
+    <string name="forgot_password">비밀번호를 잊으셨나요?</string>
+    <string name="first_time_to_daily">Daily가 처음이라면,</string>
+    <string name="email_format_not_valid">이메일 형식이 올바르지 않습니다.</string>
+    <string name="password_is_blank">비밀번호가 입력되지 않았습니다.</string>
 </resources>

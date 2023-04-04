@@ -17,4 +17,5 @@
     <string name="get_verification_code">인증번호 받기</string>
     <string name="next">다음</string>
     <string name="enter_the_nickname">사용하실 닉네임을 입력해 주세요.</string>
+    <string name="apply">확인</string>
 </resources>

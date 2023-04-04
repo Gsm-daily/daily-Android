@@ -12,7 +12,10 @@ import com.daily.presentation.R
 import com.daily.presentation.view.auth.PasswordField
 
 @Composable
-fun SignUpPassword(modifier: Modifier = Modifier) {
+fun SignUpPassword(
+    modifier: Modifier = Modifier,
+    onNext: () -> Unit
+) {
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
     var isPasswordMatched by remember { mutableStateOf(true) }
@@ -45,7 +48,8 @@ fun SignUpPassword(modifier: Modifier = Modifier) {
             text = stringResource(R.string.next),
             modifier = modifier.fillMaxWidth()
         ) {
-            isPasswordMatched = password == confirmPassword
+            isPasswordMatched = if (password.isEmpty()) false else password == confirmPassword
+            if (isPasswordMatched) onNext()
         }
     }
 }

@@ -13,7 +13,11 @@ import com.daily.presentation.R
 import com.daily.presentation.view.auth.EmailField
 
 @Composable
-fun SignUpEmail(modifier: Modifier = Modifier) {
+fun SignUpEmail(
+    modifier: Modifier = Modifier,
+    onNext: () -> Unit
+) {
+    var email by remember { mutableStateOf("") }
     var isEmailValid by remember { mutableStateOf(true) }
 
     Column(modifier = modifier.fillMaxWidth()) {
@@ -21,7 +25,8 @@ fun SignUpEmail(modifier: Modifier = Modifier) {
             modifier = modifier.defaultMinSize(minHeight = 24.dp),
             leadingIconEnabled = false
         ) {
-            isEmailValid = if (it.isEmpty()) true else PatternsCompat.EMAIL_ADDRESS.matcher(it).matches()
+            email = it
+            isEmailValid = PatternsCompat.EMAIL_ADDRESS.matcher(it).matches()
         }
         if (!isEmailValid) {
             Caption1(
@@ -34,6 +39,9 @@ fun SignUpEmail(modifier: Modifier = Modifier) {
         DailyButton(
             text = stringResource(R.string.get_verification_code),
             modifier = modifier.fillMaxWidth()
-        ) { }
+        ) {
+            isEmailValid = if (email.isEmpty()) false else PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
+            if (isEmailValid) onNext()
+        }
     }
 }

@@ -13,7 +13,10 @@ import com.daily.designsystem.theme.IcDelete
 import com.daily.presentation.R
 
 @Composable
-fun SignUpNickname(modifier: Modifier = Modifier) {
+fun SignUpNickname(
+    modifier: Modifier = Modifier,
+    onNext: () -> Unit
+) {
     var nickname by remember { mutableStateOf("") }
 
     Column(modifier = modifier.fillMaxWidth()) {
@@ -36,6 +39,8 @@ fun SignUpNickname(modifier: Modifier = Modifier) {
         DailyButton(
             text = stringResource(R.string.apply),
             modifier = modifier.fillMaxWidth()
-        ) { }
+        ) {
+            onNext()
+        }
     }
 }

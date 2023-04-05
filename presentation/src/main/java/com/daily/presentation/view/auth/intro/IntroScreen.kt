@@ -20,7 +20,11 @@ import com.daily.designsystem.theme.*
 import com.daily.presentation.R
 
 @Composable
-fun IntroScreen(modifier: Modifier = Modifier) {
+fun IntroScreen(
+    modifier: Modifier = Modifier,
+    navigateToLogin: () -> Unit,
+    navigateToSignUp: () -> Unit
+) {
     var visible by remember { mutableStateOf(false) }
 
     val offsetAnimation by animateDpAsState(
@@ -77,7 +81,7 @@ fun IntroScreen(modifier: Modifier = Modifier) {
             DailyButton(
                 text = stringResource(R.string.sign_up),
                 modifier = modifier.fillMaxWidth(),
-                onClick = {}
+                onClick = { navigateToSignUp() }
             )
             Spacer(modifier = modifier.height(16.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -88,7 +92,9 @@ fun IntroScreen(modifier: Modifier = Modifier) {
                 Spacer(modifier = modifier.width(8.dp))
                 Caption2(
                     text = stringResource(R.string.login),
-                    textColor = DailyTheme.color.Primary20
+                    textColor = DailyTheme.color.Primary20,
+                    rippleEnabled = false,
+                    onClick = { navigateToLogin() }
                 )
             }
         }

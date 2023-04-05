@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.daily.designsystem.theme.DailyTheme
-import com.daily.designsystem.theme.H1
+import com.daily.designsystem.theme.Subtitle0
 
 @Composable
 fun VerificationTextField(
@@ -45,7 +45,7 @@ fun VerificationTextField(
                             )
                             .clip(RoundedCornerShape(20.dp)),
                     ) {
-                        H1(
+                        Subtitle0(
                             text = value.getOrNull(index)?.toString() ?: "",
                             textColor = DailyTheme.color.Black,
                             textAlign = TextAlign.Center

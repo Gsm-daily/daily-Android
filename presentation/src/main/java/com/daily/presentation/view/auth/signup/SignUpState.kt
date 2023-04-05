@@ -5,13 +5,13 @@ sealed interface SignUpState {
     fun next(): SignUpState
 }
 
-object EmailVerification: SignUpState {
+object EmainInput: SignUpState {
     override fun previous() = this
     override fun next() = PasswordInput
 }
 
 object PasswordInput: SignUpState {
-    override fun previous() = EmailVerification
+    override fun previous() = EmainInput
     override fun next() = NicknameInput
 }
 

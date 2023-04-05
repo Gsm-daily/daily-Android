@@ -12,7 +12,7 @@ import com.daily.presentation.R
 import com.daily.presentation.view.auth.PasswordField
 
 @Composable
-fun SignUpPassword(
+fun PasswordInput(
     modifier: Modifier = Modifier,
     onNext: () -> Unit
 ) {

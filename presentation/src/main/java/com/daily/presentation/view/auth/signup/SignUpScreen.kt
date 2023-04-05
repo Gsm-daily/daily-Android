@@ -14,10 +14,10 @@ import com.daily.presentation.R
 fun SignUpScreen(
     modifier: Modifier = Modifier,
 ) {
-    var step by remember { mutableStateOf<SignUpState>(EmailVerification) }
+    var step by remember { mutableStateOf<SignUpState>(EmainInput) }
 
     val description = when (step) {
-        EmailVerification -> R.string.email_authentication
+        EmainInput -> R.string.email_authentication
         NicknameInput -> R.string.enter_the_nickname
         PasswordInput -> R.string.enter_the_password
     }
@@ -46,15 +46,9 @@ fun SignUpScreen(
         Spacer(modifier = modifier.height(24.dp))
 
         when (step) {
-            EmailVerification -> {
-                SignUpEmail { step = step.next() }
-            }
-            NicknameInput -> {
-                SignUpNickname { step = step.next() }
-            }
-            PasswordInput -> {
-                SignUpPassword { step = step.next() }
-            }
+            EmainInput -> EmailInput { step = step.next() }
+            NicknameInput -> NicknameInput { step = step.next() }
+            PasswordInput -> PasswordInput { step = step.next() }
         }
 
         Spacer(modifier = modifier.height(16.dp))

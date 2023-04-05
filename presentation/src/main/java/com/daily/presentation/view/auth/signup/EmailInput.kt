@@ -13,7 +13,7 @@ import com.daily.presentation.R
 import com.daily.presentation.view.auth.EmailField
 
 @Composable
-fun SignUpEmail(
+fun EmailInput(
     modifier: Modifier = Modifier,
     onNext: () -> Unit
 ) {

@@ -10,13 +10,17 @@ import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    navigateToPrevious: () -> Unit,
+    navigateToSignUp: () -> Unit
+) {
     IcBack(
         contentDescription = "back",
         tint = DailyTheme.color.Black,
         modifier = modifier
             .padding(start = 16.dp, top = 8.dp)
-            .dailyClickable(rippleEnable = false) { }
+            .dailyClickable(rippleEnable = false) { navigateToPrevious() }
     )
     Column(
         modifier = modifier
@@ -48,7 +52,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                 text = stringResource(R.string.sign_up),
                 textColor = DailyTheme.color.Primary20,
                 rippleEnabled = false,
-                onClick = { }
+                onClick = { navigateToSignUp() }
             )
         }
     }

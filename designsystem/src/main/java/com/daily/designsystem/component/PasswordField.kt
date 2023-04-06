@@ -1,4 +1,4 @@
-package com.daily.presentation.view.auth
+package com.daily.designsystem.component
 
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.*
@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import com.daily.designsystem.component.DailyTextField
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.IcEyeClose

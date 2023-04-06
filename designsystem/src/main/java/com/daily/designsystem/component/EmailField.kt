@@ -1,9 +1,7 @@
-package com.daily.presentation.view.auth
+package com.daily.designsystem.component
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.daily.designsystem.component.DailyTextField
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.IcDelete
@@ -12,6 +10,7 @@ import com.daily.designsystem.theme.IcMail
 @Composable
 fun EmailField(
     modifier: Modifier = Modifier,
+    hint: String,
     leadingIconEnabled: Boolean = true,
     trailingIconEnabled: Boolean = true,
     onValueChanged: (String) -> Unit
@@ -21,7 +20,7 @@ fun EmailField(
     DailyTextField(
         modifier = modifier,
         value = email,
-        hint = stringResource(com.daily.presentation.R.string.enter_the_email),
+        hint = hint,
         leadingIcon = {
             if (leadingIconEnabled) {
                 IcMail(

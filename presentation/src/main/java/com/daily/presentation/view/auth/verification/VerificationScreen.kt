@@ -14,7 +14,11 @@ import com.daily.presentation.R
 private const val CODE_LENGTH = 4
 
 @Composable
-fun VerificationScreen(modifier: Modifier = Modifier) {
+fun VerificationScreen(
+    modifier: Modifier = Modifier,
+    navigateToPrevious: () -> Unit,
+    navigateToSignUp: (String) -> Unit
+) {
     var code by remember { mutableStateOf("") }
 
     IcBack(
@@ -22,7 +26,7 @@ fun VerificationScreen(modifier: Modifier = Modifier) {
         tint = DailyTheme.color.Black,
         modifier = modifier
             .padding(start = 16.dp, top = 8.dp)
-            .dailyClickable(rippleEnable = false) { }
+            .dailyClickable(rippleEnable = false) { navigateToPrevious() }
     )
     Column(
         modifier = modifier
@@ -46,7 +50,10 @@ fun VerificationScreen(modifier: Modifier = Modifier) {
             value = code,
             length = CODE_LENGTH,
             onValueChange = {
-                if (it.length <= CODE_LENGTH) code = it
+                if (it.length <= CODE_LENGTH) {
+                    code = it
+                    if (it.length == CODE_LENGTH) navigateToSignUp(it)
+                }
             }
         )
         Spacer(modifier = modifier.height(16.dp))

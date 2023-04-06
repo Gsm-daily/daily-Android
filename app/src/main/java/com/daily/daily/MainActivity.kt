@@ -8,6 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
+import com.daily.navigation.DailyNavHost
+import com.daily.presentation.view.auth.intro.navigation.introRoute
 
 class MainActivity : androidx.activity.ComponentActivity() {
     private var keepSplashOnScreen = true
@@ -19,7 +22,9 @@ class MainActivity : androidx.activity.ComponentActivity() {
 
         setContent {
             Surface(modifier = Modifier.fillMaxSize()) {
+                val navController = rememberNavController()
 
+                DailyNavHost(navController = navController, startDestination = introRoute)
             }
         }
     }

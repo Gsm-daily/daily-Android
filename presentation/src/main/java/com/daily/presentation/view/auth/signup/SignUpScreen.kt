@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
@@ -13,11 +12,15 @@ import com.daily.presentation.R
 @Composable
 fun SignUpScreen(
     modifier: Modifier = Modifier,
+    email: String?,
+    navigateToPrevious: () -> Unit,
+    navigateToLogin: () -> Unit,
+    navigateToVerification: (String) -> Unit
 ) {
-    var step by remember { mutableStateOf<SignUpState>(EmainInput) }
+    var step by remember { mutableStateOf(if (email == null) EmailInput else PasswordInput) }
 
     val description = when (step) {
-        EmainInput -> R.string.email_authentication
+        EmailInput -> R.string.email_authentication
         NicknameInput -> R.string.enter_the_nickname
         PasswordInput -> R.string.enter_the_password
     }
@@ -27,7 +30,16 @@ fun SignUpScreen(
         tint = DailyTheme.color.Black,
         modifier = modifier
             .padding(start = 16.dp, top = 8.dp)
-            .dailyClickable(rippleEnable = false) { step = step.previous() }
+            .dailyClickable(rippleEnable = false) {
+                when (step) {
+                    EmailInput -> navigateToPrevious()
+                    else -> {
+                        email?.let { navigateToPrevious() } ?: {
+                            step = step.previous()
+                        }
+                    }
+                }
+            }
     )
     Column(
         modifier = modifier
@@ -46,7 +58,7 @@ fun SignUpScreen(
         Spacer(modifier = modifier.height(24.dp))
 
         when (step) {
-            EmainInput -> EmailInput { step = step.next() }
+            EmailInput -> EmailInput { navigateToVerification(it) }
             NicknameInput -> NicknameInput { step = step.next() }
             PasswordInput -> PasswordInput { step = step.next() }
         }
@@ -65,14 +77,8 @@ fun SignUpScreen(
                 text = stringResource(R.string.login),
                 textColor = DailyTheme.color.Primary20,
                 rippleEnabled = false,
-                onClick = { }
+                onClick = { navigateToLogin() }
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun PreviewSignUpScreen() {
-    SignUpScreen()
 }

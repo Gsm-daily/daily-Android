@@ -15,7 +15,7 @@ import com.daily.presentation.view.auth.EmailField
 @Composable
 fun EmailInput(
     modifier: Modifier = Modifier,
-    onNext: () -> Unit
+    onNext: (String) -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var isEmailValid by remember { mutableStateOf(true) }
@@ -41,7 +41,7 @@ fun EmailInput(
             modifier = modifier.fillMaxWidth()
         ) {
             isEmailValid = if (email.isEmpty()) false else PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
-            if (isEmailValid) onNext()
+            if (isEmailValid) onNext(email)
         }
     }
 }

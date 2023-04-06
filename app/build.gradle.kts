@@ -40,6 +40,8 @@ android {
 
 dependencies {
 
+    implementation(project(":presentation"))
+
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.AndroidX.CORE_SPLASH_SCREEN)
@@ -50,4 +52,5 @@ dependencies {
     implementation(Dependency.UnitTest.JUNIT)
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)
+    implementation(Dependency.AndroidX.NAVIGATION_COMPOSE)
 }

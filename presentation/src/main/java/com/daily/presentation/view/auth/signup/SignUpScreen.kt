@@ -33,7 +33,11 @@ fun SignUpScreen(
             .dailyClickable(rippleEnable = false) {
                 when (step) {
                     EmailInput -> navigateToPrevious()
-                    else -> step = step.previous()
+                    else -> {
+                        email?.let { navigateToPrevious() } ?: {
+                            step = step.previous()
+                        }
+                    }
                 }
             }
     )

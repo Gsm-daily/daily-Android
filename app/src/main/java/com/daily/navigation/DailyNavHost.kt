@@ -22,16 +22,16 @@ fun DailyNavHost(
             navigateToSignUp = { navController.navigateToSignUp() }
         )
         loginScreen(
-            navigateToPrevious = { navController.popBackStack() },
+            navigateToPrevious = { navController.navigateToPrevious() },
             navigateToSignUp = { navController.navigateToSignUp() }
         )
         signUpScreen(
-            navigateToPrevious = { navController.popBackStack() },
+            navigateToPrevious = { navController.navigateToPrevious() },
             navigateToLogin = { navController.navigateToLogin() },
             navigateToVerification = { navController.navigateToVerification(it) }
         )
         verificationScreen(
-            navigateToPrevious = { navController.popBackStack() },
+            navigateToPrevious = { navController.navigateToPrevious() },
             navigateToSignUp = { navController.navigateToSignUp(it) }
         )
     }

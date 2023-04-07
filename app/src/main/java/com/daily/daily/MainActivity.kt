@@ -22,6 +22,8 @@ class MainActivity : androidx.activity.ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
+        window.setTransparentStatusBar()
+
         splashScreen.setOnExitAnimationListener { splashScreenView ->
             val fadeIn = ObjectAnimator.ofFloat(
                 splashScreenView,

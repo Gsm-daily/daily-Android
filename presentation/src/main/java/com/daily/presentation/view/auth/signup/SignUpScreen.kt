@@ -27,60 +27,62 @@ fun SignUpScreen(
         PasswordInput -> R.string.enter_the_password
     }
 
-    IcBack(
-        contentDescription = "back",
-        tint = DailyTheme.color.Black,
-        modifier = modifier
-            .padding(start = 16.dp, top = 8.dp)
-            .dailyClickable(rippleEnable = false) {
-                when (step) {
-                    EmailInput -> navigateToPrevious()
-                    else -> {
-                        email?.let { navigateToPrevious() } ?: {
-                            step = step.previous()
+    Column(modifier = modifier.systemBarsPadding()) {
+        IcBack(
+            contentDescription = "back",
+            tint = DailyTheme.color.Black,
+            modifier = modifier
+                .padding(start = 16.dp, top = 8.dp)
+                .dailyClickable(rippleEnable = false) {
+                    when (step) {
+                        EmailInput -> navigateToPrevious()
+                        else -> {
+                            email?.let { navigateToPrevious() } ?: {
+                                step = step.previous()
+                            }
                         }
                     }
                 }
-            }
-    )
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-    ) {
-        Spacer(modifier = modifier.height(52.dp))
-        H1(
-            text = stringResource(R.string.sign_up)
         )
-        Spacer(modifier = modifier.height(8.dp))
-        Body2(
-            text = stringResource(description),
-            textColor = DailyTheme.color.Neutral50
-        )
-        Spacer(modifier = modifier.height(24.dp))
-
-        when (step) {
-            EmailInput -> EmailInput { navigateToVerification(it) }
-            NicknameInput -> NicknameInput { step = step.next() }
-            PasswordInput -> PasswordInput { step = step.next() }
-        }
-
-        Spacer(modifier = modifier.height(16.dp))
-        Row(
-            modifier = modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
         ) {
-            Caption1(
-                text = stringResource(R.string.already_have_an_account),
-                textColor = DailyTheme.color.Neutral40
+            Spacer(modifier = modifier.height(52.dp))
+            H1(
+                text = stringResource(R.string.sign_up)
             )
-            Spacer(modifier = modifier.width(4.dp))
-            Caption2(
-                text = stringResource(R.string.login),
-                textColor = DailyTheme.color.Primary20,
-                rippleEnabled = false,
-                onClick = { navigateToLogin() }
+            Spacer(modifier = modifier.height(8.dp))
+            Body2(
+                text = stringResource(description),
+                textColor = DailyTheme.color.Neutral50
             )
+            Spacer(modifier = modifier.height(24.dp))
+
+            when (step) {
+                EmailInput -> EmailInput { navigateToVerification(it) }
+                NicknameInput -> NicknameInput { step = step.next() }
+                PasswordInput -> PasswordInput { step = step.next() }
+            }
+
+            Spacer(modifier = modifier.height(16.dp))
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Caption1(
+                    text = stringResource(R.string.already_have_an_account),
+                    textColor = DailyTheme.color.Neutral40
+                )
+                Spacer(modifier = modifier.width(4.dp))
+                Caption2(
+                    text = stringResource(R.string.login),
+                    textColor = DailyTheme.color.Primary20,
+                    rippleEnabled = false,
+                    onClick = { navigateToLogin() }
+                )
+            }
         }
     }
 }

@@ -22,47 +22,49 @@ fun VerificationScreen(
 ) {
     var code by remember { mutableStateOf("") }
 
-    IcBack(
-        contentDescription = "back",
-        tint = DailyTheme.color.Black,
-        modifier = modifier
-            .padding(start = 16.dp, top = 8.dp)
-            .dailyClickable(rippleEnable = false) { navigateToPrevious() }
-    )
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = modifier.height(76.dp))
-        H0(
-            text = "5 : 00",
-            textColor = DailyTheme.color.Black
+    Column(modifier = modifier.systemBarsPadding()) {
+        IcBack(
+            contentDescription = "back",
+            tint = DailyTheme.color.Black,
+            modifier = modifier
+                .padding(start = 16.dp, top = 8.dp)
+                .dailyClickable(rippleEnable = false) { navigateToPrevious() }
         )
-        Spacer(modifier = modifier.height(8.dp))
-        Body3(
-            text = stringResource(R.string.verification_code_sent),
-            textAlign = TextAlign.Center,
-            textColor = DailyTheme.color.Neutral40
-        )
-        Spacer(modifier = modifier.height(32.dp))
-        VerificationTextField(
-            value = code,
-            length = CODE_LENGTH,
-            onValueChange = {
-                if (it.length <= CODE_LENGTH) {
-                    code = it
-                    if (it.length == CODE_LENGTH) navigateToNext(checkNotNull(email))
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = modifier.height(76.dp))
+            H0(
+                text = "5 : 00",
+                textColor = DailyTheme.color.Black
+            )
+            Spacer(modifier = modifier.height(8.dp))
+            Body3(
+                text = stringResource(R.string.verification_code_sent),
+                textAlign = TextAlign.Center,
+                textColor = DailyTheme.color.Neutral40
+            )
+            Spacer(modifier = modifier.height(32.dp))
+            VerificationTextField(
+                value = code,
+                length = CODE_LENGTH,
+                onValueChange = {
+                    if (it.length <= CODE_LENGTH) {
+                        code = it
+                        if (it.length == CODE_LENGTH) navigateToNext(checkNotNull(email))
+                    }
                 }
-            }
-        )
-        Spacer(modifier = modifier.height(16.dp))
-        Caption2(
-            text = stringResource(R.string.resend),
-            textColor = DailyTheme.color.Primary20,
-            rippleEnabled = false,
-            onClick = { }
-        )
+            )
+            Spacer(modifier = modifier.height(16.dp))
+            Caption2(
+                text = stringResource(R.string.resend),
+                textColor = DailyTheme.color.Primary20,
+                rippleEnabled = false,
+                onClick = { }
+            )
+        }
     }
 }

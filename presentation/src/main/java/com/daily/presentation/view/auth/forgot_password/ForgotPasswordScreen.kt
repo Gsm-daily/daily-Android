@@ -29,50 +29,52 @@ fun ForgotPasswordScreen(
         ForgotPasswordState.PasswordInput -> R.string.enter_the_new_password
     }
 
-    IcBack(
-        contentDescription = "back",
-        tint = DailyTheme.color.Black,
-        modifier = modifier
-            .padding(start = 16.dp, top = 8.dp)
-            .dailyClickable(rippleEnable = false) { navigateToPrevious() }
-    )
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-    ) {
-        Spacer(modifier = modifier.height(52.dp))
-        H1(
-            text = stringResource(R.string.find_password)
+    Column(modifier = modifier.systemBarsPadding()) {
+        IcBack(
+            contentDescription = "back",
+            tint = DailyTheme.color.Black,
+            modifier = modifier
+                .padding(start = 16.dp, top = 8.dp)
+                .dailyClickable(rippleEnable = false) { navigateToPrevious() }
         )
-        Spacer(modifier = modifier.height(8.dp))
-        Body2(
-            text = stringResource(description),
-            textColor = DailyTheme.color.Neutral50
-        )
-        Spacer(modifier = modifier.height(24.dp))
-
-        when (step) {
-            ForgotPasswordState.EmailInput -> EmailInput { navigateToVerification(it) }
-            ForgotPasswordState.PasswordInput -> PasswordInput { }
-        }
-
-        Spacer(modifier = modifier.height(16.dp))
-        Row(
-            modifier = modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
         ) {
-            Caption1(
-                text = stringResource(R.string.password_change_not_required),
-                textColor = DailyTheme.color.Neutral40
+            Spacer(modifier = modifier.height(52.dp))
+            H1(
+                text = stringResource(R.string.find_password)
             )
-            Spacer(modifier = modifier.width(4.dp))
-            Caption2(
-                text = stringResource(R.string.login),
-                textColor = DailyTheme.color.Primary20,
-                rippleEnabled = false,
-                onClick = { navigateToLogin() }
+            Spacer(modifier = modifier.height(8.dp))
+            Body2(
+                text = stringResource(description),
+                textColor = DailyTheme.color.Neutral50
             )
+            Spacer(modifier = modifier.height(24.dp))
+
+            when (step) {
+                ForgotPasswordState.EmailInput -> EmailInput { navigateToVerification(it) }
+                ForgotPasswordState.PasswordInput -> PasswordInput { }
+            }
+
+            Spacer(modifier = modifier.height(16.dp))
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Caption1(
+                    text = stringResource(R.string.password_change_not_required),
+                    textColor = DailyTheme.color.Neutral40
+                )
+                Spacer(modifier = modifier.width(4.dp))
+                Caption2(
+                    text = stringResource(R.string.login),
+                    textColor = DailyTheme.color.Primary20,
+                    rippleEnabled = false,
+                    onClick = { navigateToLogin() }
+                )
+            }
         }
     }
 }

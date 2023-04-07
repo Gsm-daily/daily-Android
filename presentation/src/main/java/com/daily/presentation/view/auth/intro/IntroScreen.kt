@@ -46,6 +46,7 @@ fun IntroScreen(
                 contentScale = ContentScale.Crop,
                 colorFilter = ColorFilter.tint(Color(0x33000000), BlendMode.Darken)
             )
+            .systemBarsPadding()
     ) {
         Column(
             verticalArrangement = Arrangement.Top,

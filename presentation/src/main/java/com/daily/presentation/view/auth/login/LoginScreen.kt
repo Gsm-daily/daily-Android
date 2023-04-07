@@ -16,45 +16,47 @@ fun LoginScreen(
     navigateToSignUp: () -> Unit,
     navigateToForgotPassword: () -> Unit
 ) {
-    IcBack(
-        contentDescription = "back",
-        tint = DailyTheme.color.Black,
-        modifier = modifier
-            .padding(start = 16.dp, top = 8.dp)
-            .dailyClickable(rippleEnable = false) { navigateToPrevious() }
-    )
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp)
-    ) {
-        Spacer(modifier = modifier.height(52.dp))
-        H1(
-            text = stringResource(R.string.login)
+    Column(modifier = modifier.systemBarsPadding()) {
+        IcBack(
+            contentDescription = "back",
+            tint = DailyTheme.color.Black,
+            modifier = modifier
+                .padding(start = 16.dp, top = 8.dp)
+                .dailyClickable(rippleEnable = false) { navigateToPrevious() }
         )
-        Spacer(modifier = modifier.height(8.dp))
-        Body2(
-            text = stringResource(R.string.welcome_to_back),
-            textColor = DailyTheme.color.Neutral50
-        )
-        Spacer(modifier = modifier.height(24.dp))
-        LoginField { navigateToForgotPassword() }
-        Spacer(modifier = modifier.height(16.dp))
-        Row(
-            modifier = modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp)
         ) {
-            Caption1(
-                text = stringResource(R.string.first_time_to_daily),
-                textColor = DailyTheme.color.Neutral40
+            Spacer(modifier = modifier.height(52.dp))
+            H1(
+                text = stringResource(R.string.login)
             )
-            Spacer(modifier = modifier.width(4.dp))
-            Caption2(
-                text = stringResource(R.string.sign_up),
-                textColor = DailyTheme.color.Primary20,
-                rippleEnabled = false,
-                onClick = { navigateToSignUp() }
+            Spacer(modifier = modifier.height(8.dp))
+            Body2(
+                text = stringResource(R.string.welcome_to_back),
+                textColor = DailyTheme.color.Neutral50
             )
+            Spacer(modifier = modifier.height(24.dp))
+            LoginField { navigateToForgotPassword() }
+            Spacer(modifier = modifier.height(16.dp))
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Caption1(
+                    text = stringResource(R.string.first_time_to_daily),
+                    textColor = DailyTheme.color.Neutral40
+                )
+                Spacer(modifier = modifier.width(4.dp))
+                Caption2(
+                    text = stringResource(R.string.sign_up),
+                    textColor = DailyTheme.color.Primary20,
+                    rippleEnabled = false,
+                    onClick = { navigateToSignUp() }
+                )
+            }
         }
     }
 }

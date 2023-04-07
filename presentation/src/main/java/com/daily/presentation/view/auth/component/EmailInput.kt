@@ -1,4 +1,4 @@
-package com.daily.presentation.view.auth.signup
+package com.daily.presentation.view.auth.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -10,7 +10,7 @@ import com.daily.designsystem.component.DailyButton
 import com.daily.designsystem.theme.Caption1
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.presentation.R
-import com.daily.presentation.view.auth.EmailField
+import com.daily.designsystem.component.EmailField
 
 @Composable
 fun EmailInput(
@@ -23,6 +23,7 @@ fun EmailInput(
     Column(modifier = modifier.fillMaxWidth()) {
         EmailField(
             modifier = modifier.defaultMinSize(minHeight = 24.dp),
+            hint = stringResource(R.string.enter_the_email),
             leadingIconEnabled = false
         ) {
             email = it

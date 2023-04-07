@@ -8,6 +8,8 @@ import androidx.compose.ui.unit.dp
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
+import com.daily.presentation.view.auth.component.EmailInput
+import com.daily.presentation.view.auth.component.PasswordInput
 
 @Composable
 fun SignUpScreen(

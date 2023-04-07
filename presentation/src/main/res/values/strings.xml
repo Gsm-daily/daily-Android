@@ -20,4 +20,7 @@
     <string name="apply">확인</string>
     <string name="verification_code_sent">이메일로 인증번호를 발송했습니다.\n인증번호는 5분 뒤 만료됩니다.</string>
     <string name="resend">재전송</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="password_change_not_required">비밀번호를 변경할 필요가 없다면?</string>
+    <string name="enter_the_new_password">새 비밀번호를 입력해 주세요.</string>
 </resources>

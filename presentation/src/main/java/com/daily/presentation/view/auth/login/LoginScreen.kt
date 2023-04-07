@@ -13,7 +13,8 @@ import com.daily.designsystem.theme.*
 fun LoginScreen(
     modifier: Modifier = Modifier,
     navigateToPrevious: () -> Unit,
-    navigateToSignUp: () -> Unit
+    navigateToSignUp: () -> Unit,
+    navigateToForgotPassword: () -> Unit
 ) {
     IcBack(
         contentDescription = "back",
@@ -37,7 +38,7 @@ fun LoginScreen(
             textColor = DailyTheme.color.Neutral50
         )
         Spacer(modifier = modifier.height(24.dp))
-        LoginField()
+        LoginField { navigateToForgotPassword() }
         Spacer(modifier = modifier.height(16.dp))
         Row(
             modifier = modifier.fillMaxWidth(),

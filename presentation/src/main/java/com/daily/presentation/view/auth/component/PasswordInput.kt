@@ -1,4 +1,4 @@
-package com.daily.presentation.view.auth.signup
+package com.daily.presentation.view.auth.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -9,7 +9,7 @@ import com.daily.designsystem.component.DailyButton
 import com.daily.designsystem.theme.Caption1
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.presentation.R
-import com.daily.presentation.view.auth.PasswordField
+import com.daily.designsystem.component.PasswordField
 
 @Composable
 fun PasswordInput(

@@ -9,16 +9,23 @@ import androidx.core.util.PatternsCompat.EMAIL_ADDRESS
 import com.daily.designsystem.component.DailyButton
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
-import com.daily.presentation.view.auth.EmailField
-import com.daily.presentation.view.auth.PasswordField
+import com.daily.designsystem.component.EmailField
+import com.daily.designsystem.component.PasswordField
 
 @Composable
-fun LoginField(modifier: Modifier = Modifier) {
+fun LoginField(
+    modifier: Modifier = Modifier,
+    navigateToForgotPassword: () -> Unit
+) {
     var isEmailValid by remember { mutableStateOf(true) }
     var isPasswordBlank by remember { mutableStateOf(false) }
 
     Column(modifier = modifier.fillMaxWidth()) {
-        EmailField(leadingIconEnabled = true, trailingIconEnabled = true) {
+        EmailField(
+            hint = stringResource(R.string.enter_the_email),
+            leadingIconEnabled = true,
+            trailingIconEnabled = true
+        ) {
             isEmailValid = if (it.isEmpty()) true else EMAIL_ADDRESS.matcher(it).matches()
         }
         if (!isEmailValid) {
@@ -48,7 +55,7 @@ fun LoginField(modifier: Modifier = Modifier) {
                 text = stringResource(R.string.forgot_password),
                 textColor = DailyTheme.color.Neutral40,
                 rippleEnabled = false,
-                onClick = { }
+                onClick = { navigateToForgotPassword() }
             )
         }
         Spacer(modifier = modifier.height(if (isPasswordBlank) 56.dp else 26.dp))

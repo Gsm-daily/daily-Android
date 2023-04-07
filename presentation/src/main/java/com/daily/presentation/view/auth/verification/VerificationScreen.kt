@@ -16,8 +16,9 @@ private const val CODE_LENGTH = 4
 @Composable
 fun VerificationScreen(
     modifier: Modifier = Modifier,
+    email: String?,
     navigateToPrevious: () -> Unit,
-    navigateToSignUp: (String) -> Unit
+    navigateToNext: (String) -> Unit
 ) {
     var code by remember { mutableStateOf("") }
 
@@ -52,7 +53,7 @@ fun VerificationScreen(
             onValueChange = {
                 if (it.length <= CODE_LENGTH) {
                     code = it
-                    if (it.length == CODE_LENGTH) navigateToSignUp(it)
+                    if (it.length == CODE_LENGTH) navigateToNext(checkNotNull(email))
                 }
             }
         )

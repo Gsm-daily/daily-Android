@@ -3,6 +3,7 @@ package com.daily.presentation.view.auth.verification.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.daily.presentation.view.auth.verification.VerificationScreen
 
 const val verificationRoute = "verification_route"
@@ -13,12 +14,16 @@ fun NavController.navigateToVerification(email: String) {
 
 fun NavGraphBuilder.verificationScreen(
     navigateToPrevious: () -> Unit,
-    navigateToSignUp: (String) -> Unit
+    navigateToNext: (String) -> Unit
 ) {
-    composable("$verificationRoute/{email}") {
+    composable(
+        route = "$verificationRoute/{email}",
+        arguments = listOf(navArgument("email") { nullable = false })
+    ) { backStackEntry ->
         VerificationScreen(
+            email = backStackEntry.arguments?.getString("email"),
             navigateToPrevious = navigateToPrevious,
-            navigateToSignUp = navigateToSignUp
+            navigateToNext = navigateToNext
         )
     }
 }

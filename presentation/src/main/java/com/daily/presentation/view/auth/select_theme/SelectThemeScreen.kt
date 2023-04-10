@@ -20,20 +20,23 @@ import com.daily.presentation.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SelectThemeScreen(modifier: Modifier = Modifier) {
+fun SelectThemeScreen(
+    modifier: Modifier = Modifier,
+    navigateToPrevious: () -> Unit
+) {
     val pagerState = rememberPagerState()
 
     Column(modifier = modifier.systemBarsPadding()) {
         Box(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp, horizontal = 20.dp)
+                .padding(vertical = 8.dp, horizontal = 16.dp)
         ) {
             IcBack(
                 contentDescription = "back",
                 tint = DailyTheme.color.Black,
                 modifier = modifier
-                    .dailyClickable(rippleEnable = false) { }
+                    .dailyClickable(rippleEnable = false) { navigateToPrevious() }
                     .align(Alignment.CenterStart)
             )
             Text(

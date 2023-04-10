@@ -17,7 +17,8 @@ fun SignUpScreen(
     email: String?,
     navigateToPrevious: () -> Unit,
     navigateToLogin: () -> Unit,
-    navigateToVerification: (String) -> Unit
+    navigateToVerification: (String) -> Unit,
+    navigateToSelectTheme: () -> Unit
 ) {
     var step by remember { mutableStateOf(if (email == null) EmailInput else PasswordInput) }
 
@@ -62,7 +63,7 @@ fun SignUpScreen(
 
             when (step) {
                 EmailInput -> EmailInput { navigateToVerification(it) }
-                NicknameInput -> NicknameInput { step = step.next() }
+                NicknameInput -> NicknameInput { navigateToSelectTheme() }
                 PasswordInput -> PasswordInput { step = step.next() }
             }
 

@@ -16,7 +16,8 @@ fun NavController.navigateToSignUp(email: String? = null) {
 fun NavGraphBuilder.signUpScreen(
     navigateToPrevious: () -> Unit,
     navigateToLogin: () -> Unit,
-    navigateToVerification: (String) -> Unit
+    navigateToVerification: (String) -> Unit,
+    navigateToSelectTheme: () -> Unit
 ) {
     composable(
         route = "$signUpRoute?email={email}",
@@ -26,7 +27,8 @@ fun NavGraphBuilder.signUpScreen(
             email = backStackEntry.arguments?.getString("email"),
             navigateToPrevious = navigateToPrevious,
             navigateToLogin = navigateToLogin,
-            navigateToVerification = navigateToVerification
+            navigateToVerification = navigateToVerification,
+            navigateToSelectTheme = navigateToSelectTheme
         )
     }
 }

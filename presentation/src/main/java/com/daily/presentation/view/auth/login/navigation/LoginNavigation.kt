@@ -8,7 +8,11 @@ import com.daily.presentation.view.auth.login.LoginScreen
 const val loginRoute = "login_route"
 
 fun NavController.navigateToLogin() {
-    this.navigate(loginRoute)
+    this.navigate(loginRoute) {
+        popUpTo(loginRoute) {
+            inclusive = true
+        }
+    }
 }
 
 fun NavGraphBuilder.loginScreen(

@@ -49,4 +49,5 @@ dependencies {
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)
     implementation(Dependency.AndroidX.NAVIGATION_COMPOSE)
+    implementation(Dependency.AndroidX.COMPOSE_UI_UTIL)
 }

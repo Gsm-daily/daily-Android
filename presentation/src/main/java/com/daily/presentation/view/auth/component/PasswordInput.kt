@@ -18,7 +18,10 @@ fun PasswordInput(
 ) {
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
-    var isPasswordMatched by remember { mutableStateOf(true) }
+    var isPasswordMatched by remember { mutableStateOf<Boolean?>(null) }
+    var buttonEnabled by remember { mutableStateOf(false) }
+
+    buttonEnabled = password.isNotEmpty() && confirmPassword.isNotEmpty()
 
     Column(modifier = modifier.fillMaxWidth()) {
         PasswordField(
@@ -36,20 +39,30 @@ fun PasswordInput(
         ) {
             confirmPassword = it
         }
-        if (!isPasswordMatched) {
-            Caption1(
-                text = stringResource(R.string.confirm_password_does_not_match),
-                textColor = DailyTheme.color.Error,
-                modifier = modifier.padding(horizontal = 8.dp, vertical = 12.dp)
-            )
+        isPasswordMatched?.let { isPasswordMatched ->
+            if (!isPasswordMatched) {
+                Caption1(
+                    text = stringResource(R.string.confirm_password_does_not_match),
+                    textColor = DailyTheme.color.Error,
+                    modifier = modifier.padding(horizontal = 8.dp, vertical = 12.dp)
+                )
+            }
         }
-        Spacer(modifier = modifier.height(if (isPasswordMatched) 82.dp else 44.dp))
+        Spacer(
+            modifier = modifier.height(
+                when (isPasswordMatched) {
+                    false -> 44.dp
+                    else -> 82.dp
+                }
+            )
+        )
         DailyButton(
             text = stringResource(R.string.next),
+            enabled = buttonEnabled,
             modifier = modifier.fillMaxWidth()
         ) {
             isPasswordMatched = if (password.isEmpty()) false else password == confirmPassword
-            if (isPasswordMatched) onNext()
+            isPasswordMatched?.let { isPasswordMatched -> if (isPasswordMatched) onNext() }
         }
     }
 }

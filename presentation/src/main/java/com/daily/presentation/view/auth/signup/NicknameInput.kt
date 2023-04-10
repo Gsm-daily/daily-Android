@@ -18,6 +18,9 @@ fun NicknameInput(
     onNext: () -> Unit
 ) {
     var nickname by remember { mutableStateOf("") }
+    var buttonEnabled by remember { mutableStateOf(false) }
+
+    buttonEnabled = nickname.isNotEmpty()
 
     Column(modifier = modifier.fillMaxWidth()) {
         DailyTextField(
@@ -38,6 +41,7 @@ fun NicknameInput(
         Spacer(modifier = modifier.height(154.dp))
         DailyButton(
             text = stringResource(R.string.apply),
+            enabled = buttonEnabled,
             modifier = modifier.fillMaxWidth()
         ) {
             onNext()

@@ -17,8 +17,11 @@ fun LoginField(
     modifier: Modifier = Modifier,
     navigateToForgotPassword: () -> Unit
 ) {
-    var isEmailValid by remember { mutableStateOf(true) }
-    var isPasswordBlank by remember { mutableStateOf(false) }
+    var isEmailValid by remember { mutableStateOf<Boolean?>(null) }
+    var isPasswordBlank by remember { mutableStateOf<Boolean?>(null) }
+    var buttonEnabled by remember { mutableStateOf(false) }
+
+    buttonEnabled = isEmailValid == true && isPasswordBlank == false
 
     Column(modifier = modifier.fillMaxWidth()) {
         EmailField(
@@ -28,13 +31,17 @@ fun LoginField(
         ) {
             isEmailValid = if (it.isEmpty()) true else EMAIL_ADDRESS.matcher(it).matches()
         }
-        if (!isEmailValid) {
-            Caption1(
-                text = stringResource(R.string.email_format_not_valid),
-                textColor = DailyTheme.color.Error,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)
-            )
+
+        isEmailValid?.let { isEmailValid ->
+            if (!isEmailValid) {
+                Caption1(
+                    text = stringResource(R.string.email_format_not_valid),
+                    textColor = DailyTheme.color.Error,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)
+                )
+            }
         }
+
         Spacer(modifier = modifier.height(12.dp))
         PasswordField(hint = stringResource(R.string.enter_the_password)) { isPasswordBlank = it.isEmpty() }
         Spacer(modifier = modifier.height(12.dp))
@@ -44,12 +51,14 @@ fun LoginField(
                 .padding(horizontal = 8.dp),
             horizontalArrangement = Arrangement.End
         ) {
-            if (isPasswordBlank) {
-                Caption1(
-                    text = stringResource(R.string.password_is_blank),
-                    textColor = DailyTheme.color.Error
-                )
-                Spacer(modifier = modifier.weight(1f))
+            isPasswordBlank?.let { isPasswordBlank ->
+                if (isPasswordBlank) {
+                    Caption1(
+                        text = stringResource(R.string.password_is_blank),
+                        textColor = DailyTheme.color.Error
+                    )
+                    Spacer(modifier = modifier.weight(1f))
+                }
             }
             Caption1(
                 text = stringResource(R.string.forgot_password),
@@ -58,10 +67,18 @@ fun LoginField(
                 onClick = { navigateToForgotPassword() }
             )
         }
-        Spacer(modifier = modifier.height(if (isPasswordBlank) 56.dp else 26.dp))
+        Spacer(
+            modifier = modifier.height(
+                when (isPasswordBlank) {
+                    null -> 26.dp
+                    else -> 56.dp
+                }
+            )
+        )
         DailyButton(
             text = stringResource(R.string.login),
             modifier = modifier.fillMaxWidth(),
+            enabled = buttonEnabled,
             onClick = { }
         )
     }

@@ -18,7 +18,10 @@ fun EmailInput(
     onNext: (String) -> Unit
 ) {
     var email by remember { mutableStateOf("") }
-    var isEmailValid by remember { mutableStateOf(true) }
+    var isEmailValid by remember { mutableStateOf<Boolean?>(null) }
+    var buttonEnabled by remember { mutableStateOf(false) }
+
+    isEmailValid?.let { buttonEnabled = it }
 
     Column(modifier = modifier.fillMaxWidth()) {
         EmailField(
@@ -29,20 +32,31 @@ fun EmailInput(
             email = it
             isEmailValid = PatternsCompat.EMAIL_ADDRESS.matcher(it).matches()
         }
-        if (!isEmailValid) {
-            Caption1(
-                text = stringResource(R.string.email_format_not_valid),
-                textColor = DailyTheme.color.Error,
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp)
-            )
+        isEmailValid?.let { isEmailValid ->
+            if (!isEmailValid) {
+                Caption1(
+                    text = stringResource(R.string.email_format_not_valid),
+                    textColor = DailyTheme.color.Error,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp)
+                )
+            }
         }
-        Spacer(modifier = modifier.height(if (isEmailValid) 154.dp else 116.dp))
+        Spacer(
+            modifier = modifier.height(
+                when (isEmailValid) {
+                    false -> 116.dp
+                    else -> 154.dp
+                }
+            )
+        )
+
         DailyButton(
             text = stringResource(R.string.get_verification_code),
+            enabled = buttonEnabled,
             modifier = modifier.fillMaxWidth()
         ) {
             isEmailValid = if (email.isEmpty()) false else PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
-            if (isEmailValid) onNext(email)
+            isEmailValid?.let { isEmailValid -> if (isEmailValid) onNext(email) }
         }
     }
 }

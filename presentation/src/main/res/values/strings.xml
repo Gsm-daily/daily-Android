@@ -23,4 +23,7 @@
     <string name="find_password">비밀번호 찾기</string>
     <string name="password_change_not_required">비밀번호를 변경할 필요가 없다면?</string>
     <string name="enter_the_new_password">새 비밀번호를 입력해 주세요.</string>
+    <string name="select_theme">테마선</string>
+    <string name="select_grassland">푸른 초원으로 할게요!</string>
+    <string name="select_ocean">고요한 바다로 할게요!</string>
 </resources>

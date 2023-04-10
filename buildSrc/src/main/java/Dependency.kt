@@ -15,6 +15,7 @@ object Dependency {
         const val COMPOSE_UI = "androidx.compose.ui:ui:${Versions.COMPOSE_UI}"
         const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.COMPOSE_TOOLING}"
         const val NAVIGATION_COMPOSE = "androidx.navigation:navigation-compose:${Versions.NAVIGATION_COMPOSE}"
+        const val COMPOSE_UI_UTIL = "androidx.compose.ui:ui-util:${Versions.COMPOSE_UI_UTIL}"
     }
 
     object Google {

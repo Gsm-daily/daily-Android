@@ -9,6 +9,8 @@ import com.daily.presentation.view.auth.forgot_password.navigation.navigateToFor
 import com.daily.presentation.view.auth.intro.navigation.introScreen
 import com.daily.presentation.view.auth.login.navigation.loginScreen
 import com.daily.presentation.view.auth.login.navigation.navigateToLogin
+import com.daily.presentation.view.auth.select_theme.navigation.navigateToSelectTheme
+import com.daily.presentation.view.auth.select_theme.navigation.selectThemeScreen
 import com.daily.presentation.view.auth.signup.navigation.navigateToSignUp
 import com.daily.presentation.view.auth.signup.navigation.signUpRoute
 import com.daily.presentation.view.auth.signup.navigation.signUpScreen
@@ -33,7 +35,8 @@ fun DailyNavHost(
         signUpScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
             navigateToLogin = { navController.navigateToLogin() },
-            navigateToVerification = { navController.navigateToVerification(it) }
+            navigateToVerification = { navController.navigateToVerification(it) },
+            navigateToSelectTheme = { navController.navigateToSelectTheme() }
         )
         verificationScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
@@ -48,6 +51,9 @@ fun DailyNavHost(
             navigateToPrevious = { navController.navigateToPrevious() },
             navigateToLogin = { navController.navigateToLogin() },
             navigateToVerification = { navController.navigateToVerification(it) }
+        )
+        selectThemeScreen(
+            navigateToPrevious = { navController.navigateToPrevious() }
         )
     }
 }

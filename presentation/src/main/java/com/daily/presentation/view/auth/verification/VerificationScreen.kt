@@ -36,7 +36,7 @@ fun VerificationScreen(
                 .padding(horizontal = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = modifier.height(76.dp))
+            Spacer(modifier = modifier.height(48.dp))
             H0(
                 text = "5 : 00",
                 textColor = DailyTheme.color.Black

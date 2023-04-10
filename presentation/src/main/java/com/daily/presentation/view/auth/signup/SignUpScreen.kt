@@ -50,7 +50,7 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
         ) {
-            Spacer(modifier = modifier.height(52.dp))
+            Spacer(modifier = modifier.height(24.dp))
             H1(
                 text = stringResource(R.string.sign_up)
             )

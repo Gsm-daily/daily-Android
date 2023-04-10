@@ -10,7 +10,11 @@ const val signUpRoute = "signup_route"
 
 fun NavController.navigateToSignUp(email: String? = null) {
     val route = email?.let { "$signUpRoute?email=$it" } ?: signUpRoute
-    this.navigate(route)
+    this.navigate(route) {
+        popUpTo(route) {
+            inclusive = true
+        }
+    }
 }
 
 fun NavGraphBuilder.signUpScreen(

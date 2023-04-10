@@ -11,6 +11,7 @@ object Versions {
     const val COMPOSE_TOOLING = "1.5.0-alpha01"
     const val COMPOSE_UI = "1.3.3"
     const val NAVIGATION_COMPOSE = "2.5.3"
+    const val COMPOSE_UI_UTIL = "1.4.1"
 
     const val MATERIAL = "1.8.0"
 

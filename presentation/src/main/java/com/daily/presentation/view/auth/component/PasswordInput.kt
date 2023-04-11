@@ -14,7 +14,7 @@ import com.daily.designsystem.component.PasswordField
 @Composable
 fun PasswordInput(
     modifier: Modifier = Modifier,
-    onNext: () -> Unit
+    onNext: (String) -> Unit
 ) {
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
@@ -62,7 +62,7 @@ fun PasswordInput(
             modifier = modifier.fillMaxWidth()
         ) {
             isPasswordMatched = if (password.isEmpty()) false else password == confirmPassword
-            isPasswordMatched?.let { isPasswordMatched -> if (isPasswordMatched) onNext() }
+            isPasswordMatched?.let { isPasswordMatched -> if (isPasswordMatched) onNext(password) }
         }
     }
 }

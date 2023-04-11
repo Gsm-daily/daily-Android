@@ -12,7 +12,12 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
-    fun signUp(signUpRequest: SignUpRequest) {
+    fun signUp(email: String, password: String, nickname: String) {
+        val signUpRequest = SignUpRequest(
+            email = email,
+            password = password,
+            name = nickname
+        )
         viewModelScope.launch {
             signUpUseCase(signUpRequest)
         }

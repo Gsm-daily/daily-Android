@@ -13,6 +13,7 @@ object Versions {
     const val NAVIGATION_COMPOSE = "2.5.3"
     const val COMPOSE_UI_UTIL = "1.4.1"
     const val LIFECYCLE = "2.6.1"
+    const val HILT_NAVIGATION_COMPOSE = "1.0.0"
 
     const val MATERIAL = "1.8.0"
     const val HILT = "2.44"

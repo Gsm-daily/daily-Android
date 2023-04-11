@@ -43,6 +43,7 @@ android {
 dependencies {
 
     implementation(project(":presentation"))
+    implementation(project(":di"))
 
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)

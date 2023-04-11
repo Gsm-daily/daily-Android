@@ -1,7 +1,7 @@
 package com.daily.di
 
-import com.daily.data.repository.AuthRepositoryImpl
-import com.daily.domain.repository.AuthRepository
+import com.daily.data.remote.datasource.auth.AuthDataSource
+import com.daily.data.remote.datasource.auth.AuthDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 interface RemoteDataSourceModule {
     @Binds
     fun bindsAuthDataSource(
-        authRepositoryImpl: AuthRepositoryImpl
-    ): AuthRepository
+        authDataSourceImpl: AuthDataSourceImpl
+    ): AuthDataSource
 }

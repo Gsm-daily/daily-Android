@@ -15,6 +15,8 @@ object Versions {
 
     const val MATERIAL = "1.8.0"
 
+    const val RETROFIT = "2.9.0"
+
     const val JUNIT = "4.13.2"
     const val ANDROID_JUNIT = "1.1.5"
     const val ESPRESSO_CORE = "3.5.1"

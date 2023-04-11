@@ -22,6 +22,11 @@ object Dependency {
         const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
     }
 
+    object Libraries {
+        const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+        const val RETROFIT_CONVERTER = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
+    }
+
     object UnitTest {
         const val JUNIT = "junit:junit:${Versions.JUNIT}"
     }

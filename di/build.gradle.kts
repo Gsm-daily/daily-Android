@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     kotlin("kapt")
     id(Dependency.GradlePlugin.ANDROID_LIBRARY)
@@ -15,6 +17,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "BASE_URL", gradleLocalProperties(rootDir).getProperty("base_url"))
     }
 
     buildTypes {
@@ -33,6 +37,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":data"))
 
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)

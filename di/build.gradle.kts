@@ -39,6 +39,8 @@ dependencies {
     implementation(Dependency.Google.MATERIAL)
     implementation(Dependency.Google.HILT_ANDROID)
     kapt(Dependency.Google.HILT_COMPILER)
+    implementation(Dependency.Libraries.RETROFIT)
+    implementation(Dependency.Libraries.RETROFIT_CONVERTER)
     implementation(Dependency.UnitTest.JUNIT)
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)

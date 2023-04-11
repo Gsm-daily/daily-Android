@@ -15,7 +15,7 @@ import com.daily.presentation.R
 @Composable
 fun NicknameInput(
     modifier: Modifier = Modifier,
-    onNext: () -> Unit
+    onNext: (String) -> Unit
 ) {
     var nickname by remember { mutableStateOf("") }
     var buttonEnabled by remember { mutableStateOf(false) }
@@ -44,7 +44,7 @@ fun NicknameInput(
             enabled = buttonEnabled,
             modifier = modifier.fillMaxWidth()
         ) {
-            onNext()
+            onNext(nickname)
         }
     }
 }

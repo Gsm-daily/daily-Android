@@ -40,6 +40,7 @@ android {
 dependencies {
 
     implementation(project(":designsystem"))
+    implementation(project(":domain"))
 
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)

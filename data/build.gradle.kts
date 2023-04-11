@@ -1,6 +1,10 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
+    kotlin("kapt")
     id(Dependency.GradlePlugin.ANDROID_LIBRARY)
     id(Dependency.GradlePlugin.KOTLIN_ANDROID)
+    id(Dependency.GradlePlugin.HILT_ANDROID)
 }
 
 android {
@@ -32,9 +36,15 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.Google.MATERIAL)
+    implementation(Dependency.Google.HILT_ANDROID)
+    kapt(Dependency.Google.HILT_COMPILER)
+    implementation(Dependency.Libraries.RETROFIT)
+    implementation(Dependency.Libraries.RETROFIT_CONVERTER)
     implementation(Dependency.UnitTest.JUNIT)
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)

@@ -3,6 +3,7 @@ object Dependency {
         const val ANDROID_APPLICATION = "com.android.application"
         const val ANDROID_LIBRARY = "com.android.library"
         const val KOTLIN_ANDROID = "org.jetbrains.kotlin.android"
+        const val HILT_ANDROID = "com.google.dagger.hilt.android"
     }
 
     object AndroidX {
@@ -16,10 +17,18 @@ object Dependency {
         const val COMPOSE_TOOLING = "androidx.compose.ui:ui-tooling:${Versions.COMPOSE_TOOLING}"
         const val NAVIGATION_COMPOSE = "androidx.navigation:navigation-compose:${Versions.NAVIGATION_COMPOSE}"
         const val COMPOSE_UI_UTIL = "androidx.compose.ui:ui-util:${Versions.COMPOSE_UI_UTIL}"
+        const val LIFECYCLE_COMPOSE = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.LIFECYCLE}"
     }
 
     object Google {
         const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
+        const val HILT_ANDROID = "com.google.dagger:hilt-android:${Versions.HILT}"
+        const val HILT_COMPILER = "com.google.dagger:hilt-android-compiler:${Versions.HILT}"
+    }
+
+    object Libraries {
+        const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+        const val RETROFIT_CONVERTER = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
     }
 
     object UnitTest {

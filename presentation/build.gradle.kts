@@ -1,6 +1,8 @@
 plugins {
+    kotlin("kapt")
     id(Dependency.GradlePlugin.ANDROID_LIBRARY)
     id(Dependency.GradlePlugin.KOTLIN_ANDROID)
+    id(Dependency.GradlePlugin.HILT_ANDROID)
 }
 
 android {
@@ -38,10 +40,13 @@ android {
 dependencies {
 
     implementation(project(":designsystem"))
+    implementation(project(":domain"))
 
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.Google.MATERIAL)
+    implementation(Dependency.Google.HILT_ANDROID)
+    kapt(Dependency.Google.HILT_COMPILER)
     implementation(Dependency.AndroidX.COMPOSE_RUNTIME)
     implementation(Dependency.AndroidX.COMPOSE_MATERIAL3)
     implementation(Dependency.AndroidX.COMPOSE_TOOLING)
@@ -50,4 +55,5 @@ dependencies {
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)
     implementation(Dependency.AndroidX.NAVIGATION_COMPOSE)
     implementation(Dependency.AndroidX.COMPOSE_UI_UTIL)
+    implementation(Dependency.AndroidX.LIFECYCLE_COMPOSE)
 }

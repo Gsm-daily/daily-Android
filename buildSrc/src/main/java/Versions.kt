@@ -12,8 +12,12 @@ object Versions {
     const val COMPOSE_UI = "1.3.3"
     const val NAVIGATION_COMPOSE = "2.5.3"
     const val COMPOSE_UI_UTIL = "1.4.1"
+    const val LIFECYCLE = "2.6.1"
 
     const val MATERIAL = "1.8.0"
+    const val HILT = "2.44"
+
+    const val RETROFIT = "2.9.0"
 
     const val JUNIT = "4.13.2"
     const val ANDROID_JUNIT = "1.1.5"

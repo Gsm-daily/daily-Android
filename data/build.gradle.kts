@@ -35,6 +35,8 @@ dependencies {
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.Google.MATERIAL)
+    implementation(Dependency.Libraries.RETROFIT)
+    implementation(Dependency.Libraries.RETROFIT_CONVERTER)
     implementation(Dependency.UnitTest.JUNIT)
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)

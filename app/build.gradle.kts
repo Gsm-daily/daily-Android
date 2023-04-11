@@ -1,6 +1,8 @@
 plugins {
+    kotlin("kapt")
     id(Dependency.GradlePlugin.ANDROID_APPLICATION)
     id(Dependency.GradlePlugin.KOTLIN_ANDROID)
+    id(Dependency.GradlePlugin.HILT_ANDROID)
 }
 
 android {
@@ -46,6 +48,8 @@ dependencies {
     implementation(Dependency.AndroidX.APP_COMPAT)
     implementation(Dependency.AndroidX.CORE_SPLASH_SCREEN)
     implementation(Dependency.Google.MATERIAL)
+    implementation(Dependency.Google.HILT_ANDROID)
+    kapt(Dependency.Google.HILT_COMPILER)
     implementation(Dependency.AndroidX.COMPOSE_RUNTIME)
     implementation(Dependency.AndroidX.COMPOSE_MATERIAL3)
     implementation(Dependency.AndroidX.ACTIVITY_COMPOSE)

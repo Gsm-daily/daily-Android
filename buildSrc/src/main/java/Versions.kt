@@ -14,6 +14,7 @@ object Versions {
     const val COMPOSE_UI_UTIL = "1.4.1"
 
     const val MATERIAL = "1.8.0"
+    const val HILT = "2.44"
 
     const val RETROFIT = "2.9.0"
 

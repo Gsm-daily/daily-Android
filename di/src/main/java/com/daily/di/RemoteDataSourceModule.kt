@@ -2,6 +2,8 @@ package com.daily.di
 
 import com.daily.data.remote.datasource.auth.AuthDataSource
 import com.daily.data.remote.datasource.auth.AuthDataSourceImpl
+import com.daily.data.remote.datasource.email.EmailDataSource
+import com.daily.data.remote.datasource.email.EmailDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,4 +16,9 @@ interface RemoteDataSourceModule {
     fun bindsAuthDataSource(
         authDataSourceImpl: AuthDataSourceImpl
     ): AuthDataSource
+
+    @Binds
+    fun bindsEmailDataSource(
+        emailDataSourceImpl: EmailDataSourceImpl
+    ): EmailDataSource
 }

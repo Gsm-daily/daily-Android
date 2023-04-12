@@ -1,7 +1,9 @@
 package com.daily.di
 
 import com.daily.data.repository.AuthRepositoryImpl
+import com.daily.data.repository.EmailRepositoryImpl
 import com.daily.domain.repository.AuthRepository
+import com.daily.domain.repository.EmailRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,4 +16,9 @@ interface RepositoryModule {
     fun bindsAuthRepository(
         authRepositoryImpl: AuthRepositoryImpl
     ): AuthRepository
+
+    @Binds
+    fun bindsEmailRepository(
+        emailRepositoryImpl: EmailRepositoryImpl
+    ): EmailRepository
 }

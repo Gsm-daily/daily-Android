@@ -8,4 +8,9 @@ interface EmailApi {
     suspend fun sendVerificationCode(
         @Body email: String
     )
+
+    @POST("/api/v1/email/verify-authkey")
+    suspend fun verifyAuthKey(
+        @Body authKey: Int
+    )
 }

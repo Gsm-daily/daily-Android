@@ -9,4 +9,8 @@ class EmailDataSourceImpl @Inject constructor(
     override suspend fun sendVerificationCode(email: String) {
         emailApi.sendVerificationCode(email)
     }
+
+    override suspend fun verifyAuthKey(authKey: Int) {
+        emailApi.verifyAuthKey(authKey)
+    }
 }

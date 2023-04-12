@@ -4,4 +4,6 @@ interface EmailDataSource {
     suspend fun sendEmailForSignUp(email: String)
 
     suspend fun verifyAuthKey(authKey: Int)
+
+    suspend fun sendEmailForPasswordChange(email: String)
 }

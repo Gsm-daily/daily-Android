@@ -13,4 +13,9 @@ interface EmailApi {
     suspend fun verifyAuthKey(
         @Body authKey: Int
     )
+
+    @POST("/api/v1/email/password")
+    suspend fun sendEmailForPasswordChange(
+        @Body email: String
+    )
 }

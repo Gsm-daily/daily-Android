@@ -15,4 +15,9 @@ interface AuthApi {
     suspend fun checkDuplicateEmail(
         @Query("email") email: String
     )
+
+    @POST("/api/v1/auth/name")
+    suspend fun checkDuplicateName(
+        @Query("name") name: String
+    )
 }

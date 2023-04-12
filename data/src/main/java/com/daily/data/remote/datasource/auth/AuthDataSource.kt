@@ -6,4 +6,6 @@ interface AuthDataSource {
     suspend fun signUp(signUpRequestData: SignUpRequestData)
 
     suspend fun checkDuplicateEmail(email: String)
+
+    suspend fun checkDuplicateName(name: String)
 }

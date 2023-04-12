@@ -7,8 +7,8 @@ import javax.inject.Inject
 class EmailRepositoryImpl @Inject constructor(
     private val emailDataSource: EmailDataSource
 ): EmailRepository {
-    override suspend fun sendVerificationCode(email: String) {
-        emailDataSource.sendVerificationCode(email)
+    override suspend fun sendEmailForSignUp(email: String) {
+        emailDataSource.sendEmailForSignUp(email)
     }
 
     override suspend fun verifyAuthKey(authKey: Int) {

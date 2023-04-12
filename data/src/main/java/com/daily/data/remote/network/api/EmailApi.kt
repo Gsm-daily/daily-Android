@@ -5,7 +5,7 @@ import retrofit2.http.POST
 
 interface EmailApi {
     @POST("/api/v1/email/signup")
-    suspend fun sendVerificationCode(
+    suspend fun sendEmailForSignUp(
         @Body email: String
     )
 

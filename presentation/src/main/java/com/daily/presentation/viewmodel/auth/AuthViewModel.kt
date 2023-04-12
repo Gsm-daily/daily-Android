@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daily.domain.model.SignUpRequest
 import com.daily.domain.usecase.CheckDuplicateEmailUseCase
+import com.daily.domain.usecase.CheckDuplicateNameUseCase
 import com.daily.domain.usecase.SignUpUseCase
 import com.daily.presentation.viewmodel.util.ExceptionType
 import com.daily.presentation.viewmodel.util.exceptionHandling
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
-    private val checkDuplicateEmailUseCase: CheckDuplicateEmailUseCase
+    private val checkDuplicateEmailUseCase: CheckDuplicateEmailUseCase,
+    private val checkDuplicateNameUseCase: CheckDuplicateNameUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<AuthUiState>(AuthUiState.Loading)
     val uiState = _uiState.asStateFlow()
@@ -46,6 +48,18 @@ class AuthViewModel @Inject constructor(
     fun checkDuplicateEmail(email: String) {
         viewModelScope.launch {
             checkDuplicateEmailUseCase(email)
+                .onSuccess { _uiState.value = AuthUiState.Success }
+                .onFailure {
+                    it.exceptionHandling(conflictAction = {
+                        _uiState.value = AuthUiState.Error(exception = ExceptionType.ConflictException)
+                    })
+                }
+        }
+    }
+
+    fun checkDuplicateName(name: String) {
+        viewModelScope.launch {
+            checkDuplicateNameUseCase(name)
                 .onSuccess { _uiState.value = AuthUiState.Success }
                 .onFailure {
                     it.exceptionHandling(conflictAction = {

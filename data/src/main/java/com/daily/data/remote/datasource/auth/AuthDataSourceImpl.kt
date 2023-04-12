@@ -15,4 +15,8 @@ class AuthDataSourceImpl @Inject constructor(
     override suspend fun checkDuplicateEmail(email: String) {
         safeApiCall { authApi.checkDuplicateEmail(email) }
     }
+
+    override suspend fun checkDuplicateName(name: String) {
+        safeApiCall { authApi.checkDuplicateName(name) }
+    }
 }

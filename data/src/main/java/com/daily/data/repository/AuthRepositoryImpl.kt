@@ -12,4 +12,8 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun signUp(signUpRequest: SignUpRequest) {
         authDataSource.signUp(signUpRequest.asSignUpRequestData())
     }
+
+    override suspend fun checkDuplicateEmail(email: String) {
+        authDataSource.checkDuplicateEmail(email)
+    }
 }

@@ -57,4 +57,5 @@ dependencies {
     implementation(Dependency.AndroidX.COMPOSE_UI_UTIL)
     implementation(Dependency.AndroidX.LIFECYCLE_COMPOSE)
     implementation(Dependency.AndroidX.HILT_NAVIGATION_COMPOSE)
+    implementation(Dependency.AndroidX.LIFECYCLE_RUNTIME_COMPOSE)
 }

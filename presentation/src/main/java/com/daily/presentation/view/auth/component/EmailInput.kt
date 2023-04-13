@@ -36,6 +36,8 @@ fun EmailInput(
         }
     }
 
+    if (isEmailValid == true && isEmailUnique == true) onNext(email)
+
     Column(modifier = modifier.fillMaxWidth()) {
         EmailField(
             modifier = modifier.defaultMinSize(minHeight = 24.dp),
@@ -75,9 +77,8 @@ fun EmailInput(
         ) {
             isEmailValid = if (email.isEmpty()) false else PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
             isEmailValid?.let { isEmailValid ->
-                when {
-                    isEmailValid && isEmailUnique == true -> onNext(email)
-                    isEmailValid -> if (checkDuplicateEmail != null) checkDuplicateEmail(email)
+                if (isEmailValid) {
+                    checkDuplicateEmail?.let { checkDuplicateEmail -> checkDuplicateEmail(email) }
                 }
             }
         }

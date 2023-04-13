@@ -6,6 +6,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -19,6 +21,7 @@ object NetworkModule {
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(provideClient())
             .build()
 
     @Provides
@@ -30,4 +33,11 @@ object NetworkModule {
     @Singleton
     fun provideEmailService(retrofit: Retrofit): EmailApi =
         retrofit.create(EmailApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+        return OkHttpClient.Builder().addInterceptor(interceptor).build()
+    }
 }

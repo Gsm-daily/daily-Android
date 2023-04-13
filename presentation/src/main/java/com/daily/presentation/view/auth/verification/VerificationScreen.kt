@@ -7,9 +7,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
+import com.daily.presentation.viewmodel.email.EmailViewModel
+import com.daily.presentation.viewmodel.util.UiState
 
 private const val CODE_LENGTH = 4
 
@@ -17,10 +21,33 @@ private const val CODE_LENGTH = 4
 fun VerificationScreen(
     modifier: Modifier = Modifier,
     email: String?,
+    type: String?,
+    viewModel: EmailViewModel = hiltViewModel(),
     navigateToPrevious: () -> Unit,
     navigateToNext: (String) -> Unit
 ) {
     var code by remember { mutableStateOf("") }
+    var isMatched by remember { mutableStateOf(true) }
+
+    val uiState by viewModel.verifyUiState.collectAsStateWithLifecycle()
+
+    when (uiState) {
+        UiState.Success -> navigateToNext(checkNotNull(email))
+        UiState.Loading -> {}
+        UiState.BadRequest -> isMatched = false
+        else -> {} // 알 수 없는 오류
+    }
+
+    LaunchedEffect(Unit) {
+        when (type) {
+            "signup" -> {
+                if (email != null) {
+                    viewModel.sendEmailForSignUp(email)
+                }
+            }
+            "password" -> viewModel.sendEmailForPasswordChange(checkNotNull(email))
+        }
+    }
 
     Column(modifier = modifier.systemBarsPadding()) {
         IcBack(
@@ -54,16 +81,31 @@ fun VerificationScreen(
                 onValueChange = {
                     if (it.length <= CODE_LENGTH) {
                         code = it
-                        if (it.length == CODE_LENGTH) navigateToNext(checkNotNull(email))
+                        if (code.length == CODE_LENGTH) {
+                            viewModel.verifyAuthKey(code.toInt())
+                        }
                     }
                 }
             )
+            if (!isMatched) {
+                Spacer(modifier = modifier.height(12.dp))
+                Caption1(
+                    text = stringResource(R.string.verification_code_not_matching),
+                    textColor = DailyTheme.color.Error,
+                    rippleEnabled = false
+                )
+            }
             Spacer(modifier = modifier.height(16.dp))
             Caption2(
                 text = stringResource(R.string.resend),
                 textColor = DailyTheme.color.Primary20,
                 rippleEnabled = false,
-                onClick = { }
+                onClick = {
+                    when (checkNotNull(type)) {
+                        "signup" -> viewModel.sendEmailForSignUp(checkNotNull(email))
+                        "password" -> viewModel.sendEmailForPasswordChange(checkNotNull(email))
+                    }
+                }
             )
         }
     }

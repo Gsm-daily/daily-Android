@@ -47,6 +47,7 @@ dependencies {
     kapt(Dependency.Google.HILT_COMPILER)
     implementation(Dependency.Libraries.RETROFIT)
     implementation(Dependency.Libraries.RETROFIT_CONVERTER)
+    implementation(Dependency.Libraries.OKHTTP_LOGGING_INTERCEPTOR)
     implementation(Dependency.UnitTest.JUNIT)
     implementation(Dependency.AndroidTest.ANDROID_JUNIT)
     implementation(Dependency.AndroidTest.ESPRESSO_CORE)

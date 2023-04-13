@@ -1,10 +1,13 @@
 package com.daily.di
 
 import com.daily.data.remote.network.api.AuthApi
+import com.daily.data.remote.network.api.EmailApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -18,10 +21,23 @@ object NetworkModule {
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(provideClient())
             .build()
 
     @Provides
     @Singleton
     fun provideAuthService(retrofit: Retrofit): AuthApi =
         retrofit.create(AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideEmailService(retrofit: Retrofit): EmailApi =
+        retrofit.create(EmailApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+        return OkHttpClient.Builder().addInterceptor(interceptor).build()
+    }
 }

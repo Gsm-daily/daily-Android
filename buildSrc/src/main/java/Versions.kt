@@ -1,5 +1,5 @@
 object Versions {
-    const val GRADLE_ANDROID = "7.3.1"
+    const val GRADLE_ANDROID = "7.4.2"
     const val GRADLE_KOTLIN = "1.8.10"
 
     const val CORE_KTX = "1.9.0"
@@ -17,6 +17,7 @@ object Versions {
 
     const val MATERIAL = "1.8.0"
     const val HILT = "2.44"
+    const val OKHTTP = "5.0.0-alpha.2"
 
     const val RETROFIT = "2.9.0"
 

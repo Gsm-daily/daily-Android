@@ -8,8 +8,10 @@ import com.daily.presentation.view.auth.verification.VerificationScreen
 
 const val verificationRoute = "verification_route"
 
-fun NavController.navigateToVerification(email: String) {
-    this.navigate("$verificationRoute/$email")
+fun NavController.navigateToVerification(email: String, type: String) {
+    this.navigate("$verificationRoute/$email/$type") {
+        launchSingleTop = true
+    }
 }
 
 fun NavGraphBuilder.verificationScreen(
@@ -17,11 +19,15 @@ fun NavGraphBuilder.verificationScreen(
     navigateToNext: (String) -> Unit
 ) {
     composable(
-        route = "$verificationRoute/{email}",
-        arguments = listOf(navArgument("email") { nullable = false })
+        route = "$verificationRoute/{email}/{type}",
+        arguments = listOf(
+            navArgument("email") { nullable = false },
+            navArgument("type") { nullable = false }
+        )
     ) { backStackEntry ->
         VerificationScreen(
             email = backStackEntry.arguments?.getString("email"),
+            type = backStackEntry.arguments?.getString("type"),
             navigateToPrevious = navigateToPrevious,
             navigateToNext = navigateToNext
         )

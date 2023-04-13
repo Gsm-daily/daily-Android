@@ -26,4 +26,6 @@
     <string name="select_theme">테마선택</string>
     <string name="select_grassland">푸른 초원으로 할게요!</string>
     <string name="select_ocean">고요한 바다로 할게요!</string>
+    <string name="email_is_already_exist">이미 등록된 이메일 입니다.</string>
+    <string name="verification_code_not_matching">인증번호가 일치하지 않습니다.</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.daily.di
 
 import com.daily.data.remote.network.api.AuthApi
+import com.daily.data.remote.network.api.EmailApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,4 +25,9 @@ object NetworkModule {
     @Singleton
     fun provideAuthService(retrofit: Retrofit): AuthApi =
         retrofit.create(AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideEmailService(retrofit: Retrofit): EmailApi =
+        retrofit.create(EmailApi::class.java)
 }

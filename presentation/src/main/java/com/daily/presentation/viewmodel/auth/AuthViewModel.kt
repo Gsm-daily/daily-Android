@@ -30,13 +30,14 @@ class AuthViewModel @Inject constructor(
     val duplicateNameUiState = _duplicateNameUiState.asStateFlow()
 
     fun signUp(email: String, password: String, nickname: String) {
-        val signUpRequest = SignUpRequest(
-            email = email,
-            password = password,
-            name = nickname
-        )
         viewModelScope.launch {
-            signUpUseCase(signUpRequest)
+            signUpUseCase(
+                SignUpRequest(
+                    email = email,
+                    password = password,
+                    name = nickname
+                )
+            )
                 .onSuccess { _signUpUiState.value = UiState.Success }
                 .onFailure {
                     it.exceptionHandling(
@@ -47,7 +48,7 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun checkDuplicateEmail(email: String, ) {
+    fun checkDuplicateEmail(email: String) {
         viewModelScope.launch {
             checkDuplicateEmailUseCase(email)
                 .onSuccess { _duplicateEmailUiState.value = UiState.Success }

@@ -87,25 +87,26 @@ fun VerificationScreen(
                     }
                 }
             )
-        }
-        if (!isMatched) {
-            Caption1(
-                text = stringResource(R.string.verification_code_not_matching),
-                textColor = DailyTheme.color.Error,
-                rippleEnabled = false
+            if (!isMatched) {
+                Spacer(modifier = modifier.height(12.dp))
+                Caption1(
+                    text = stringResource(R.string.verification_code_not_matching),
+                    textColor = DailyTheme.color.Error,
+                    rippleEnabled = false
+                )
+            }
+            Spacer(modifier = modifier.height(16.dp))
+            Caption2(
+                text = stringResource(R.string.resend),
+                textColor = DailyTheme.color.Primary20,
+                rippleEnabled = false,
+                onClick = {
+                    when (checkNotNull(type)) {
+                        "signup" -> viewModel.sendEmailForSignUp(checkNotNull(email))
+                        "password" -> viewModel.sendEmailForPasswordChange(checkNotNull(email))
+                    }
+                }
             )
         }
-        Spacer(modifier = modifier.height(16.dp))
-        Caption2(
-            text = stringResource(R.string.resend),
-            textColor = DailyTheme.color.Primary20,
-            rippleEnabled = false,
-            onClick = {
-                when (checkNotNull(type)) {
-                    "signup" -> viewModel.sendEmailForSignUp(checkNotNull(email))
-                    "password" -> viewModel.sendEmailForPasswordChange(checkNotNull(email))
-                }
-            }
-        )
     }
 }

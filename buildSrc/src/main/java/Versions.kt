@@ -17,6 +17,7 @@ object Versions {
 
     const val MATERIAL = "1.8.0"
     const val HILT = "2.44"
+    const val OKHTTP = "5.0.0-alpha.2"
 
     const val RETROFIT = "2.9.0"
 

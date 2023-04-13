@@ -1,21 +1,23 @@
 package com.daily.data.remote.network.api
 
+import com.daily.data.remote.model.EmailRequest
+import com.daily.data.remote.model.VerifyAuthKeyRequest
 import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface EmailApi {
     @POST("/api/v1/email/signup")
     suspend fun sendEmailForSignUp(
-        @Body email: String
+        @Body email: EmailRequest
     )
 
     @POST("/api/v1/email/verify-authkey")
     suspend fun verifyAuthKey(
-        @Body authKey: Int
+        @Body authKey: VerifyAuthKeyRequest
     )
 
     @POST("/api/v1/email/password")
     suspend fun sendEmailForPasswordChange(
-        @Body email: String
+        @Body email: EmailRequest
     )
 }

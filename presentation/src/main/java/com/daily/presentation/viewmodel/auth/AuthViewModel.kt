@@ -6,7 +6,7 @@ import com.daily.domain.model.SignUpRequest
 import com.daily.domain.usecase.CheckDuplicateEmailUseCase
 import com.daily.domain.usecase.CheckDuplicateNameUseCase
 import com.daily.domain.usecase.SignUpUseCase
-import com.daily.presentation.viewmodel.util.ExceptionType
+import com.daily.presentation.viewmodel.util.UiState
 import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,8 +20,14 @@ class AuthViewModel @Inject constructor(
     private val checkDuplicateEmailUseCase: CheckDuplicateEmailUseCase,
     private val checkDuplicateNameUseCase: CheckDuplicateNameUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow<AuthUiState>(AuthUiState.Loading)
-    val uiState = _uiState.asStateFlow()
+    private val _signUpUiState = MutableStateFlow<UiState>(UiState.Loading)
+    val signUpUiState = _signUpUiState.asStateFlow()
+
+    private val _duplicateEmailUiState = MutableStateFlow<UiState>(UiState.Loading)
+    val duplicateEmailUiState = _duplicateEmailUiState.asStateFlow()
+
+    private val _duplicateNameUiState = MutableStateFlow<UiState>(UiState.Loading)
+    val duplicateNameUiState = _duplicateNameUiState.asStateFlow()
 
     fun signUp(email: String, password: String, nickname: String) {
         val signUpRequest = SignUpRequest(
@@ -31,28 +37,22 @@ class AuthViewModel @Inject constructor(
         )
         viewModelScope.launch {
             signUpUseCase(signUpRequest)
-                .onSuccess { _uiState.value = AuthUiState.Success }
+                .onSuccess { _signUpUiState.value = UiState.Success }
                 .onFailure {
                     it.exceptionHandling(
-                        badRequestAction = {
-                            _uiState.value = AuthUiState.Error(exception = ExceptionType.BadRequestException)
-                        },
-                        conflictAction = {
-                            _uiState.value = AuthUiState.Error(exception = ExceptionType.ConflictException)
-                        }
+                        badRequestAction = { _signUpUiState.value = UiState.BadRequest },
+                        conflictAction = { _signUpUiState.value = UiState.Conflict }
                     )
                 }
         }
     }
 
-    fun checkDuplicateEmail(email: String) {
+    fun checkDuplicateEmail(email: String, ) {
         viewModelScope.launch {
             checkDuplicateEmailUseCase(email)
-                .onSuccess { _uiState.value = AuthUiState.Success }
+                .onSuccess { _duplicateEmailUiState.value = UiState.Success }
                 .onFailure {
-                    it.exceptionHandling(conflictAction = {
-                        _uiState.value = AuthUiState.Error(exception = ExceptionType.ConflictException)
-                    })
+                    it.exceptionHandling(conflictAction = { _duplicateEmailUiState.value = UiState.Conflict })
                 }
         }
     }
@@ -60,11 +60,9 @@ class AuthViewModel @Inject constructor(
     fun checkDuplicateName(name: String) {
         viewModelScope.launch {
             checkDuplicateNameUseCase(name)
-                .onSuccess { _uiState.value = AuthUiState.Success }
+                .onSuccess { _duplicateNameUiState.value = UiState.Success }
                 .onFailure {
-                    it.exceptionHandling(conflictAction = {
-                        _uiState.value = AuthUiState.Error(exception = ExceptionType.ConflictException)
-                    })
+                    it.exceptionHandling(conflictAction = { _duplicateNameUiState.value = UiState.Conflict })
                 }
         }
     }

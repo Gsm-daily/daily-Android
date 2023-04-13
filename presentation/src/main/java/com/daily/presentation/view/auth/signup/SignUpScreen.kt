@@ -1,18 +1,18 @@
 package com.daily.presentation.view.auth.signup
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
 import com.daily.presentation.view.auth.component.EmailInput
 import com.daily.presentation.view.auth.component.PasswordInput
-import com.daily.presentation.viewmodel.AuthViewModel
+import com.daily.presentation.viewmodel.auth.AuthViewModel
 
 @Composable
 fun SignUpScreen(
@@ -28,6 +28,7 @@ fun SignUpScreen(
     var password by remember { mutableStateOf("") }
     var nickname by remember { mutableStateOf("") }
 
+    val duplicateEmailState by viewModel.duplicateEmailUiState.collectAsStateWithLifecycle()
     val description = when (step) {
         EmailInput -> R.string.email_authentication
         NicknameInput -> R.string.enter_the_nickname
@@ -68,7 +69,12 @@ fun SignUpScreen(
             Spacer(modifier = modifier.height(24.dp))
 
             when (step) {
-                EmailInput -> EmailInput { navigateToVerification(it) }
+                EmailInput -> EmailInput(
+                    state = duplicateEmailState,
+                    checkDuplicateEmail = viewModel::checkDuplicateEmail
+                ) {
+                    navigateToVerification(it)
+                }
                 NicknameInput -> NicknameInput {
                     nickname = it
                     email?.let { email ->

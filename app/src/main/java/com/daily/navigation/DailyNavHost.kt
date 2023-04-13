@@ -35,7 +35,12 @@ fun DailyNavHost(
         signUpScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
             navigateToLogin = { navController.navigateToLogin() },
-            navigateToVerification = { navController.navigateToVerification(it) },
+            navigateToVerification = {
+                navController.navigateToVerification(
+                    email = it,
+                    type = "signup"
+                )
+            },
             navigateToSelectTheme = { navController.navigateToSelectTheme() }
         )
         verificationScreen(
@@ -50,7 +55,12 @@ fun DailyNavHost(
         forgotPasswordScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
             navigateToLogin = { navController.navigateToLogin() },
-            navigateToVerification = { navController.navigateToVerification(it) }
+            navigateToVerification = {
+                navController.navigateToVerification(
+                    email = it,
+                    type = "password"
+                )
+            }
         )
         selectThemeScreen(
             navigateToPrevious = { navController.navigateToPrevious() }

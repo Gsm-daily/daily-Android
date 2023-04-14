@@ -17,15 +17,14 @@ import com.daily.presentation.viewmodel.util.UiState
 fun EmailInput(
     modifier: Modifier = Modifier,
     state: UiState? = null,
-    checkDuplicateEmail: ((String) -> Unit)? = null,
+    type: String,
+    checkDuplicateEmail: (String) -> Unit = {},
     onNext: (String) -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var isEmailValid by remember { mutableStateOf<Boolean?>(null) }
     var isEmailUnique by remember { mutableStateOf<Boolean?>(null) }
-    var buttonEnabled by remember { mutableStateOf(false) }
-
-    isEmailValid?.let { buttonEnabled = it }
+    var onClicked by remember { mutableStateOf(false) }
 
     if (state != null) {
         when (state) {
@@ -36,7 +35,15 @@ fun EmailInput(
         }
     }
 
-    if (isEmailValid == true && isEmailUnique == true) onNext(email)
+    val errorRes = when {
+        isEmailValid == false -> R.string.email_format_not_valid
+        isEmailUnique == false -> R.string.email_is_already_exist
+        else -> null
+    }
+
+    if (isEmailValid == true && isEmailUnique == true && onClicked) {
+        onNext(email)
+    }
 
     Column(modifier = modifier.fillMaxWidth()) {
         EmailField(
@@ -47,38 +54,26 @@ fun EmailInput(
             email = it
             isEmailValid = PatternsCompat.EMAIL_ADDRESS.matcher(it).matches()
         }
-        isEmailValid?.let { isEmailValid ->
-            if (!isEmailValid) {
-                Caption1(
-                    text = stringResource(R.string.email_format_not_valid),
-                    textColor = DailyTheme.color.Error,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp)
-                )
-            }
-        }
-        isEmailUnique?.let { isEmailUnique ->
-            if (!isEmailUnique) {
-                Caption1(
-                    text = stringResource(R.string.email_is_already_exist),
-                    textColor = DailyTheme.color.Error,
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp)
-                )
-            }
-        }
-        Spacer(
-            modifier = modifier.height(
-                if (isEmailValid == false || isEmailUnique == false) 116.dp else 154.dp
+        errorRes?.let {
+            Caption1(
+                text = stringResource(it),
+                textColor = DailyTheme.color.Error,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp)
             )
-        )
+        }
+        Spacer(modifier = modifier.height(if (errorRes != null) 116.dp else 154.dp))
         DailyButton(
             text = stringResource(R.string.get_verification_code),
-            enabled = buttonEnabled,
+            enabled = isEmailValid ?: false,
             modifier = modifier.fillMaxWidth()
         ) {
-            isEmailValid = if (email.isEmpty()) false else PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()
-            isEmailValid?.let { isEmailValid ->
-                if (isEmailValid) {
-                    checkDuplicateEmail?.let { checkDuplicateEmail -> checkDuplicateEmail(email) }
+            if (isEmailValid == true) {
+                when (type) {
+                    "signup" -> {
+                        checkDuplicateEmail(email)
+                        onClicked = true
+                    }
+                    "password" -> {}
                 }
             }
         }

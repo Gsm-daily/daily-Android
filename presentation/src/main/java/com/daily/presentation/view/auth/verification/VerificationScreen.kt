@@ -28,6 +28,7 @@ fun VerificationScreen(
 ) {
     var code by remember { mutableStateOf("") }
     var isMatched by remember { mutableStateOf(true) }
+    var isComplete by remember { mutableStateOf(false) }
 
     val uiState by viewModel.verifyUiState.collectAsStateWithLifecycle()
 
@@ -79,15 +80,17 @@ fun VerificationScreen(
                 value = code,
                 length = CODE_LENGTH,
                 onValueChange = {
+                    isComplete = false
                     if (it.length <= CODE_LENGTH) {
                         code = it
-                        if (code.length == CODE_LENGTH) {
-                            viewModel.verifyAuthKey(code.toInt())
-                        }
+                    }
+                    if (code.length == CODE_LENGTH) {
+                        viewModel.verifyAuthKey(code.toInt())
+                        isComplete = true
                     }
                 }
             )
-            if (!isMatched) {
+            if (!isMatched && isComplete) {
                 Spacer(modifier = modifier.height(12.dp))
                 Caption1(
                     text = stringResource(R.string.verification_code_not_matching),

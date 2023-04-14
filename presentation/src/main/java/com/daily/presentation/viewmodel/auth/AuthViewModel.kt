@@ -67,4 +67,8 @@ class AuthViewModel @Inject constructor(
                 }
         }
     }
+
+    fun resetEmailUiState() {
+        _duplicateEmailUiState.value = UiState.Loading
+    }
 }

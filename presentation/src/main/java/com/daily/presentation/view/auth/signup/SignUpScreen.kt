@@ -71,8 +71,10 @@ fun SignUpScreen(
             when (step) {
                 EmailInput -> EmailInput(
                     state = duplicateEmailState,
+                    type = "signup",
                     checkDuplicateEmail = viewModel::checkDuplicateEmail
                 ) {
+                    viewModel.resetEmailUiState()
                     navigateToVerification(it)
                 }
                 NicknameInput -> NicknameInput {
@@ -91,7 +93,6 @@ fun SignUpScreen(
                     step = step.next()
                 }
             }
-
             Spacer(modifier = modifier.height(16.dp))
             Row(
                 modifier = modifier.fillMaxWidth(),

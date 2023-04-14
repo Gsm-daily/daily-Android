@@ -37,7 +37,7 @@ fun EmailInput(
 
     val errorRes = when {
         isEmailValid == false -> R.string.email_format_not_valid
-        isEmailUnique == false -> R.string.email_is_already_exist
+        isEmailUnique == false && onClicked -> R.string.email_is_already_exist
         else -> null
     }
 
@@ -53,6 +53,7 @@ fun EmailInput(
         ) {
             email = it
             isEmailValid = PatternsCompat.EMAIL_ADDRESS.matcher(it).matches()
+            onClicked = false
         }
         errorRes?.let {
             Caption1(

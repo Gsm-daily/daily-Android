@@ -6,6 +6,7 @@ import com.daily.domain.model.SignInRequest
 import com.daily.domain.model.SignUpRequest
 import com.daily.domain.usecase.CheckDuplicateEmailUseCase
 import com.daily.domain.usecase.CheckDuplicateNameUseCase
+import com.daily.domain.usecase.SaveTokenUseCase
 import com.daily.domain.usecase.SignInUseCase
 import com.daily.domain.usecase.SignUpUseCase
 import com.daily.presentation.viewmodel.util.UiState
@@ -21,7 +22,8 @@ class AuthViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val signUpUseCase: SignUpUseCase,
     private val checkDuplicateEmailUseCase: CheckDuplicateEmailUseCase,
-    private val checkDuplicateNameUseCase: CheckDuplicateNameUseCase
+    private val checkDuplicateNameUseCase: CheckDuplicateNameUseCase,
+    private val saveTokenUseCase: SaveTokenUseCase
 ) : ViewModel() {
     private val _signInUiState = MutableStateFlow<UiState>(UiState.Loading)
     val signInUiState = _signInUiState.asStateFlow()
@@ -43,7 +45,14 @@ class AuthViewModel @Inject constructor(
                     password = password
                 )
             )
-                .onSuccess { _signInUiState.value = UiState.Success }
+                .onSuccess {
+                    saveTokenUseCase(
+                        accessToken = it.accessToken,
+                        refreshToken = it.refreshToken,
+                        accessTokenExpiredAt = it.accessTokenExpiredAt
+                    )
+                    _signInUiState.value = UiState.Success
+                }
                 .onFailure {
                     it.exceptionHandling(
                         badRequestAction = { _signInUiState.value = UiState.BadRequest },

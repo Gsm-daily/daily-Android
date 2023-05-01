@@ -1,14 +1,24 @@
 package com.daily.data.repository
 
+import com.daily.data.local.datasource.LocalDataSource
 import com.daily.data.remote.datasource.auth.AuthDataSource
+import com.daily.data.remote.model.asSignInRequestData
+import com.daily.data.remote.model.asSignInResponse
 import com.daily.data.remote.model.asSignUpRequestData
+import com.daily.domain.model.SignInRequest
+import com.daily.domain.model.SignInResponse
 import com.daily.domain.model.SignUpRequest
 import com.daily.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val authDataSource: AuthDataSource
+    private val authDataSource: AuthDataSource,
+    private val localDataSource: LocalDataSource
 ): AuthRepository {
+    override suspend fun signIn(signInRequest: SignInRequest): SignInResponse {
+        return authDataSource.signIn(signInRequest.asSignInRequestData()).asSignInResponse()
+    }
+
     override suspend fun signUp(signUpRequest: SignUpRequest) {
         authDataSource.signUp(signUpRequest.asSignUpRequestData())
     }
@@ -19,5 +29,9 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun checkDuplicateName(name: String) {
         authDataSource.checkDuplicateName(name)
+    }
+
+    override suspend fun saveToken(accessToken: String, refreshToken: String, accessTokenExpiredAt: String) {
+        localDataSource.saveToken(accessToken, refreshToken, accessTokenExpiredAt)
     }
 }

@@ -29,6 +29,7 @@ fun SignUpScreen(
     var nickname by remember { mutableStateOf("") }
 
     val duplicateEmailState by viewModel.duplicateEmailUiState.collectAsStateWithLifecycle()
+    val duplicateNameState by viewModel.duplicateNameUiState.collectAsStateWithLifecycle()
     val description = when (step) {
         EmailInput -> R.string.email_authentication
         NicknameInput -> R.string.enter_the_nickname
@@ -77,7 +78,10 @@ fun SignUpScreen(
                     viewModel.resetEmailUiState()
                     navigateToVerification(it)
                 }
-                NicknameInput -> NicknameInput {
+                NicknameInput -> NicknameInput(
+                    state = duplicateNameState,
+                    checkDuplicationName = viewModel::checkDuplicateName
+                ) {
                     nickname = it
                     email?.let { email ->
                         viewModel.signUp(

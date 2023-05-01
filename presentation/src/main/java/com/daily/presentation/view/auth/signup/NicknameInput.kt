@@ -8,19 +8,27 @@ import androidx.compose.ui.unit.dp
 import com.daily.designsystem.component.DailyButton
 import com.daily.designsystem.component.DailyTextField
 import com.daily.designsystem.modifier.dailyClickable
+import com.daily.designsystem.theme.Caption1
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.IcDelete
 import com.daily.presentation.R
+import com.daily.presentation.viewmodel.util.UiState
 
 @Composable
 fun NicknameInput(
     modifier: Modifier = Modifier,
+    state: UiState,
+    checkDuplicationName: (String) -> Unit,
     onNext: (String) -> Unit
 ) {
     var nickname by remember { mutableStateOf("") }
+    var isNicknameValid by remember { mutableStateOf<Boolean?>(null) }
     var buttonEnabled by remember { mutableStateOf(false) }
+    var onClicked by remember { mutableStateOf(false) }
 
     buttonEnabled = nickname.isNotEmpty()
+
+    if (isNicknameValid == true && onClicked) onNext(nickname)
 
     Column(modifier = modifier.fillMaxWidth()) {
         DailyTextField(
@@ -38,13 +46,35 @@ fun NicknameInput(
             },
             modifier = modifier.defaultMinSize(minHeight = 24.dp)
         )
-        Spacer(modifier = modifier.height(154.dp))
+        when (state) {
+            UiState.Success -> isNicknameValid = true
+            UiState.Conflict -> {
+                isNicknameValid = false
+                Caption1(
+                    text = stringResource(R.string.nickname_is_already_exist),
+                    textColor = DailyTheme.color.Error,
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp)
+                )
+            }
+
+            UiState.Loading -> {}
+            else -> {} // 알 수 없는 오류
+        }
+        Spacer(
+            modifier = modifier.height(
+                when (isNicknameValid) {
+                    false -> 130.dp
+                    else -> 154.dp
+                }
+            )
+        )
         DailyButton(
             text = stringResource(R.string.apply),
             enabled = buttonEnabled,
             modifier = modifier.fillMaxWidth()
         ) {
-            onNext(nickname)
+            onClicked = true
+            checkDuplicationName(nickname)
         }
     }
 }

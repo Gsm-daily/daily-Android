@@ -5,13 +5,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.daily.presentation.R
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
+import com.daily.presentation.viewmodel.auth.AuthViewModel
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
+    viewModel: AuthViewModel = hiltViewModel(),
     navigateToPrevious: () -> Unit,
     navigateToSignUp: () -> Unit,
     navigateToForgotPassword: () -> Unit
@@ -39,7 +42,11 @@ fun LoginScreen(
                 textColor = DailyTheme.color.Neutral50
             )
             Spacer(modifier = modifier.height(24.dp))
-            LoginField { navigateToForgotPassword() }
+            LoginField(
+                signIn = viewModel::signIn
+            ) {
+                navigateToForgotPassword()
+            }
             Spacer(modifier = modifier.height(16.dp))
             Row(
                 modifier = modifier.fillMaxWidth(),

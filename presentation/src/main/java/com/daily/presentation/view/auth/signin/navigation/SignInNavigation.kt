@@ -1,27 +1,27 @@
-package com.daily.presentation.view.auth.login.navigation
+package com.daily.presentation.view.auth.signin.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.daily.presentation.view.auth.login.LoginScreen
+import com.daily.presentation.view.auth.signin.SignInScreen
 
-const val loginRoute = "login_route"
+const val signInRoute = "signin_route"
 
-fun NavController.navigateToLogin() {
-    this.navigate(loginRoute) {
-        popUpTo(loginRoute) {
+fun NavController.navigateToSignIn() {
+    this.navigate(signInRoute) {
+        popUpTo(signInRoute) {
             inclusive = true
         }
     }
 }
 
-fun NavGraphBuilder.loginScreen(
+fun NavGraphBuilder.signInScreen(
     navigateToPrevious: () -> Unit,
     navigateToSignUp: () -> Unit,
     navigateToForgotPassword: () -> Unit
 ) {
-    composable(loginRoute) {
-        LoginScreen(
+    composable(signInRoute) {
+        SignInScreen(
             navigateToPrevious = navigateToPrevious,
             navigateToSignUp = navigateToSignUp,
             navigateToForgotPassword = navigateToForgotPassword

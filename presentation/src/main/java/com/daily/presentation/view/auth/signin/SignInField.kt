@@ -1,4 +1,4 @@
-package com.daily.presentation.view.auth.login
+package com.daily.presentation.view.auth.signin
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -13,10 +13,13 @@ import com.daily.designsystem.component.EmailField
 import com.daily.designsystem.component.PasswordField
 
 @Composable
-fun LoginField(
+fun SignInField(
     modifier: Modifier = Modifier,
+    signIn: (String, String) -> Unit,
     navigateToForgotPassword: () -> Unit
 ) {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var isEmailValid by remember { mutableStateOf<Boolean?>(null) }
     var isPasswordBlank by remember { mutableStateOf<Boolean?>(null) }
     var buttonEnabled by remember { mutableStateOf(false) }
@@ -30,6 +33,7 @@ fun LoginField(
             trailingIconEnabled = true
         ) {
             isEmailValid = if (it.isEmpty()) true else EMAIL_ADDRESS.matcher(it).matches()
+            email = it
         }
 
         isEmailValid?.let { isEmailValid ->
@@ -41,9 +45,13 @@ fun LoginField(
                 )
             }
         }
-
         Spacer(modifier = modifier.height(12.dp))
-        PasswordField(hint = stringResource(R.string.enter_the_password)) { isPasswordBlank = it.isEmpty() }
+        PasswordField(
+            hint = stringResource(R.string.enter_the_password)
+        ) {
+            isPasswordBlank = it.isEmpty()
+            password = it
+        }
         Spacer(modifier = modifier.height(12.dp))
         Row(
             modifier = modifier
@@ -79,7 +87,7 @@ fun LoginField(
             text = stringResource(R.string.login),
             modifier = modifier.fillMaxWidth(),
             enabled = buttonEnabled,
-            onClick = { }
+            onClick = { signIn(email, password) }
         )
     }
 }

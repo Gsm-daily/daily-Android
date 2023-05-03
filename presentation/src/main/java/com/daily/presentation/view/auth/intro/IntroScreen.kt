@@ -22,7 +22,7 @@ import com.daily.presentation.R
 @Composable
 fun IntroScreen(
     modifier: Modifier = Modifier,
-    navigateToLogin: () -> Unit,
+    navigateToSignIn: () -> Unit,
     navigateToSignUp: () -> Unit
 ) {
     var visible by remember { mutableStateOf(false) }
@@ -95,7 +95,7 @@ fun IntroScreen(
                     text = stringResource(R.string.login),
                     textColor = DailyTheme.color.Primary20,
                     rippleEnabled = false,
-                    onClick = { navigateToLogin() }
+                    onClick = { navigateToSignIn() }
                 )
             }
         }

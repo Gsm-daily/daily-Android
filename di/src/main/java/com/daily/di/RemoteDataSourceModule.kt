@@ -1,5 +1,7 @@
 package com.daily.di
 
+import com.daily.data.remote.datasource.account.AccountDataSource
+import com.daily.data.remote.datasource.account.AccountDataSourceImpl
 import com.daily.data.remote.datasource.auth.AuthDataSource
 import com.daily.data.remote.datasource.auth.AuthDataSourceImpl
 import com.daily.data.remote.datasource.email.EmailDataSource
@@ -21,4 +23,9 @@ interface RemoteDataSourceModule {
     fun bindsEmailDataSource(
         emailDataSourceImpl: EmailDataSourceImpl
     ): EmailDataSource
+
+    @Binds
+    fun bindsAccountDataSource(
+        accountDataSourceImpl: AccountDataSourceImpl
+    ): AccountDataSource
 }

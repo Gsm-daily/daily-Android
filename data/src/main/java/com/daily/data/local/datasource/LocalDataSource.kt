@@ -9,9 +9,9 @@ interface LocalDataSource {
         accessTokenExpiredAt: String
     )
 
-    suspend fun getAccessToken(): Flow<String>
+    fun getAccessToken(): Flow<String>
 
-    suspend fun getRefreshToken(): Flow<String>
+    fun getRefreshToken(): Flow<String>
 
-    suspend fun getAccessTokenExpiredAt(): Flow<String>
+    fun getAccessTokenExpiredAt(): Flow<String>
 }

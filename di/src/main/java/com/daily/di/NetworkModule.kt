@@ -1,5 +1,6 @@
 package com.daily.di
 
+import com.daily.data.remote.network.RequestInterceptor
 import com.daily.data.remote.network.api.AuthApi
 import com.daily.data.remote.network.api.EmailApi
 import dagger.Module
@@ -17,11 +18,11 @@ import javax.inject.Singleton
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit =
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(provideClient())
+            .client(okHttpClient)
             .build()
 
     @Provides
@@ -33,11 +34,21 @@ object NetworkModule {
     @Singleton
     fun provideEmailService(retrofit: Retrofit): EmailApi =
         retrofit.create(EmailApi::class.java)
+    @Provides
+    @Singleton
+    fun provideOkhttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        requestInterceptor: RequestInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(requestInterceptor)
+            .build()
+    }
 
     @Provides
     @Singleton
-    fun provideClient(): OkHttpClient {
-        val interceptor = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
-        return OkHttpClient.Builder().addInterceptor(interceptor).build()
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
     }
 }

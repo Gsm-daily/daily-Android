@@ -5,6 +5,8 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.daily.data.local.util.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(
@@ -23,4 +25,10 @@ class LocalDataSourceImpl @Inject constructor(
             it[ACCESS_TOKEN_EXPIRED_AT] = accessTokenExpiredAt
         }
     }
+
+    override suspend fun getAccessToken(): Flow<String> = context.dataStore.data.map { it[ACCESS_TOKEN] ?: "" }
+
+    override suspend fun getRefreshToken(): Flow<String> = context.dataStore.data.map { it[REFRESH_TOKEN] ?: "" }
+
+    override suspend fun getAccessTokenExpiredAt(): Flow<String> = context.dataStore.data.map { it[ACCESS_TOKEN_EXPIRED_AT] ?: "" }
 }

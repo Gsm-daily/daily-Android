@@ -19,7 +19,7 @@ fun NavController.navigateToSignUp(email: String? = null) {
 
 fun NavGraphBuilder.signUpScreen(
     navigateToPrevious: () -> Unit,
-    navigateToLogin: () -> Unit,
+    navigateToSignIn: () -> Unit,
     navigateToVerification: (String) -> Unit,
     navigateToSelectTheme: () -> Unit
 ) {
@@ -30,7 +30,7 @@ fun NavGraphBuilder.signUpScreen(
         SignUpScreen(
             email = backStackEntry.arguments?.getString("email"),
             navigateToPrevious = navigateToPrevious,
-            navigateToLogin = navigateToLogin,
+            navigateToLogin = navigateToSignIn,
             navigateToVerification = navigateToVerification,
             navigateToSelectTheme = navigateToSelectTheme
         )

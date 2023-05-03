@@ -7,8 +7,8 @@ import com.daily.presentation.view.auth.forgot_password.navigation.forgotPasswor
 import com.daily.presentation.view.auth.forgot_password.navigation.forgotPasswordScreen
 import com.daily.presentation.view.auth.forgot_password.navigation.navigateToForgotPassword
 import com.daily.presentation.view.auth.intro.navigation.introScreen
-import com.daily.presentation.view.auth.login.navigation.loginScreen
-import com.daily.presentation.view.auth.login.navigation.navigateToLogin
+import com.daily.presentation.view.auth.signin.navigation.signInScreen
+import com.daily.presentation.view.auth.signin.navigation.navigateToSignIn
 import com.daily.presentation.view.auth.select_theme.navigation.navigateToSelectTheme
 import com.daily.presentation.view.auth.select_theme.navigation.selectThemeScreen
 import com.daily.presentation.view.auth.signup.navigation.navigateToSignUp
@@ -24,17 +24,17 @@ fun DailyNavHost(
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
         introScreen(
-            navigateToLogin = { navController.navigateToLogin() },
+            navigateToSignIn = { navController.navigateToSignIn() },
             navigateToSignUp = { navController.navigateToSignUp() }
         )
-        loginScreen(
+        signInScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
             navigateToSignUp = { navController.navigateToSignUp() },
             navigateToForgotPassword = { navController.navigateToForgotPassword() }
         )
         signUpScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
-            navigateToLogin = { navController.navigateToLogin() },
+            navigateToSignIn = { navController.navigateToSignIn() },
             navigateToVerification = {
                 navController.navigateToVerification(
                     email = it,
@@ -54,7 +54,7 @@ fun DailyNavHost(
         )
         forgotPasswordScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
-            navigateToLogin = { navController.navigateToLogin() },
+            navigateToSignIn = { navController.navigateToSignIn() },
             navigateToVerification = {
                 navController.navigateToVerification(
                     email = it,

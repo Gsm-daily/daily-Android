@@ -1,4 +1,4 @@
-package com.daily.presentation.view.auth.login
+package com.daily.presentation.view.auth.signin
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -13,7 +13,7 @@ import com.daily.designsystem.component.EmailField
 import com.daily.designsystem.component.PasswordField
 
 @Composable
-fun LoginField(
+fun SignInField(
     modifier: Modifier = Modifier,
     signIn: (String, String) -> Unit,
     navigateToForgotPassword: () -> Unit

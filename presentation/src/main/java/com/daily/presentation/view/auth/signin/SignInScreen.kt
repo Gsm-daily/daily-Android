@@ -1,4 +1,4 @@
-package com.daily.presentation.view.auth.login
+package com.daily.presentation.view.auth.signin
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -12,7 +12,7 @@ import com.daily.designsystem.theme.*
 import com.daily.presentation.viewmodel.auth.AuthViewModel
 
 @Composable
-fun LoginScreen(
+fun SignInScreen(
     modifier: Modifier = Modifier,
     viewModel: AuthViewModel = hiltViewModel(),
     navigateToPrevious: () -> Unit,
@@ -42,7 +42,7 @@ fun LoginScreen(
                 textColor = DailyTheme.color.Neutral50
             )
             Spacer(modifier = modifier.height(24.dp))
-            LoginField(
+            SignInField(
                 signIn = viewModel::signIn
             ) {
                 navigateToForgotPassword()

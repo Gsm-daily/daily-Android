@@ -16,7 +16,7 @@ fun NavController.navigateToForgotPassword(email: String? = null) {
 
 fun NavGraphBuilder.forgotPasswordScreen(
     navigateToPrevious: () -> Unit,
-    navigateToLogin: () -> Unit,
+    navigateToSignIn: () -> Unit,
     navigateToVerification: (String) -> Unit
 ) {
     composable(
@@ -26,7 +26,7 @@ fun NavGraphBuilder.forgotPasswordScreen(
         ForgotPasswordScreen(
             email = backStackEntry.arguments?.getString("email"),
             navigateToPrevious = navigateToPrevious,
-            navigateToLogin = navigateToLogin,
+            navigateToLogin = navigateToSignIn,
             navigateToVerification = navigateToVerification
         )
     }

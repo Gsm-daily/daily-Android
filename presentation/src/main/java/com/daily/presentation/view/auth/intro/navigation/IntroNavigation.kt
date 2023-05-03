@@ -7,12 +7,12 @@ import com.daily.presentation.view.auth.intro.IntroScreen
 const val introRoute = "intro_route"
 
 fun NavGraphBuilder.introScreen(
-    navigateToLogin: () -> Unit,
+    navigateToSignIn: () -> Unit,
     navigateToSignUp: () -> Unit
 ) {
     composable(introRoute) {
         IntroScreen(
-            navigateToLogin = navigateToLogin,
+            navigateToSignIn = navigateToSignIn,
             navigateToSignUp = navigateToSignUp
         )
     }

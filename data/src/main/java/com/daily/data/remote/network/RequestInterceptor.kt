@@ -1,6 +1,8 @@
 package com.daily.data.remote.network
 
 import com.daily.data.local.datasource.LocalDataSource
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -14,12 +16,12 @@ class RequestInterceptor @Inject constructor(
         val ignorePath = listOf("/auth", "/account/password", "/email")
 
         ignorePath.forEach {
-            if (path.contains(it)){
+            if (path.contains(it)) {
                 return chain.proceed(request)
             }
         }
 
-        val accessToken = localDataSource.getAccessToken()
+        val accessToken = runBlocking { localDataSource.getAccessToken().first() }
 
         return chain.proceed(
             request.newBuilder()

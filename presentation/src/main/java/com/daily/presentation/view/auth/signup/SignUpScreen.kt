@@ -13,6 +13,7 @@ import com.daily.presentation.R
 import com.daily.presentation.view.auth.component.EmailInput
 import com.daily.presentation.view.auth.component.PasswordInput
 import com.daily.presentation.viewmodel.auth.AuthViewModel
+import com.daily.presentation.viewmodel.util.UiState
 
 @Composable
 fun SignUpScreen(
@@ -28,12 +29,38 @@ fun SignUpScreen(
     var password by remember { mutableStateOf("") }
     var nickname by remember { mutableStateOf("") }
 
+    val signUpState by viewModel.signUpUiState.collectAsStateWithLifecycle()
+    val signInState by viewModel.signInUiState.collectAsStateWithLifecycle()
     val duplicateEmailState by viewModel.duplicateEmailUiState.collectAsStateWithLifecycle()
     val duplicateNameState by viewModel.duplicateNameUiState.collectAsStateWithLifecycle()
+
     val description = when (step) {
         EmailInput -> R.string.email_authentication
         NicknameInput -> R.string.enter_the_nickname
         PasswordInput -> R.string.enter_the_password
+    }
+
+    when(signUpState) {
+        UiState.BadRequest -> {}
+        UiState.Conflict -> {}
+        UiState.Loading -> {}
+        UiState.Success -> {
+            viewModel.signIn(
+                email = checkNotNull(email),
+                password = password
+            )
+        }
+        UiState.Unknown -> {}
+        else -> {}
+    }
+
+    when(signInState) {
+        UiState.BadRequest -> {}
+        UiState.Loading -> {}
+        UiState.NotFound -> {}
+        UiState.Success -> navigateToSelectTheme()
+        UiState.Unknown -> {}
+        else -> {}
     }
 
     Column(modifier = modifier.systemBarsPadding()) {
@@ -90,7 +117,6 @@ fun SignUpScreen(
                             nickname = nickname
                         )
                     }
-                    navigateToSelectTheme()
                 }
                 PasswordInput -> PasswordInput {
                     password = it

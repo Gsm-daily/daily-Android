@@ -33,7 +33,7 @@ class RequestInterceptor @Inject constructor(
 
         val accessToken = runBlocking { localDataSource.getAccessToken().first() }
         val refreshToken = runBlocking { localDataSource.getRefreshToken().first() }
-        val currentTime = LocalDateTime.now()
+        val currentTime = LocalDateTime.parse("2023-05-08T03:11:30")
         val accessTokenExpiredAt = runBlocking { convertDateFormat(localDataSource.getAccessTokenExpiredAt().first()) }
         val refreshTokenExpiredAt = runBlocking { convertDateFormat(localDataSource.getRefreshTokenExpiredAt().first()) }
 
@@ -43,7 +43,7 @@ class RequestInterceptor @Inject constructor(
             val client = OkHttpClient()
             val reissueRequest = Request.Builder()
                 .url("${BuildConfig.BASE_URL}/reissue")
-                .patch(RequestBody.create(MediaType.parse("application/json"), ""))
+                .patch(RequestBody.create(MediaType.parse("application/json"), JsonObject().toString()))
                 .addHeader(
                     "refreshToken",
                     "Bearer $refreshToken"

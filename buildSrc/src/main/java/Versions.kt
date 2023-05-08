@@ -27,6 +27,6 @@ object Versions {
     const val ESPRESSO_CORE = "3.5.1"
 
     const val COMPILE_SDK = 33
-    const val MIN_SDK = 21
+    const val MIN_SDK = 26
     const val TARGET_SDK = 33
 }

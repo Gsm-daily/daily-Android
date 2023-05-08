@@ -9,8 +9,10 @@ import com.google.gson.JsonParser
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
+import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 import okhttp3.Response
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -41,6 +43,7 @@ class RequestInterceptor @Inject constructor(
             val client = OkHttpClient()
             val reissueRequest = Request.Builder()
                 .url("${BuildConfig.BASE_URL}/reissue")
+                .patch(RequestBody.create(MediaType.parse("application/json"), ""))
                 .addHeader(
                     "refreshToken",
                     "Bearer $refreshToken"

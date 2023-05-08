@@ -2,6 +2,7 @@ package com.daily.data.remote.network
 
 import com.daily.data.BuildConfig
 import com.daily.data.local.datasource.LocalDataSource
+import com.daily.domain.exception.LoginRequiredException
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.coroutines.flow.first
@@ -52,7 +53,7 @@ class RequestInterceptor @Inject constructor(
                         token["expiredAt"].toString()
                     )
                 }
-            }
+            } else throw LoginRequiredException()
         }
 
         return chain.proceed(

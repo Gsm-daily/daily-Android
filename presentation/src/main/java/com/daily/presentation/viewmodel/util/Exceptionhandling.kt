@@ -13,7 +13,7 @@ fun Throwable.exceptionHandling(
 ) {
     when (this) {
         is BadRequestException -> badRequestAction()
-        is UnauthorizedException -> unauthorizedAction()
+        is UnauthorizedException, is LoginRequiredException -> unauthorizedAction()
         is ForbiddenException -> forbiddenAction()
         is NotFoundException -> notFoundAction()
         is ConflictException -> conflictAction()

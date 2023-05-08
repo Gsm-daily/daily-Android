@@ -1,5 +1,5 @@
 package com.daily.data.remote.model
 
-data class VerifyAuthKeyRequest(
+data class VerifyAuthKeyRequestData(
     val authKey: Int
 )

@@ -12,16 +12,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.daily.designsystem.component.DailyButton
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.IcBack
 import com.daily.presentation.R
+import com.daily.presentation.viewmodel.account.AccountViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SelectThemeScreen(
     modifier: Modifier = Modifier,
+    viewModel: AccountViewModel = hiltViewModel(),
     navigateToPrevious: () -> Unit
 ) {
     val pagerState = rememberPagerState()
@@ -55,6 +58,8 @@ fun SelectThemeScreen(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp)
-        ) { }
+        ) {
+            viewModel.choiceTheme(if (pagerState.currentPage == 0) "GRASSLAND" else "OCEAN")
+        }
     }
 }

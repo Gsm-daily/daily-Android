@@ -32,6 +32,9 @@ class RequestInterceptor @Inject constructor(
         val refreshToken = runBlocking { localDataSource.getRefreshToken().first() }
         val currentTime = LocalDateTime.now()
         val accessTokenExpiredAt = runBlocking { LocalDateTime.parse(localDataSource.getAccessTokenExpiredAt().first()) }
+        val refreshTokenExpiredAt = runBlocking { LocalDateTime.parse(localDataSource.getRefreshTokenExpiredAt().first()) }
+
+        if (currentTime.isAfter(refreshTokenExpiredAt)) throw LoginRequiredException()
 
         if (currentTime.isAfter(accessTokenExpiredAt)) {
             val client = OkHttpClient()
@@ -50,7 +53,8 @@ class RequestInterceptor @Inject constructor(
                     localDataSource.saveToken(
                         token["accessToken"].toString(),
                         token["refreshToken"].toString(),
-                        token["expiredAt"].toString()
+                        token["accessTokenExpiredAt"].toString(),
+                        token["refreshTokenExpiredAt"].toString()
                     )
                 }
             } else throw LoginRequiredException()

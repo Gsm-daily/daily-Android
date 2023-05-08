@@ -33,7 +33,7 @@ class RequestInterceptor @Inject constructor(
 
         val accessToken = runBlocking { localDataSource.getAccessToken().first() }
         val refreshToken = runBlocking { localDataSource.getRefreshToken().first() }
-        val currentTime = LocalDateTime.parse("2023-05-08T03:11:30")
+        val currentTime = LocalDateTime.now()
         val accessTokenExpiredAt = runBlocking { convertDateFormat(localDataSource.getAccessTokenExpiredAt().first()) }
         val refreshTokenExpiredAt = runBlocking { convertDateFormat(localDataSource.getRefreshTokenExpiredAt().first()) }
 

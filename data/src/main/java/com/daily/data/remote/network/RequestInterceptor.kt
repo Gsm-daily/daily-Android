@@ -23,7 +23,7 @@ class RequestInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val path = request.url().encodedPath()
-        val ignorePath = listOf("/account/password", "/email")
+        val ignorePath = listOf("/auth", "/account/password", "/email")
 
         ignorePath.forEach {
             if (path.contains(it)) {

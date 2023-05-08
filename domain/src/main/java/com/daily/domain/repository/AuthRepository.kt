@@ -13,5 +13,5 @@ interface AuthRepository {
 
     suspend fun checkDuplicateName(name: String)
 
-    suspend fun saveToken(accessToken: String, refreshToken: String, accessTokenExpiredAt: String)
+    suspend fun saveToken(accessToken: String, refreshToken: String, accessTokenExpiredAt: String, refreshTokenExpiredAt: String)
 }

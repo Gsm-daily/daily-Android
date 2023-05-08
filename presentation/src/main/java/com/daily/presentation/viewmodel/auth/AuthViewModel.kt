@@ -49,7 +49,8 @@ class AuthViewModel @Inject constructor(
                     saveTokenUseCase(
                         accessToken = it.accessToken,
                         refreshToken = it.refreshToken,
-                        accessTokenExpiredAt = it.accessTokenExpiredAt
+                        accessTokenExpiredAt = it.accessTokenExpiredAt,
+                        refreshTokenExpiredAt = it.refreshTokenExpiredAt
                     )
                     _signInUiState.value = UiState.Success
                 }

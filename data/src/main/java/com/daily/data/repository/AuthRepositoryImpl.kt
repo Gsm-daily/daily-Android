@@ -31,7 +31,7 @@ class AuthRepositoryImpl @Inject constructor(
         authDataSource.checkDuplicateName(name)
     }
 
-    override suspend fun saveToken(accessToken: String, refreshToken: String, accessTokenExpiredAt: String) {
-        localDataSource.saveToken(accessToken, refreshToken, accessTokenExpiredAt)
+    override suspend fun saveToken(accessToken: String, refreshToken: String, accessTokenExpiredAt: String, refreshTokenExpiredAt: String) {
+        localDataSource.saveToken(accessToken, refreshToken, accessTokenExpiredAt, refreshTokenExpiredAt)
     }
 }

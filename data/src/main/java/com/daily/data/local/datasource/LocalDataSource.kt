@@ -6,7 +6,8 @@ interface LocalDataSource {
     suspend fun saveToken(
         accessToken: String,
         refreshToken: String,
-        accessTokenExpiredAt: String
+        accessTokenExpiredAt: String,
+        refreshTokenExpiredAt: String
     )
 
     fun getAccessToken(): Flow<String>
@@ -14,4 +15,6 @@ interface LocalDataSource {
     fun getRefreshToken(): Flow<String>
 
     fun getAccessTokenExpiredAt(): Flow<String>
+
+    fun getRefreshTokenExpiredAt(): Flow<String>
 }

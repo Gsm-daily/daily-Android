@@ -1,7 +1,7 @@
 package com.daily.data.remote.datasource.email
 
 import com.daily.data.remote.model.EmailRequestData
-import com.daily.data.remote.model.VerifyAuthKeyRequest
+import com.daily.data.remote.model.VerifyAuthKeyRequestData
 import com.daily.data.remote.network.api.EmailApi
 import com.daily.data.remote.util.safeApiCall
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class EmailDataSourceImpl @Inject constructor(
     }
 
     override suspend fun verifyAuthKey(authKey: Int) {
-        safeApiCall { emailApi.verifyAuthKey(VerifyAuthKeyRequest(authKey)) }
+        safeApiCall { emailApi.verifyAuthKey(VerifyAuthKeyRequestData(authKey)) }
     }
 
     override suspend fun sendEmailForPasswordChange(email: String) {

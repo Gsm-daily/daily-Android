@@ -2,6 +2,7 @@ package com.daily.data.remote.network
 
 import com.daily.data.BuildConfig
 import com.daily.data.local.datasource.LocalDataSource
+import com.daily.data.remote.util.convertDateFormat
 import com.daily.domain.exception.LoginRequiredException
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -20,7 +21,7 @@ class RequestInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val path = request.url().encodedPath()
-        val ignorePath = listOf("/auth", "/account/password", "/email")
+        val ignorePath = listOf("/account/password", "/email")
 
         ignorePath.forEach {
             if (path.contains(it)) {
@@ -31,8 +32,8 @@ class RequestInterceptor @Inject constructor(
         val accessToken = runBlocking { localDataSource.getAccessToken().first() }
         val refreshToken = runBlocking { localDataSource.getRefreshToken().first() }
         val currentTime = LocalDateTime.now()
-        val accessTokenExpiredAt = runBlocking { LocalDateTime.parse(localDataSource.getAccessTokenExpiredAt().first()) }
-        val refreshTokenExpiredAt = runBlocking { LocalDateTime.parse(localDataSource.getRefreshTokenExpiredAt().first()) }
+        val accessTokenExpiredAt = runBlocking { convertDateFormat(localDataSource.getAccessTokenExpiredAt().first()) }
+        val refreshTokenExpiredAt = runBlocking { convertDateFormat(localDataSource.getRefreshTokenExpiredAt().first()) }
 
         if (currentTime.isAfter(refreshTokenExpiredAt)) throw LoginRequiredException()
 

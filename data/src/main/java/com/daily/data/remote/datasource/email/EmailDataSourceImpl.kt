@@ -1,6 +1,6 @@
 package com.daily.data.remote.datasource.email
 
-import com.daily.data.remote.model.EmailRequest
+import com.daily.data.remote.model.EmailRequestData
 import com.daily.data.remote.model.VerifyAuthKeyRequest
 import com.daily.data.remote.network.api.EmailApi
 import com.daily.data.remote.util.safeApiCall
@@ -10,7 +10,7 @@ class EmailDataSourceImpl @Inject constructor(
     private val emailApi: EmailApi
 ): EmailDataSource {
     override suspend fun sendEmailForSignUp(email: String) {
-        safeApiCall { emailApi.sendEmailForSignUp(EmailRequest(email)) }
+        safeApiCall { emailApi.sendEmailForSignUp(EmailRequestData(email)) }
     }
 
     override suspend fun verifyAuthKey(authKey: Int) {
@@ -18,6 +18,6 @@ class EmailDataSourceImpl @Inject constructor(
     }
 
     override suspend fun sendEmailForPasswordChange(email: String) {
-        safeApiCall { emailApi.sendEmailForPasswordChange(EmailRequest(email)) }
+        safeApiCall { emailApi.sendEmailForPasswordChange(EmailRequestData(email)) }
     }
 }

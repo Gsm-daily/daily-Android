@@ -1,5 +1,5 @@
 package com.daily.data.remote.model
 
-data class EmailRequest(
+data class EmailRequestData(
     val email: String
 )

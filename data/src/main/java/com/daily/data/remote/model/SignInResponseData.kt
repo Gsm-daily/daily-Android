@@ -5,11 +5,13 @@ import com.daily.domain.model.SignInResponse
 data class SignInResponseData(
     val accessToken: String,
     val refreshToken: String,
-    val accessTokenExpiredAt: String
+    val accessTokenExpiredAt: String,
+    val refreshTokenExpiredAt: String
 )
 
 fun SignInResponseData.asSignInResponse() = SignInResponse(
     accessToken = accessToken,
     refreshToken = refreshToken,
-    accessTokenExpiredAt = accessTokenExpiredAt
+    accessTokenExpiredAt = accessTokenExpiredAt,
+    refreshTokenExpiredAt = refreshTokenExpiredAt
 )

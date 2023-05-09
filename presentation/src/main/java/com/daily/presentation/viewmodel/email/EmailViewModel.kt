@@ -8,6 +8,7 @@ import com.daily.domain.usecase.VerifyAuthKeyUseCase
 import com.daily.presentation.viewmodel.util.UiState
 import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -27,6 +28,8 @@ class EmailViewModel @Inject constructor(
 
     private val _passwordChangeEmailUiState = MutableStateFlow<UiState>(UiState.Loading)
     val passwordChangeUiState = _passwordChangeEmailUiState.asStateFlow()
+
+    val remainingTime = MutableStateFlow(0L)
 
     fun sendEmailForSignUp(email: String) {
         viewModelScope.launch {
@@ -61,6 +64,17 @@ class EmailViewModel @Inject constructor(
                         notFoundAction = { _passwordChangeEmailUiState.value = UiState.NotFound }
                     )
                 }
+        }
+    }
+
+    fun startTimer(duration: Long) {
+        remainingTime.value = duration
+
+        viewModelScope.launch {
+            while (remainingTime.value > 0) {
+                delay(1000L)
+                remainingTime.value = remainingTime.value - 1
+            }
         }
     }
 }

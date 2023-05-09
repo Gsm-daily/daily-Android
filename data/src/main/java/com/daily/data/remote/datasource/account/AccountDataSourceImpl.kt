@@ -1,6 +1,5 @@
 package com.daily.data.remote.datasource.account
 
-import com.daily.data.remote.model.ChangePasswordRequestData
 import com.daily.data.remote.model.SelectThemeRequestData
 import com.daily.data.remote.network.api.AccountApi
 import com.daily.data.remote.util.safeApiCall
@@ -11,9 +10,5 @@ class AccountDataSourceImpl @Inject constructor(
 ) : AccountDataSource {
     override suspend fun choiceTheme(theme: String) {
         safeApiCall { accountApi.choiceTheme(SelectThemeRequestData(theme)) }
-    }
-
-    override suspend fun changePassword(changePasswordRequestData: ChangePasswordRequestData) {
-        safeApiCall { accountApi.changePassword(changePasswordRequestData) }
     }
 }

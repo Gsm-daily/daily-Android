@@ -1,5 +1,6 @@
 package com.daily.data.remote.datasource.auth
 
+import com.daily.data.remote.model.ChangePasswordRequestData
 import com.daily.data.remote.model.SignInRequestData
 import com.daily.data.remote.model.SignInResponseData
 import com.daily.data.remote.model.SignUpRequestData
@@ -24,5 +25,9 @@ class AuthDataSourceImpl @Inject constructor(
 
     override suspend fun checkDuplicateName(name: String) {
         safeApiCall { authApi.checkDuplicateName(name) }
+    }
+
+    override suspend fun changePassword(changePasswordRequestData: ChangePasswordRequestData) {
+        safeApiCall { authApi.changePassword(changePasswordRequestData) }
     }
 }

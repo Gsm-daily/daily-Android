@@ -2,9 +2,11 @@ package com.daily.data.repository
 
 import com.daily.data.local.datasource.LocalDataSource
 import com.daily.data.remote.datasource.auth.AuthDataSource
+import com.daily.data.remote.model.asChangePasswordRequest
 import com.daily.data.remote.model.asSignInRequestData
 import com.daily.data.remote.model.asSignInResponse
 import com.daily.data.remote.model.asSignUpRequestData
+import com.daily.domain.model.ChangePasswordRequest
 import com.daily.domain.model.SignInRequest
 import com.daily.domain.model.SignInResponse
 import com.daily.domain.model.SignUpRequest
@@ -33,5 +35,10 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun saveToken(accessToken: String, refreshToken: String, accessTokenExpiredAt: String, refreshTokenExpiredAt: String) {
         localDataSource.saveToken(accessToken, refreshToken, accessTokenExpiredAt, refreshTokenExpiredAt)
+    }
+
+
+    override suspend fun changePassword(changePasswordRequest: ChangePasswordRequest) {
+        authDataSource.changePassword(changePasswordRequest.asChangePasswordRequest())
     }
 }

@@ -1,5 +1,6 @@
 package com.daily.domain.repository
 
+import com.daily.domain.model.ChangePasswordRequest
 import com.daily.domain.model.SignInRequest
 import com.daily.domain.model.SignInResponse
 import com.daily.domain.model.SignUpRequest
@@ -14,4 +15,6 @@ interface AuthRepository {
     suspend fun checkDuplicateName(name: String)
 
     suspend fun saveToken(accessToken: String, refreshToken: String, accessTokenExpiredAt: String, refreshTokenExpiredAt: String)
+
+    suspend fun changePassword(changePasswordRequest: ChangePasswordRequest)
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
+import com.daily.presentation.view.auth.component.Timer
 import com.daily.presentation.viewmodel.email.EmailViewModel
 import com.daily.presentation.viewmodel.util.UiState
 
@@ -40,6 +41,7 @@ fun VerificationScreen(
     }
 
     LaunchedEffect(Unit) {
+        viewModel.startTimer(300L)
         when (type) {
             "signup" -> {
                 if (email != null) {
@@ -64,11 +66,10 @@ fun VerificationScreen(
                 .padding(horizontal = 20.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val duration by viewModel.remainingTime.collectAsStateWithLifecycle()
+
             Spacer(modifier = modifier.height(48.dp))
-            H0(
-                text = "5 : 00",
-                textColor = DailyTheme.color.Black
-            )
+            Timer(duration = duration)
             Spacer(modifier = modifier.height(8.dp))
             Body3(
                 text = stringResource(R.string.verification_code_sent),

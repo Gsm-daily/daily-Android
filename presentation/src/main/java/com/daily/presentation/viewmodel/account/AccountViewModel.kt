@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AccountViewModel @Inject constructor(
     private val choiceThemeUseCase: ChoiceThemeUseCase,
-    private val changePasswordUseCase: ChangePasswordUseCase
+    private val changePasswordUseCase: ChangePasswordUseCase,
 ) : ViewModel() {
     private val _choiceThemeUiState = MutableStateFlow<UiState>(UiState.Loading)
     val choiceThemeUiState = _choiceThemeUiState.asStateFlow()
@@ -43,12 +43,11 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    fun changePassword(email: String, password: String, newPassword: String) {
+    fun changePassword(email: String, newPassword: String) {
         viewModelScope.launch {
             changePasswordUseCase(
                 ChangePasswordRequest(
                     email = email,
-                    password = password,
                     newPassword = newPassword
                 )
             )

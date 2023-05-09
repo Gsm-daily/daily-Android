@@ -63,7 +63,6 @@ fun ForgotPasswordScreen(
                         if (email != null) {
                             viewModel.changePassword(
                                 email = email,
-                                password = it,
                                 newPassword = it
                             )
                         }

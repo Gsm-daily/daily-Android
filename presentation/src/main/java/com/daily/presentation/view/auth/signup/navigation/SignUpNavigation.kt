@@ -10,9 +10,13 @@ const val signUpRoute = "signup_route"
 
 fun NavController.navigateToSignUp(email: String? = null) {
     val route = email?.let { "$signUpRoute?email=$it" } ?: signUpRoute
+    val prevRoute = this.currentBackStackEntry?.destination?.route
+
     this.navigate(route) {
-        popUpTo(route) {
-            inclusive = true
+        prevRoute?.let {
+            popUpTo(it) {
+                inclusive = true
+            }
         }
     }
 }

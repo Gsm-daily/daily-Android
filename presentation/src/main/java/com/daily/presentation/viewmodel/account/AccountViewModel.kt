@@ -2,6 +2,8 @@ package com.daily.presentation.viewmodel.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.daily.domain.model.ChangePasswordRequest
+import com.daily.domain.usecase.ChangePasswordUseCase
 import com.daily.domain.usecase.ChoiceThemeUseCase
 import com.daily.presentation.viewmodel.util.UiState
 import com.daily.presentation.viewmodel.util.exceptionHandling
@@ -13,25 +15,50 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
-    private val choiceThemeUseCase: ChoiceThemeUseCase
+    private val choiceThemeUseCase: ChoiceThemeUseCase,
+    private val changePasswordUseCase: ChangePasswordUseCase,
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
-    val uiState = _uiState.asStateFlow()
+    private val _choiceThemeUiState = MutableStateFlow<UiState>(UiState.Loading)
+    val choiceThemeUiState = _choiceThemeUiState.asStateFlow()
+
+    private val _changePasswordUiState = MutableStateFlow<UiState>(UiState.Loading)
+    val changePasswordUiState = _changePasswordUiState.asStateFlow()
 
     fun choiceTheme(theme: String) {
         viewModelScope.launch {
             choiceThemeUseCase(theme)
                 .onSuccess {
-                    _uiState.value = UiState.Success
+                    _choiceThemeUiState.value = UiState.Success
                 }
                 .onFailure {
                     it.exceptionHandling(
-                        badRequestAction = { _uiState.value = UiState.BadRequest },
-                        unauthorizedAction = { _uiState.value = UiState.Unauthorized },
-                        forbiddenAction = { _uiState.value = UiState.Forbidden },
-                        notFoundAction = { _uiState.value = UiState.NotFound },
-                        conflictAction = { _uiState.value = UiState.Conflict },
-                        unknownAction = { _uiState.value = UiState.Unknown }
+                        badRequestAction = { _choiceThemeUiState.value = UiState.BadRequest },
+                        unauthorizedAction = { _choiceThemeUiState.value = UiState.Unauthorized },
+                        forbiddenAction = { _choiceThemeUiState.value = UiState.Forbidden },
+                        notFoundAction = { _choiceThemeUiState.value = UiState.NotFound },
+                        conflictAction = { _choiceThemeUiState.value = UiState.Conflict },
+                        unknownAction = { _choiceThemeUiState.value = UiState.Unknown }
+                    )
+                }
+        }
+    }
+
+    fun changePassword(email: String, newPassword: String) {
+        viewModelScope.launch {
+            changePasswordUseCase(
+                ChangePasswordRequest(
+                    email = email,
+                    newPassword = newPassword
+                )
+            )
+                .onSuccess {
+                    _changePasswordUiState.value = UiState.Success
+                }
+                .onFailure {
+                    it.exceptionHandling(
+                        badRequestAction = { _changePasswordUiState.value = UiState.BadRequest },
+                        notFoundAction = { _changePasswordUiState.value = UiState.NotFound },
+                        unknownAction = { _changePasswordUiState.value = UiState.Unknown }
                     )
                 }
         }

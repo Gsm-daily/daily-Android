@@ -8,15 +8,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
 import com.daily.presentation.view.auth.component.EmailInput
 import com.daily.presentation.view.auth.component.PasswordInput
+import com.daily.presentation.viewmodel.account.AccountViewModel
 
 @Composable
 fun ForgotPasswordScreen(
     modifier: Modifier = Modifier,
+    viewModel: AccountViewModel = hiltViewModel(),
     email: String?,
     navigateToPrevious: () -> Unit,
     navigateToLogin: () -> Unit,
@@ -54,8 +57,17 @@ fun ForgotPasswordScreen(
             Spacer(modifier = modifier.height(24.dp))
 
             when (step) {
-                ForgotPasswordState.EmailInput -> EmailInput { navigateToVerification(it) }
-                ForgotPasswordState.PasswordInput -> PasswordInput { }
+                ForgotPasswordState.EmailInput -> EmailInput(type = "password") { navigateToVerification(it) }
+                ForgotPasswordState.PasswordInput -> {
+                    PasswordInput {
+                        if (email != null) {
+                            viewModel.changePassword(
+                                email = email,
+                                newPassword = it
+                            )
+                        }
+                    }
+                }
             }
 
             Spacer(modifier = modifier.height(16.dp))

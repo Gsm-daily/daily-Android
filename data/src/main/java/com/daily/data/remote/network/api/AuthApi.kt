@@ -1,9 +1,11 @@
 package com.daily.data.remote.network.api
 
+import com.daily.data.remote.model.ChangePasswordRequestData
 import com.daily.data.remote.model.SignInRequestData
 import com.daily.data.remote.model.SignInResponseData
 import com.daily.data.remote.model.SignUpRequestData
 import retrofit2.http.Body
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -26,5 +28,10 @@ interface AuthApi {
     @POST("/api/v1/auth/name")
     suspend fun checkDuplicateName(
         @Query("name") name: String
+    )
+
+    @PATCH("/api/v1/auth/password")
+    suspend fun changePassword(
+        @Body body: ChangePasswordRequestData
     )
 }

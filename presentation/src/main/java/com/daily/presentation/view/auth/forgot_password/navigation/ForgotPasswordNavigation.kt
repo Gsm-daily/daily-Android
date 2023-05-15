@@ -10,8 +10,15 @@ const val forgotPassword = "forgot_password"
 
 fun NavController.navigateToForgotPassword(email: String? = null) {
     val route = email?.let { "$forgotPassword?email=$it" } ?: forgotPassword
+    val prevRoute = this.currentBackStackEntry?.destination?.route
 
-    this.navigate(route)
+    this.navigate(route) {
+        prevRoute?.let {
+            popUpTo(it) {
+                inclusive = true
+            }
+        }
+    }
 }
 
 fun NavGraphBuilder.forgotPasswordScreen(

@@ -90,3 +90,45 @@ fun IcMail(
         tint = tint
     )
 }
+
+@Composable
+fun IcNote(
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_note),
+        contentDescription = contentDescription,
+        modifier = modifier,
+        tint = tint
+    )
+}
+
+@Composable
+fun IcPerson(
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_person),
+        contentDescription = contentDescription,
+        modifier = modifier,
+        tint = tint
+    )
+}
+
+@Composable
+fun IcPicture(
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_picture),
+        contentDescription = contentDescription,
+        modifier = modifier,
+        tint = tint
+    )
+}

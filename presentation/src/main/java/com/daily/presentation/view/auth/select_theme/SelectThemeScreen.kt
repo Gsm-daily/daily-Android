@@ -13,21 +13,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daily.designsystem.component.DailyButton
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.IcBack
 import com.daily.presentation.R
 import com.daily.presentation.viewmodel.account.AccountViewModel
+import com.daily.presentation.viewmodel.util.UiState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SelectThemeScreen(
     modifier: Modifier = Modifier,
     viewModel: AccountViewModel = hiltViewModel(),
-    navigateToPrevious: () -> Unit
+    navigateToPrevious: () -> Unit,
+    navigateToMain: () -> Unit
 ) {
     val pagerState = rememberPagerState()
+    val uiState by viewModel.choiceThemeUiState.collectAsStateWithLifecycle()
+
+    when (uiState) {
+        UiState.Success -> navigateToMain()
+        UiState.BadRequest -> {}
+        UiState.Conflict -> {}
+        UiState.Forbidden -> {}
+        UiState.Loading -> {}
+        UiState.NotFound -> {}
+        UiState.Unauthorized -> {}
+        UiState.Unknown -> {}
+        else -> {}
+    }
 
     Column(modifier = modifier.systemBarsPadding()) {
         Box(

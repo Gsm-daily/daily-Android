@@ -132,3 +132,31 @@ fun IcPicture(
         tint = tint
     )
 }
+
+@Composable
+fun IcLeft(
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_left),
+        contentDescription = contentDescription,
+        modifier = modifier,
+        tint = tint
+    )
+}
+
+@Composable
+fun IcRight(
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_right),
+        contentDescription = contentDescription,
+        modifier = modifier,
+        tint = tint
+    )
+}

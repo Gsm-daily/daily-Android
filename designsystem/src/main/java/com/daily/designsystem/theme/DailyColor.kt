@@ -18,6 +18,12 @@ object DailyColor {
     val Neutral30 = Color(0xFFD7C9C9)
     val Neutral40 = Color(0xFF977272)
     val Neutral50 = Color(0xFF6C5050)
+
+    object FeatureColor {
+        val CalendarWeekColor = Color(0x331C1C1E)
+        val CalendarDayColor = Color(0xFF1C1C1E)
+        val AnotherMonthColor = Color(0x801C1C1E)
+    }
 }
 
 internal val LocalColor = staticCompositionLocalOf { DailyColor }

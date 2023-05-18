@@ -14,10 +14,14 @@ fun NavController.navigateToSelectTheme() {
     }
 }
 
-fun NavGraphBuilder.selectThemeScreen(navigateToPrevious: () -> Unit) {
+fun NavGraphBuilder.selectThemeScreen(
+    navigateToPrevious: () -> Unit,
+    navigateToMain: () -> Unit
+) {
     composable(selectThemeRoute) {
         SelectThemeScreen(
-            navigateToPrevious = navigateToPrevious
+            navigateToPrevious = navigateToPrevious,
+            navigateToMain = navigateToMain
         )
     }
 }

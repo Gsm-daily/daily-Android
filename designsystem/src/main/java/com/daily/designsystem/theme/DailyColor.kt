@@ -11,6 +11,8 @@ object DailyColor {
 
     val Shadow = Color(0x71717129)
 
+    val Hint = Color(0xFF8F8F8F)
+
     val Primary5 = Color(0xFFFFF5F7)
     val Primary10 = Color(0xFFFFC7D8)
     val Primary20 = Color(0xFFFF5F8F)

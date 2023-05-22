@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,13 +39,13 @@ fun DailyCalendar(
     modifier: Modifier = Modifier,
     onClickItem: (day: Int) -> Unit
 ) {
-    val selectedDay by remember { mutableStateOf(LocalDate.now()) }
+    var selectedDay by remember { mutableStateOf(LocalDate.now()) }
 
     Column(modifier = modifier.fillMaxWidth()) {
         CalendarTopBar(
             month = selectedDay.month.name,
-            showPreviousMonth = { selectedDay.minusMonths(1) },
-            showNextMonth = { selectedDay.plusMonths(1) }
+            showPreviousMonth = { selectedDay = selectedDay.minusMonths(1) },
+            showNextMonth = { selectedDay = selectedDay.plusMonths(1) }
         )
         Spacer(modifier = modifier.height(20.dp))
         DayOfWeekBar()
@@ -122,23 +123,24 @@ private fun DayItem(
     monthDays: MonthDay,
     onClickItem: (day: Int) -> Unit
 ) {
+    val isToday = LocalDate.now().isEqual(LocalDate.of(selectedDay.year, monthDays.month, monthDays.day))
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .aspectRatio(1f)
             .padding(9.dp)
             .background(
-                color = if (selectedDay.dayOfMonth == monthDays.day) DailyTheme.color.Black else Color.Transparent,
+                color = if (isToday) DailyTheme.color.Black else Color.Transparent,
                 shape = RoundedCornerShape(12.dp),
             )
             .dailyClickable(rippleEnable = false) {
                 onClickItem(monthDays.day)
             }
     ) {
-        val isSelected = LocalDate.now().isEqual(LocalDate.of(selectedDay.year, monthDays.month, monthDays.day))
-        val isAnotherMonth = LocalDate.now().monthValue != monthDays.month
+        val isAnotherMonth = LocalDate.now().monthValue == selectedDay.monthValue && LocalDate.now().monthValue != monthDays.month
         val textColor = when {
-            isSelected -> DailyColor.White
+            isToday -> DailyColor.White
             isAnotherMonth -> DailyColor.FeatureColor.AnotherMonthColor
             else -> DailyColor.FeatureColor.CalendarDayColor
         }

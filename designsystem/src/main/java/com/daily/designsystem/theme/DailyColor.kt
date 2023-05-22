@@ -7,6 +7,7 @@ object DailyColor {
     val White = Color(0xFFFFFFFF)
     val Black = Color(0xFF000000)
     val Error = Color(0xFFD80505)
+    val Background = Color(0xFFF9F9F9)
 
     val Primary5 = Color(0xFFFFF5F7)
     val Primary10 = Color(0xFFFFC7D8)

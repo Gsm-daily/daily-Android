@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,13 +39,13 @@ fun DailyCalendar(
     modifier: Modifier = Modifier,
     onClickItem: (day: Int) -> Unit
 ) {
-    val selectedDay by remember { mutableStateOf(LocalDate.now()) }
+    var selectedDay by remember { mutableStateOf(LocalDate.now()) }
 
     Column(modifier = modifier.fillMaxWidth()) {
         CalendarTopBar(
             month = selectedDay.month.name,
-            showPreviousMonth = { selectedDay.minusMonths(1) },
-            showNextMonth = { selectedDay.plusMonths(1) }
+            showPreviousMonth = { selectedDay = selectedDay.minusMonths(1) },
+            showNextMonth = { selectedDay = selectedDay.plusMonths(1) }
         )
         Spacer(modifier = modifier.height(20.dp))
         DayOfWeekBar()

@@ -138,7 +138,7 @@ private fun DayItem(
                 onClickItem(monthDays.day)
             }
     ) {
-        val isAnotherMonth = LocalDate.now().monthValue != monthDays.month
+        val isAnotherMonth = LocalDate.now().monthValue == selectedDay.monthValue && LocalDate.now().monthValue != monthDays.month
         val textColor = when {
             isToday -> DailyColor.White
             isAnotherMonth -> DailyColor.FeatureColor.AnotherMonthColor

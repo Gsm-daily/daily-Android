@@ -160,3 +160,32 @@ fun IcRight(
         tint = tint
     )
 }
+
+@Composable
+fun IcWrite(
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_write),
+        contentDescription = contentDescription,
+        modifier = modifier,
+        tint = tint
+    )
+}
+
+
+@Composable
+fun IcTrashCan(
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    tint: Color = Color.Unspecified
+) {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_trashcan),
+        contentDescription = contentDescription,
+        modifier = modifier,
+        tint = tint
+    )
+}

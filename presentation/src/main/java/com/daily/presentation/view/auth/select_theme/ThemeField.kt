@@ -39,8 +39,8 @@ fun ThemeField(
             pageSpacing = 32.dp
         ) { page ->
             val (image, description) = when (page) {
-                0 -> Pair(R.drawable.bg_grassland, "grassland")
-                1 -> Pair(R.drawable.bg_ocean, "ocean")
+                0 -> Pair(R.drawable.bg_grassland7, "grassland")
+                1 -> Pair(R.drawable.bg_ocean7, "ocean")
                 else -> Pair(null, null)
             }
 

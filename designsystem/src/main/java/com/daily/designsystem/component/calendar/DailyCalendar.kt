@@ -123,23 +123,24 @@ private fun DayItem(
     monthDays: MonthDay,
     onClickItem: (day: Int) -> Unit
 ) {
+    val isToday = LocalDate.now().isEqual(LocalDate.of(selectedDay.year, monthDays.month, monthDays.day))
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .aspectRatio(1f)
             .padding(9.dp)
             .background(
-                color = if (selectedDay.dayOfMonth == monthDays.day) DailyTheme.color.Black else Color.Transparent,
+                color = if (isToday) DailyTheme.color.Black else Color.Transparent,
                 shape = RoundedCornerShape(12.dp),
             )
             .dailyClickable(rippleEnable = false) {
                 onClickItem(monthDays.day)
             }
     ) {
-        val isSelected = LocalDate.now().isEqual(LocalDate.of(selectedDay.year, monthDays.month, monthDays.day))
         val isAnotherMonth = LocalDate.now().monthValue != monthDays.month
         val textColor = when {
-            isSelected -> DailyColor.White
+            isToday -> DailyColor.White
             isAnotherMonth -> DailyColor.FeatureColor.AnotherMonthColor
             else -> DailyColor.FeatureColor.CalendarDayColor
         }

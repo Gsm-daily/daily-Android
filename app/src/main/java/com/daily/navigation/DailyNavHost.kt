@@ -16,6 +16,10 @@ import com.daily.presentation.view.auth.signup.navigation.signUpRoute
 import com.daily.presentation.view.auth.signup.navigation.signUpScreen
 import com.daily.presentation.view.auth.verification.navigation.navigateToVerification
 import com.daily.presentation.view.auth.verification.navigation.verificationScreen
+import com.daily.presentation.view.main.navigation.mainScreen
+import com.daily.presentation.view.main.navigation.navigateToMain
+import com.daily.presentation.view.my_theme.navigation.myThemeScreen
+import com.daily.presentation.view.profile.navigation.profileScreen
 
 @Composable
 fun DailyNavHost(
@@ -30,7 +34,8 @@ fun DailyNavHost(
         signInScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
             navigateToSignUp = { navController.navigateToSignUp() },
-            navigateToForgotPassword = { navController.navigateToForgotPassword() }
+            navigateToForgotPassword = { navController.navigateToForgotPassword() },
+            navigateToMain = { navController.navigateToMain() }
         )
         signUpScreen(
             navigateToPrevious = { navController.navigateToPrevious() },
@@ -63,7 +68,11 @@ fun DailyNavHost(
             }
         )
         selectThemeScreen(
-            navigateToPrevious = { navController.navigateToPrevious() }
+            navigateToPrevious = { navController.navigateToPrevious() },
+            navigateToMain = { navController.navigateToMain() }
         )
+        mainScreen()
+        profileScreen()
+        myThemeScreen()
     }
 }

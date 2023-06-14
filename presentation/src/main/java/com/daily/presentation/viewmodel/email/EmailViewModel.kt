@@ -20,13 +20,13 @@ class EmailViewModel @Inject constructor(
     private val verificationCodeUseCase: VerifyAuthKeyUseCase,
     private val sendEmailForPasswordChangeUseCase: SendEmailForPasswordChangeUseCase
 ) : ViewModel() {
-    private val _signUpEmailUiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _signUpEmailUiState = MutableStateFlow<UiState<Nothing>>(UiState.Loading)
     val signUpEmailUiState = _signUpEmailUiState.asStateFlow()
 
-    private val _verifyUiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _verifyUiState = MutableStateFlow<UiState<Nothing>>(UiState.Loading)
     val verifyUiState = _verifyUiState
 
-    private val _passwordChangeEmailUiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _passwordChangeEmailUiState = MutableStateFlow<UiState<Nothing>>(UiState.Loading)
     val passwordChangeUiState = _passwordChangeEmailUiState.asStateFlow()
 
     val remainingTime = MutableStateFlow(0L)
@@ -34,7 +34,7 @@ class EmailViewModel @Inject constructor(
     fun sendEmailForSignUp(email: String) {
         viewModelScope.launch {
             sendEmailForSignUpUseCase(email)
-                .onSuccess { _signUpEmailUiState.value = UiState.Success }
+                .onSuccess { _signUpEmailUiState.value = UiState.Success() }
                 .onFailure {
                     it.exceptionHandling(
                         badRequestAction = { _signUpEmailUiState.value = UiState.BadRequest },
@@ -47,7 +47,7 @@ class EmailViewModel @Inject constructor(
     fun verifyAuthKey(authKey: Int) {
         viewModelScope.launch {
             verificationCodeUseCase(authKey)
-                .onSuccess { _verifyUiState.value = UiState.Success }
+                .onSuccess { _verifyUiState.value = UiState.Success() }
                 .onFailure {
                     it.exceptionHandling(badRequestAction = { _verifyUiState.value = UiState.BadRequest })
                 }
@@ -57,7 +57,7 @@ class EmailViewModel @Inject constructor(
     fun sendEmailForPasswordChange(email: String) {
         viewModelScope.launch {
             sendEmailForPasswordChangeUseCase(email)
-                .onSuccess { _passwordChangeEmailUiState.value = UiState.Success }
+                .onSuccess { _passwordChangeEmailUiState.value = UiState.Success() }
                 .onFailure {
                     it.exceptionHandling(
                         badRequestAction = { _passwordChangeEmailUiState.value = UiState.BadRequest },

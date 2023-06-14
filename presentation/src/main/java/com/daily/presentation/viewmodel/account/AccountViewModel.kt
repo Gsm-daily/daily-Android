@@ -3,6 +3,8 @@ package com.daily.presentation.viewmodel.account
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daily.domain.model.ChangePasswordRequest
+import com.daily.domain.model.ThemeCountResponse
+import com.daily.domain.model.ThemeResponse
 import com.daily.domain.usecase.ChangePasswordUseCase
 import com.daily.domain.usecase.ChoiceThemeUseCase
 import com.daily.domain.usecase.GetThemeDiaryCountUseCase
@@ -22,23 +24,23 @@ class AccountViewModel @Inject constructor(
     private val getThemeUseCase: GetThemeUseCase,
     private val getThemeDiaryCountUseCase: GetThemeDiaryCountUseCase
 ) : ViewModel() {
-    private val _choiceThemeUiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _choiceThemeUiState = MutableStateFlow<UiState<Nothing?>>(UiState.Loading)
     val choiceThemeUiState = _choiceThemeUiState.asStateFlow()
 
-    private val _changePasswordUiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _changePasswordUiState = MutableStateFlow<UiState<Nothing>>(UiState.Loading)
     val changePasswordUiState = _changePasswordUiState.asStateFlow()
 
-    private val _myThemeUiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _myThemeUiState = MutableStateFlow<UiState<ThemeResponse>>(UiState.Loading)
     val myThemeUiState = _myThemeUiState.asStateFlow()
 
-    private val _countUiState = MutableStateFlow<UiState>(UiState.Loading)
+    private val _countUiState = MutableStateFlow<UiState<ThemeCountResponse>>(UiState.Loading)
     val countUiState = _countUiState.asStateFlow()
 
     fun choiceTheme(theme: String) {
         viewModelScope.launch {
             choiceThemeUseCase(theme)
                 .onSuccess {
-                    _choiceThemeUiState.value = UiState.Success
+                    _choiceThemeUiState.value = UiState.Success()
                 }
                 .onFailure {
                     it.exceptionHandling(
@@ -62,7 +64,7 @@ class AccountViewModel @Inject constructor(
                 )
             )
                 .onSuccess {
-                    _changePasswordUiState.value = UiState.Success
+                    _changePasswordUiState.value = UiState.Success()
                 }
                 .onFailure {
                     it.exceptionHandling(
@@ -78,7 +80,7 @@ class AccountViewModel @Inject constructor(
         viewModelScope.launch {
             getThemeUseCase()
                 .onSuccess {
-                    _myThemeUiState.value = UiState.Success
+                    _myThemeUiState.value = UiState.Success(it)
                 }
                 .onFailure {
                     it.exceptionHandling(
@@ -94,7 +96,7 @@ class AccountViewModel @Inject constructor(
         viewModelScope.launch {
             getThemeDiaryCountUseCase(theme)
                 .onSuccess {
-                    _countUiState.value = UiState.Success
+                    _countUiState.value = UiState.Success(it)
                 }
                 .onFailure {
                     it.exceptionHandling(

@@ -1,5 +1,6 @@
 package com.daily.data.remote.datasource.account
 
+import com.daily.data.remote.model.ThemeCountResponseData
 import com.daily.data.remote.model.ThemeResponseData
 
 interface AccountDataSource {
@@ -7,5 +8,5 @@ interface AccountDataSource {
 
     suspend fun getTheme(): ThemeResponseData
 
-    suspend fun getThemeDiaryCount(theme: String)
+    suspend fun getThemeDiaryCount(theme: String): ThemeCountResponseData
 }

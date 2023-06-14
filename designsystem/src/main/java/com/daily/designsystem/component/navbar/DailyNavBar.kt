@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.daily.designsystem.theme.DailyTheme
 
-private val NavBarHeight = 56.dp
+private val NavBarHeight = 83.dp
 
 @Composable
 fun DailyNavBar(

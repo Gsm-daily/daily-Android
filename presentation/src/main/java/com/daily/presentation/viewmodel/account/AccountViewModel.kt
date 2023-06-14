@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.daily.domain.model.ChangePasswordRequest
 import com.daily.domain.usecase.ChangePasswordUseCase
 import com.daily.domain.usecase.ChoiceThemeUseCase
+import com.daily.domain.usecase.GetThemeDiaryCountUseCase
+import com.daily.domain.usecase.GetThemeUseCase
 import com.daily.presentation.viewmodel.util.UiState
 import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,12 +19,20 @@ import javax.inject.Inject
 class AccountViewModel @Inject constructor(
     private val choiceThemeUseCase: ChoiceThemeUseCase,
     private val changePasswordUseCase: ChangePasswordUseCase,
+    private val getThemeUseCase: GetThemeUseCase,
+    private val getThemeDiaryCountUseCase: GetThemeDiaryCountUseCase
 ) : ViewModel() {
     private val _choiceThemeUiState = MutableStateFlow<UiState>(UiState.Loading)
     val choiceThemeUiState = _choiceThemeUiState.asStateFlow()
 
     private val _changePasswordUiState = MutableStateFlow<UiState>(UiState.Loading)
     val changePasswordUiState = _changePasswordUiState.asStateFlow()
+
+    private val _myThemeUiState = MutableStateFlow<UiState>(UiState.Loading)
+    val myThemeUiState = _myThemeUiState.asStateFlow()
+
+    private val _countUiState = MutableStateFlow<UiState>(UiState.Loading)
+    val countUiState = _countUiState.asStateFlow()
 
     fun choiceTheme(theme: String) {
         viewModelScope.launch {
@@ -59,6 +69,38 @@ class AccountViewModel @Inject constructor(
                         badRequestAction = { _changePasswordUiState.value = UiState.BadRequest },
                         notFoundAction = { _changePasswordUiState.value = UiState.NotFound },
                         unknownAction = { _changePasswordUiState.value = UiState.Unknown }
+                    )
+                }
+        }
+    }
+
+    fun getTheme() {
+        viewModelScope.launch {
+            getThemeUseCase()
+                .onSuccess {
+                    _myThemeUiState.value = UiState.Success
+                }
+                .onFailure {
+                    it.exceptionHandling(
+                        unauthorizedAction = { _myThemeUiState.value = UiState.Unauthorized },
+                        forbiddenAction = { _myThemeUiState.value = UiState.Forbidden },
+                        notFoundAction = { _myThemeUiState.value = UiState.NotFound }
+                    )
+                }
+        }
+    }
+
+    fun getThemeDiaryCount(theme: String) {
+        viewModelScope.launch {
+            getThemeDiaryCountUseCase(theme)
+                .onSuccess {
+                    _countUiState.value = UiState.Success
+                }
+                .onFailure {
+                    it.exceptionHandling(
+                        unauthorizedAction = { _countUiState.value = UiState.Unauthorized },
+                        forbiddenAction = { _countUiState.value = UiState.Forbidden },
+                        notFoundAction = { _countUiState.value = UiState.NotFound }
                     )
                 }
         }

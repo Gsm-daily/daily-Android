@@ -6,10 +6,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daily.presentation.R
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
 import com.daily.presentation.viewmodel.auth.AuthViewModel
+import com.daily.presentation.viewmodel.util.UiState
 
 @Composable
 fun SignInScreen(
@@ -17,8 +19,21 @@ fun SignInScreen(
     viewModel: AuthViewModel = hiltViewModel(),
     navigateToPrevious: () -> Unit,
     navigateToSignUp: () -> Unit,
-    navigateToForgotPassword: () -> Unit
+    navigateToForgotPassword: () -> Unit,
+    navigateToMain: () -> Unit
 ) {
+    val uiState by viewModel.signInUiState.collectAsStateWithLifecycle()
+
+
+    when(uiState) {
+        UiState.BadRequest -> {}
+        UiState.Loading -> {}
+        UiState.NotFound -> {}
+        UiState.Success -> navigateToMain()
+        UiState.Unknown -> {}
+        else -> {}
+    }
+
     Column(modifier = modifier.systemBarsPadding()) {
         IcBack(
             contentDescription = "back",

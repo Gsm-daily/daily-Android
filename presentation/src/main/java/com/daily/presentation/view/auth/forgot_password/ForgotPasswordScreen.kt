@@ -9,12 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
 import com.daily.presentation.view.auth.component.EmailInput
 import com.daily.presentation.view.auth.component.PasswordInput
 import com.daily.presentation.viewmodel.account.AccountViewModel
+import com.daily.presentation.viewmodel.util.UiState
 
 @Composable
 fun ForgotPasswordScreen(
@@ -26,6 +28,16 @@ fun ForgotPasswordScreen(
     navigateToVerification: (String) -> Unit
 ) {
     val step by remember { mutableStateOf(if (email == null) ForgotPasswordState.EmailInput else ForgotPasswordState.PasswordInput) }
+
+    val uiState by viewModel.changePasswordUiState.collectAsStateWithLifecycle()
+
+    when (uiState) {
+        UiState.Success -> navigateToLogin()
+        UiState.BadRequest -> {}
+        UiState.NotFound -> {}
+        UiState.Unknown -> {}
+        else -> {} // 알 수 없는 오류
+    }
 
     val description = when (step) {
         ForgotPasswordState.EmailInput -> R.string.email_authentication

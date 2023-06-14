@@ -1,5 +1,6 @@
 package com.daily.domain.repository
 
+import com.daily.domain.model.ThemeCountResponse
 import com.daily.domain.model.ThemeResponse
 
 interface AccountRepository {
@@ -7,5 +8,5 @@ interface AccountRepository {
 
     suspend fun getTheme(): ThemeResponse
 
-    suspend fun getThemeDiaryCount(theme: String)
+    suspend fun getThemeDiaryCount(theme: String): ThemeCountResponse
 }

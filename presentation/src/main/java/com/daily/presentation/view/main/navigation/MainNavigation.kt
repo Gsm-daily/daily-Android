@@ -8,7 +8,15 @@ import com.daily.presentation.view.main.MainScreen
 const val mainRoute = "main_route"
 
 fun NavController.navigateToMain() {
-    this.navigate(mainRoute)
+    val startRoute = this.graph.startDestinationRoute
+
+    this.navigate(mainRoute) {
+        startRoute?.let {
+            popUpTo(it) {
+                inclusive = true
+            }
+        }
+    }
 }
 
 fun NavGraphBuilder.mainScreen() {

@@ -1,6 +1,6 @@
 package com.daily.data.remote.datasource.image
 
-import com.daily.data.remote.model.ImageResponseData
+import com.daily.data.remote.model.response.ImageResponseData
 import okhttp3.MultipartBody
 
 interface ImageDataSource {

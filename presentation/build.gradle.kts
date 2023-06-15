@@ -58,4 +58,5 @@ dependencies {
     implementation(Dependency.AndroidX.LIFECYCLE_COMPOSE)
     implementation(Dependency.AndroidX.HILT_NAVIGATION_COMPOSE)
     implementation(Dependency.AndroidX.LIFECYCLE_RUNTIME_COMPOSE)
+    implementation(Dependency.Libraries.OKHTTP)
 }

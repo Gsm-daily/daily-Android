@@ -34,7 +34,7 @@ fun VerificationScreen(
     val uiState by viewModel.verifyUiState.collectAsStateWithLifecycle()
 
     when (uiState) {
-        UiState.Success -> navigateToNext(checkNotNull(email))
+        is UiState.Success -> navigateToNext(checkNotNull(email))
         UiState.Loading -> {}
         UiState.BadRequest -> isMatched = false
         else -> {} // 알 수 없는 오류

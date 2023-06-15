@@ -32,7 +32,7 @@ fun ForgotPasswordScreen(
     val uiState by viewModel.changePasswordUiState.collectAsStateWithLifecycle()
 
     when (uiState) {
-        UiState.Success -> navigateToLogin()
+        is UiState.Success -> navigateToLogin()
         UiState.BadRequest -> {}
         UiState.NotFound -> {}
         UiState.Unknown -> {}

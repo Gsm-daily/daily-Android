@@ -21,9 +21,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -32,50 +35,115 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daily.designsystem.theme.Caption1
 import com.daily.designsystem.theme.DailyColor
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.Subtitle1
+import com.daily.domain.model.ImageResponse
+import com.daily.domain.model.ProfileRequest
+import com.daily.domain.model.ProfileResponse
 import com.daily.presentation.R
-
-val diary = listOf(
-    Pair("title", "date"),
-    Pair("title", "date"),
-    Pair("title", "date")
-)
+import com.daily.presentation.viewmodel.profile.ProfileViewModel
+import com.daily.presentation.viewmodel.util.UiState
+import okhttp3.MultipartBody
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(DailyTheme.color.Background)
-            .systemBarsPadding()
-    ) {
-        val listState = rememberLazyListState()
-        val showShadow by remember {
-            derivedStateOf { listState.firstVisibleItemIndex > 0 }
-        }
+fun ProfileScreen(
+    modifier: Modifier = Modifier,
+    viewModel: ProfileViewModel = hiltViewModel()
+) {
+    val profileUiState by viewModel.profileUiState.collectAsStateWithLifecycle()
+    val diaryUiState by viewModel.diaryUiState.collectAsStateWithLifecycle()
+    val uploadUiState by viewModel.uploadUiState.collectAsStateWithLifecycle()
 
-        DiaryHeader(showShadow = showShadow)
-        LazyColumn(
-            state = listState,
-            modifier = modifier.padding(horizontal = 20.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(top = 16.dp)
-        ) {
-            items(diary) {
-                DiaryItem(title = it.first, date = it.second)
+    LaunchedEffect(Unit) {
+        viewModel.getProfile()
+    }
+
+    when (val profileState = profileUiState) {
+        is UiState.Success -> {
+            var profileImage by remember { mutableStateOf(profileState.data!!.profileUrl) }
+
+            Column(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(DailyTheme.color.Background)
+                    .systemBarsPadding()
+            ) {
+                val listState = rememberLazyListState()
+                val showShadow by remember {
+                    derivedStateOf { listState.firstVisibleItemIndex > 0 }
+                }
+
+                DiaryHeader(
+                    profile = profileState.data!!,
+                    showShadow = showShadow,
+                    uploadUiState = uploadUiState,
+                    imageUpload = { viewModel.imageUpload(it) }
+                ) { url ->
+                    val profile = profileState.data
+
+                    viewModel.updateProfile(
+                        ProfileRequest(
+                            idx = profile.idx,
+                            name = profile.name,
+                            email = profile.email,
+                            profileUrl = url
+                        )
+                    )
+                    profileImage = url
+                }
+
+                when (val diaryState = diaryUiState) {
+                    is UiState.Success -> {
+                        val diary = diaryState.data!!
+
+                        LazyColumn(
+                            state = listState,
+                            modifier = modifier.padding(horizontal = 20.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            contentPadding = PaddingValues(top = 16.dp)
+                        ) {
+                            items(diary) {
+                                val month = it.date.monthValue
+                                val day = it.date.dayOfMonth
+
+                                DiaryItem(title = it.content, date = "${month}월 ${day}일")
+                            }
+                        }
+                    }
+
+                    UiState.Loading -> {}
+                    UiState.Unauthorized -> {}
+                    else -> {} // 알 수 없는 오류
+                }
             }
         }
+
+        UiState.Loading -> {}
+        UiState.Unauthorized -> {}
+        UiState.NotFound -> {}
+        else -> {} // 알 수 없는 오류
     }
 }
 
 @Composable
 fun DiaryHeader(
     modifier: Modifier = Modifier,
-    showShadow: Boolean
+    uploadUiState: UiState<ImageResponse>,
+    profile: ProfileResponse,
+    showShadow: Boolean,
+    imageUpload: (body: MultipartBody.Part) -> Unit,
+    updateProfile: (url: String) -> Unit
 ) {
+    when (uploadUiState) {
+        is UiState.Success -> updateProfile(uploadUiState.data!!.imageUrl)
+        UiState.BadRequest -> {}
+        else -> {}
+    }
+
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -98,10 +166,10 @@ fun DiaryHeader(
             )
             Spacer(modifier = modifier.width(16.dp))
             Column(modifier = modifier.fillMaxWidth()) {
-                Subtitle1(text = "데일리")
+                Subtitle1(text = profile.name)
                 Spacer(modifier = modifier.height(8.dp))
                 Caption1(
-                    text = "test@gmail.com",
+                    text = profile.email,
                     textColor = DailyColor.Neutral30
                 )
             }

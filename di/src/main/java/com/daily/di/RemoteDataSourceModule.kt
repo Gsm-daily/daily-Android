@@ -8,6 +8,8 @@ import com.daily.data.remote.datasource.diary.DiaryDataSource
 import com.daily.data.remote.datasource.diary.DiaryDataSourceImpl
 import com.daily.data.remote.datasource.email.EmailDataSource
 import com.daily.data.remote.datasource.email.EmailDataSourceImpl
+import com.daily.data.remote.datasource.image.ImageDataSource
+import com.daily.data.remote.datasource.image.ImageDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -35,4 +37,9 @@ interface RemoteDataSourceModule {
     fun bindsDiaryDataSource(
         diaryDataSourceImpl: DiaryDataSourceImpl
     ): DiaryDataSource
+
+    @Binds
+    fun bindsImageDataSource(
+        imageDataSourceImpl: ImageDataSourceImpl
+    ): ImageDataSource
 }

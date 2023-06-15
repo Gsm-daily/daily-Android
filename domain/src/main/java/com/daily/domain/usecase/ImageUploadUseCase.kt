@@ -7,5 +7,5 @@ import javax.inject.Inject
 class ImageUploadUseCase @Inject constructor(
     private val repository: ImageRepository
 ) {
-    suspend operator fun invoke(body: MultipartBody.Part) = repository.imageUpload(body)
+    suspend operator fun invoke(body: MultipartBody.Part) = kotlin.runCatching { repository.imageUpload(body) }
 }

@@ -9,10 +9,10 @@ import com.google.gson.JsonParser
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class RequestInterceptor @Inject constructor(
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        val path = request.url().encodedPath()
+        val path = request.url.encodedPath
         val ignorePath = listOf("/auth", "/account/password", "/email")
 
         ignorePath.forEach {
@@ -43,7 +43,7 @@ class RequestInterceptor @Inject constructor(
             val client = OkHttpClient()
             val reissueRequest = Request.Builder()
                 .url("${BuildConfig.BASE_URL}/api/v1/auth/reissue")
-                .patch(RequestBody.create(MediaType.parse("application/json"), JsonObject().toString()))
+                .patch(JsonObject().toString().toRequestBody("application/json".toMediaTypeOrNull()))
                 .addHeader(
                     "refreshToken",
                     "Bearer $refreshToken"
@@ -52,7 +52,7 @@ class RequestInterceptor @Inject constructor(
             val jsonParser = JsonParser()
             val response = client.newCall(reissueRequest).execute()
             if (response.isSuccessful) {
-                val token = jsonParser.parse(response.body()!!.string()) as JsonObject
+                val token = jsonParser.parse(response.body!!.string()) as JsonObject
                 runBlocking {
                     localDataSource.saveToken(
                         token["accessToken"].toString(),

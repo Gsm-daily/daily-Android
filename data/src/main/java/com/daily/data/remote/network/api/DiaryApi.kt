@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface DiaryApi {
     @GET("/api/v1/diary/season")
-    fun getSeason(): SeasonResponseData
+    suspend fun getSeason(): SeasonResponseData
 }

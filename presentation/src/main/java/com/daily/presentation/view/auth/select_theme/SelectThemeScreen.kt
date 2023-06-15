@@ -34,7 +34,7 @@ fun SelectThemeScreen(
     val uiState by viewModel.choiceThemeUiState.collectAsStateWithLifecycle()
 
     when (uiState) {
-        UiState.Success -> navigateToMain()
+        is UiState.Success -> navigateToMain()
         UiState.BadRequest -> {}
         UiState.Conflict -> {}
         UiState.Forbidden -> {}

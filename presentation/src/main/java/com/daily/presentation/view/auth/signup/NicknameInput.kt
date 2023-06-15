@@ -17,7 +17,7 @@ import com.daily.presentation.viewmodel.util.UiState
 @Composable
 fun NicknameInput(
     modifier: Modifier = Modifier,
-    state: UiState,
+    state: UiState<*>,
     checkDuplicationName: (String) -> Unit,
     onNext: (String) -> Unit
 ) {
@@ -47,7 +47,7 @@ fun NicknameInput(
             modifier = modifier.defaultMinSize(minHeight = 24.dp)
         )
         when (state) {
-            UiState.Success -> isNicknameValid = true
+            is UiState.Success -> isNicknameValid = true
             UiState.Conflict -> {
                 isNicknameValid = false
                 Caption1(

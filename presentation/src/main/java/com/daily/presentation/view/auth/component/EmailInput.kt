@@ -16,7 +16,7 @@ import com.daily.presentation.viewmodel.util.UiState
 @Composable
 fun EmailInput(
     modifier: Modifier = Modifier,
-    state: UiState? = null,
+    state: UiState<*>? = null,
     type: String,
     checkDuplicateEmail: (String) -> Unit = {},
     onNext: (String) -> Unit
@@ -28,7 +28,7 @@ fun EmailInput(
 
     if (state != null) {
         when (state) {
-            UiState.Success -> isEmailUnique = true
+            is UiState.Success -> isEmailUnique = true
             UiState.Conflict -> isEmailUnique = false
             UiState.Loading -> {}
             else -> {} // 알 수 없는 오류

@@ -41,24 +41,24 @@ fun SignUpScreen(
     }
 
     when(signUpState) {
-        UiState.BadRequest -> {}
-        UiState.Conflict -> {}
-        UiState.Loading -> {}
-        UiState.Success -> {
+        is UiState.Success -> {
             viewModel.signIn(
                 email = checkNotNull(email),
                 password = password
             )
         }
+        UiState.BadRequest -> {}
+        UiState.Conflict -> {}
+        UiState.Loading -> {}
         UiState.Unknown -> {}
         else -> {}
     }
 
     when(signInState) {
+        is UiState.Success -> navigateToSelectTheme()
         UiState.BadRequest -> {}
         UiState.Loading -> {}
         UiState.NotFound -> {}
-        UiState.Success -> navigateToSelectTheme()
         UiState.Unknown -> {}
         else -> {}
     }

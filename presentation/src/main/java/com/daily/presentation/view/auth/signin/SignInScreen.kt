@@ -26,10 +26,10 @@ fun SignInScreen(
 
 
     when(uiState) {
+        is UiState.Success -> navigateToMain()
         UiState.BadRequest -> {}
         UiState.Loading -> {}
         UiState.NotFound -> {}
-        UiState.Success -> navigateToMain()
         UiState.Unknown -> {}
         else -> {}
     }

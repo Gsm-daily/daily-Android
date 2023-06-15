@@ -2,8 +2,8 @@ package com.daily.presentation.viewmodel.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daily.domain.model.SignInRequest
-import com.daily.domain.model.SignUpRequest
+import com.daily.domain.model.request.SignInRequest
+import com.daily.domain.model.request.SignUpRequest
 import com.daily.domain.usecase.CheckDuplicateEmailUseCase
 import com.daily.domain.usecase.CheckDuplicateNameUseCase
 import com.daily.domain.usecase.SaveTokenUseCase

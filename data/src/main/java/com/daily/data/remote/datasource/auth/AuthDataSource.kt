@@ -1,9 +1,9 @@
 package com.daily.data.remote.datasource.auth
 
-import com.daily.data.remote.model.ChangePasswordRequestData
-import com.daily.data.remote.model.SignInRequestData
-import com.daily.data.remote.model.SignInResponseData
-import com.daily.data.remote.model.SignUpRequestData
+import com.daily.data.remote.model.request.ChangePasswordRequestData
+import com.daily.data.remote.model.request.SignInRequestData
+import com.daily.data.remote.model.response.SignInResponseData
+import com.daily.data.remote.model.request.SignUpRequestData
 
 interface AuthDataSource {
     suspend fun signIn(signInRequestData: SignInRequestData): SignInResponseData

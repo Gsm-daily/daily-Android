@@ -1,6 +1,6 @@
-package com.daily.data.remote.model
+package com.daily.data.remote.model.request
 
-import com.daily.domain.model.ProfileRequest
+import com.daily.domain.model.request.ProfileRequest
 import java.util.UUID
 
 data class ProfileRequestData(

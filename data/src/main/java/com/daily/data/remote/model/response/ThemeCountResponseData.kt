@@ -1,6 +1,6 @@
-package com.daily.data.remote.model
+package com.daily.data.remote.model.response
 
-import com.daily.domain.model.ThemeCountResponse
+import com.daily.domain.model.response.ThemeCountResponse
 
 data class ThemeCountResponseData(
     val count: Int

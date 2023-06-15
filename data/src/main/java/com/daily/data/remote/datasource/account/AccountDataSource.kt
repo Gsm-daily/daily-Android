@@ -1,9 +1,9 @@
 package com.daily.data.remote.datasource.account
 
-import com.daily.data.remote.model.ProfileRequestData
-import com.daily.data.remote.model.ProfileResponseData
-import com.daily.data.remote.model.ThemeCountResponseData
-import com.daily.data.remote.model.ThemeResponseData
+import com.daily.data.remote.model.request.ProfileRequestData
+import com.daily.data.remote.model.response.ProfileResponseData
+import com.daily.data.remote.model.response.ThemeCountResponseData
+import com.daily.data.remote.model.response.ThemeResponseData
 
 interface AccountDataSource {
     suspend fun choiceTheme(theme: String)

@@ -2,7 +2,7 @@ package com.daily.presentation.viewmodel.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daily.domain.model.SeasonResponse
+import com.daily.domain.model.response.SeasonResponse
 import com.daily.domain.usecase.GetSeasonUseCase
 import com.daily.presentation.viewmodel.util.UiState
 import com.daily.presentation.viewmodel.util.exceptionHandling

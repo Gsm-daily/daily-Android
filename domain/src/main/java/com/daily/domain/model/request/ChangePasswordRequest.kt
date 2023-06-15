@@ -1,4 +1,4 @@
-package com.daily.domain.model
+package com.daily.domain.model.request
 
 data class ChangePasswordRequest(
     val email: String,

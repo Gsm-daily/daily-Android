@@ -1,6 +1,6 @@
-package com.daily.data.remote.model
+package com.daily.data.remote.model.request
 
-import com.daily.domain.model.ChangePasswordRequest
+import com.daily.domain.model.request.ChangePasswordRequest
 
 data class ChangePasswordRequestData(
     val email: String,

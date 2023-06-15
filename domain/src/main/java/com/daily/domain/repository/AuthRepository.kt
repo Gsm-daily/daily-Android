@@ -1,9 +1,9 @@
 package com.daily.domain.repository
 
-import com.daily.domain.model.ChangePasswordRequest
-import com.daily.domain.model.SignInRequest
-import com.daily.domain.model.SignInResponse
-import com.daily.domain.model.SignUpRequest
+import com.daily.domain.model.request.ChangePasswordRequest
+import com.daily.domain.model.request.SignInRequest
+import com.daily.domain.model.response.SignInResponse
+import com.daily.domain.model.request.SignUpRequest
 
 interface AuthRepository {
     suspend fun signIn(signInRequest: SignInRequest): SignInResponse

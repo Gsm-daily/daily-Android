@@ -1,6 +1,6 @@
-package com.daily.data.remote.model
+package com.daily.data.remote.model.response
 
-import com.daily.domain.model.ThemeResponse
+import com.daily.domain.model.response.ThemeResponse
 
 data class ThemeResponseData(
     val theme: String

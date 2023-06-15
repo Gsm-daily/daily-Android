@@ -2,9 +2,9 @@ package com.daily.presentation.viewmodel.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daily.domain.model.ChangePasswordRequest
-import com.daily.domain.model.ThemeCountResponse
-import com.daily.domain.model.ThemeResponse
+import com.daily.domain.model.request.ChangePasswordRequest
+import com.daily.domain.model.response.ThemeCountResponse
+import com.daily.domain.model.response.ThemeResponse
 import com.daily.domain.usecase.ChangePasswordUseCase
 import com.daily.domain.usecase.ChoiceThemeUseCase
 import com.daily.domain.usecase.GetThemeDiaryCountUseCase

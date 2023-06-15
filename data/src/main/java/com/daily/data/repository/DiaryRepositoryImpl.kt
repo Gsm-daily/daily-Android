@@ -11,7 +11,7 @@ import javax.inject.Inject
 class DiaryRepositoryImpl @Inject constructor(
     private val diaryDataSource: DiaryDataSource
 ): DiaryRepository {
-    override suspend fun getDiary(): SeasonResponse = diaryDataSource.getSeason().asSeasonResponse()
+    override suspend fun getSeason(): SeasonResponse = diaryDataSource.getSeason().asSeasonResponse()
 
     override suspend fun getAllDiary(): List<DiaryResponse> = diaryDataSource.getAllDiary().map { it.asDiaryResponse() }
 }

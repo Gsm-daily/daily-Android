@@ -5,6 +5,7 @@ import com.daily.data.remote.network.api.AccountApi
 import com.daily.data.remote.network.api.AuthApi
 import com.daily.data.remote.network.api.DiaryApi
 import com.daily.data.remote.network.api.EmailApi
+import com.daily.data.remote.network.api.ImageApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,6 +47,11 @@ object NetworkModule {
     @Singleton
     fun provideDiaryService(retrofit: Retrofit): DiaryApi =
         retrofit.create(DiaryApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideImageService(retrofit: Retrofit): ImageApi =
+        retrofit.create(ImageApi::class.java)
 
     @Provides
     @Singleton

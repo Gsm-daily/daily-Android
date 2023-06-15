@@ -1,7 +1,7 @@
 package com.daily.data.remote.datasource.diary
 
-import com.daily.data.remote.model.DiaryResponseData
-import com.daily.data.remote.model.SeasonResponseData
+import com.daily.data.remote.model.response.DiaryResponseData
+import com.daily.data.remote.model.response.SeasonResponseData
 import com.daily.data.remote.network.api.DiaryApi
 import javax.inject.Inject
 

@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetSeasonUseCase @Inject constructor(
     private val repository: DiaryRepository
 ) {
-    suspend operator fun invoke() = kotlin.runCatching { repository.getDiary() }
+    suspend operator fun invoke() = kotlin.runCatching { repository.getSeason() }
 }

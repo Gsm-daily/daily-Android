@@ -1,9 +1,9 @@
 package com.daily.data.remote.datasource.auth
 
-import com.daily.data.remote.model.ChangePasswordRequestData
-import com.daily.data.remote.model.SignInRequestData
-import com.daily.data.remote.model.SignInResponseData
-import com.daily.data.remote.model.SignUpRequestData
+import com.daily.data.remote.model.request.ChangePasswordRequestData
+import com.daily.data.remote.model.request.SignInRequestData
+import com.daily.data.remote.model.response.SignInResponseData
+import com.daily.data.remote.model.request.SignUpRequestData
 import com.daily.data.remote.network.api.AuthApi
 import com.daily.data.remote.util.safeApiCall
 import javax.inject.Inject

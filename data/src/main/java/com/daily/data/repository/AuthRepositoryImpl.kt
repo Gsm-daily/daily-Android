@@ -2,14 +2,14 @@ package com.daily.data.repository
 
 import com.daily.data.local.datasource.LocalDataSource
 import com.daily.data.remote.datasource.auth.AuthDataSource
-import com.daily.data.remote.model.asChangePasswordRequest
-import com.daily.data.remote.model.asSignInRequestData
-import com.daily.data.remote.model.asSignInResponse
-import com.daily.data.remote.model.asSignUpRequestData
-import com.daily.domain.model.ChangePasswordRequest
-import com.daily.domain.model.SignInRequest
-import com.daily.domain.model.SignInResponse
-import com.daily.domain.model.SignUpRequest
+import com.daily.data.remote.model.request.asChangePasswordRequest
+import com.daily.data.remote.model.request.asSignInRequestData
+import com.daily.data.remote.model.response.asSignInResponse
+import com.daily.data.remote.model.request.asSignUpRequestData
+import com.daily.domain.model.request.ChangePasswordRequest
+import com.daily.domain.model.request.SignInRequest
+import com.daily.domain.model.response.SignInResponse
+import com.daily.domain.model.request.SignUpRequest
 import com.daily.domain.repository.AuthRepository
 import javax.inject.Inject
 

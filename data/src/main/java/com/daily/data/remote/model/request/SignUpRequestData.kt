@@ -1,6 +1,6 @@
-package com.daily.data.remote.model
+package com.daily.data.remote.model.request
 
-import com.daily.domain.model.SignUpRequest
+import com.daily.domain.model.request.SignUpRequest
 
 data class SignUpRequestData(
     val email: String,

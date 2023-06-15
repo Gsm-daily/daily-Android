@@ -1,10 +1,10 @@
 package com.daily.data.repository
 
 import com.daily.data.remote.datasource.diary.DiaryDataSource
-import com.daily.data.remote.model.asDiaryResponse
-import com.daily.data.remote.model.asSeasonResponse
-import com.daily.domain.model.DiaryResponse
-import com.daily.domain.model.SeasonResponse
+import com.daily.data.remote.model.response.asDiaryResponse
+import com.daily.data.remote.model.response.asSeasonResponse
+import com.daily.domain.model.response.DiaryResponse
+import com.daily.domain.model.response.SeasonResponse
 import com.daily.domain.repository.DiaryRepository
 import javax.inject.Inject
 

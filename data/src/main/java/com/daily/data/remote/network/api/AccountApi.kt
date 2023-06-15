@@ -1,10 +1,10 @@
 package com.daily.data.remote.network.api
 
-import com.daily.data.remote.model.ProfileRequestData
-import com.daily.data.remote.model.ProfileResponseData
-import com.daily.data.remote.model.SelectThemeRequestData
-import com.daily.data.remote.model.ThemeCountResponseData
-import com.daily.data.remote.model.ThemeResponseData
+import com.daily.data.remote.model.request.ProfileRequestData
+import com.daily.data.remote.model.response.ProfileResponseData
+import com.daily.data.remote.model.request.SelectThemeRequestData
+import com.daily.data.remote.model.response.ThemeCountResponseData
+import com.daily.data.remote.model.response.ThemeResponseData
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

@@ -1,4 +1,4 @@
-package com.daily.domain.model
+package com.daily.domain.model.request
 
 import java.util.UUID
 

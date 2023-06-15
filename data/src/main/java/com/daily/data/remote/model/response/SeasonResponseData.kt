@@ -1,6 +1,6 @@
-package com.daily.data.remote.model
+package com.daily.data.remote.model.response
 
-import com.daily.domain.model.SeasonResponse
+import com.daily.domain.model.response.SeasonResponse
 
 data class SeasonResponseData(
     val season: String

@@ -1,6 +1,6 @@
-package com.daily.data.remote.model
+package com.daily.data.remote.model.response
 
-import com.daily.domain.model.ImageResponse
+import com.daily.domain.model.response.ImageResponse
 
 data class ImageResponseData(
     val imageUrl: String

@@ -1,6 +1,6 @@
 package com.daily.domain.repository
 
-import com.daily.domain.model.ImageResponse
+import com.daily.domain.model.response.ImageResponse
 import okhttp3.MultipartBody
 
 interface ImageRepository {

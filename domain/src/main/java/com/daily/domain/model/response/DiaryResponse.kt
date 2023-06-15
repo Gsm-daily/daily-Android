@@ -1,4 +1,4 @@
-package com.daily.domain.model
+package com.daily.domain.model.response
 
 import java.time.LocalDateTime
 

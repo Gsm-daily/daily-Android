@@ -1,6 +1,6 @@
 package com.daily.domain.usecase
 
-import com.daily.domain.model.ChangePasswordRequest
+import com.daily.domain.model.request.ChangePasswordRequest
 import com.daily.domain.repository.AuthRepository
 import javax.inject.Inject
 

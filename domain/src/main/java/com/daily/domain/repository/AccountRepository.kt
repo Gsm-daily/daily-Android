@@ -1,9 +1,9 @@
 package com.daily.domain.repository
 
-import com.daily.domain.model.ProfileRequest
-import com.daily.domain.model.ProfileResponse
-import com.daily.domain.model.ThemeCountResponse
-import com.daily.domain.model.ThemeResponse
+import com.daily.domain.model.request.ProfileRequest
+import com.daily.domain.model.response.ProfileResponse
+import com.daily.domain.model.response.ThemeCountResponse
+import com.daily.domain.model.response.ThemeResponse
 
 interface AccountRepository {
     suspend fun choiceTheme(theme: String)

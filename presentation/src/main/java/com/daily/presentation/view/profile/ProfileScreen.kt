@@ -54,13 +54,13 @@ fun ProfileScreen(
     modifier: Modifier = Modifier,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
-    val profileUiState by viewModel.profileUiState.collectAsStateWithLifecycle()
-    val diaryUiState by viewModel.diaryUiState.collectAsStateWithLifecycle()
-    val uploadUiState by viewModel.uploadUiState.collectAsStateWithLifecycle()
-
     LaunchedEffect(Unit) {
         viewModel.getProfile()
     }
+
+    val diaryUiState by viewModel.diaryUiState.collectAsStateWithLifecycle()
+    val uploadUiState by viewModel.uploadUiState.collectAsStateWithLifecycle()
+    val profileUiState by viewModel.profileUiState.collectAsStateWithLifecycle()
 
     when (val profileState = profileUiState) {
         is UiState.Success -> {
@@ -87,7 +87,6 @@ fun ProfileScreen(
 
                     viewModel.updateProfile(
                         ProfileRequest(
-                            idx = profile.idx,
                             name = profile.name,
                             email = profile.email,
                             profileUrl = url

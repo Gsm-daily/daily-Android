@@ -4,6 +4,7 @@ object Dependency {
         const val ANDROID_LIBRARY = "com.android.library"
         const val KOTLIN_ANDROID = "org.jetbrains.kotlin.android"
         const val HILT_ANDROID = "com.google.dagger.hilt.android"
+        const val KTLINT = "org.jlleitschuh.gradle.ktlint"
     }
 
     object AndroidX {

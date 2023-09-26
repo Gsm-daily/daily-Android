@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class ImageDataSourceImpl @Inject constructor(
     private val imageApi: ImageApi
-) {
-    suspend fun imageUpload(file: MultipartBody.Part) = imageApi.imageUpload(file)
+): ImageDataSource {
+    override suspend fun imageUpload(body: MultipartBody.Part) = imageApi.imageUpload(body)
 }

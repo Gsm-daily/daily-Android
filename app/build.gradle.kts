@@ -42,6 +42,7 @@ android {
 
 dependencies {
 
+    implementation(project(":designsystem"))
     implementation(project(":presentation"))
     implementation(project(":di"))
 

@@ -15,7 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.daily.designsystem.component.DailyButton
+import com.daily.designsystem.component.button.DailyButton
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
 

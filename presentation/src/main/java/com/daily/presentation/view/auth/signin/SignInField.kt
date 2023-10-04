@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.util.PatternsCompat.EMAIL_ADDRESS
-import com.daily.designsystem.component.DailyButton
+import com.daily.designsystem.component.button.DailyButton
 import com.daily.designsystem.theme.*
 import com.daily.presentation.R
 import com.daily.designsystem.component.EmailField

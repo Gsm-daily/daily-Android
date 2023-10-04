@@ -1,8 +1,9 @@
-package com.daily.designsystem.component
+package com.daily.designsystem.component.button
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,21 +17,23 @@ fun DailyButton(
     modifier: Modifier = Modifier,
     text: String,
     enabled: Boolean = true,
+    colors: ButtonColors = ButtonDefaults.buttonColors(
+        containerColor = DailyTheme.color.Primary20,
+        disabledContainerColor = DailyTheme.color.Primary10
+    ),
+    contentPadding: PaddingValues = PaddingValues(vertical = 20.dp),
     onClick: () -> Unit
 ) {
     Button(
         modifier = modifier,
-        onClick = { onClick() },
-        colors = ButtonDefaults.buttonColors(
-            containerColor = DailyTheme.color.Primary20,
-            disabledContainerColor = DailyTheme.color.Primary10
-        ),
+        colors = colors,
         shape = RoundedCornerShape(20.dp),
-        enabled = enabled
+        contentPadding = contentPadding,
+        enabled = enabled,
+        onClick = onClick
     ) {
         Subtitle1(
             text = text,
-            modifier = modifier.padding(vertical = 10.dp),
             textColor = DailyTheme.color.White,
             textAlign = TextAlign.Center
         )

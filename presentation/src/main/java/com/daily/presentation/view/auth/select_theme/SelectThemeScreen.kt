@@ -1,8 +1,6 @@
 package com.daily.presentation.view.auth.select_theme
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -14,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.daily.designsystem.component.DailyButton
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.IcBack
@@ -22,7 +19,6 @@ import com.daily.presentation.R
 import com.daily.presentation.viewmodel.account.AccountViewModel
 import com.daily.presentation.viewmodel.util.UiState
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SelectThemeScreen(
     modifier: Modifier = Modifier,
@@ -30,7 +26,7 @@ fun SelectThemeScreen(
     navigateToPrevious: () -> Unit,
     navigateToMain: () -> Unit
 ) {
-    val pagerState = rememberPagerState()
+//    val pagerState = rememberPagerState() TODO: 변경된 디자인에 맞게 수정
     val uiState by viewModel.choiceThemeUiState.collectAsStateWithLifecycle()
 
     when (uiState) {
@@ -67,15 +63,16 @@ fun SelectThemeScreen(
             )
         }
         Spacer(modifier = modifier.height(16.dp))
-        ThemeField(pagerState = pagerState)
+//        ThemeField(pagerState = pagerState) TODO: 변경된 디자인에 맞게 수정
         Spacer(modifier = modifier.height(26.dp))
-        DailyButton(
-            text = stringResource(if (pagerState.currentPage == 0) R.string.select_grassland else R.string.select_ocean),
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp)
-        ) {
-            viewModel.choiceTheme(if (pagerState.currentPage == 0) "GRASSLAND" else "OCEAN")
-        }
+//        TODO: 변경된 디자인에 맞게 수정
+//        DailyButton(
+//            text = stringResource(if (pagerState.currentPage == 0) R.string.select_grassland else R.string.select_ocean),
+//            modifier = modifier
+//                .fillMaxWidth()
+//                .padding(horizontal = 20.dp)
+//        ) {
+//            viewModel.choiceTheme(if (pagerState.currentPage == 0) "GRASSLAND" else "OCEAN")
+//        }
     }
 }

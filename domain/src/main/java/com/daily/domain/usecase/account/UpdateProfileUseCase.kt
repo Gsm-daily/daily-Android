@@ -1,4 +1,4 @@
-package com.daily.domain.usecase
+package com.daily.domain.usecase.account
 
 import com.daily.domain.model.account.request.ProfileRequest
 import com.daily.domain.repository.AccountRepository

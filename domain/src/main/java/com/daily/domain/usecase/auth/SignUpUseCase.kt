@@ -1,4 +1,4 @@
-package com.daily.domain.usecase
+package com.daily.domain.usecase.auth
 
 import com.daily.domain.model.auth.request.SignUpRequest
 import com.daily.domain.repository.AuthRepository

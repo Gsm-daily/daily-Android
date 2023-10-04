@@ -2,9 +2,9 @@ package com.daily.presentation.viewmodel.email
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daily.domain.usecase.SendEmailForPasswordChangeUseCase
-import com.daily.domain.usecase.SendEmailForSignUpUseCase
-import com.daily.domain.usecase.VerifyAuthKeyUseCase
+import com.daily.domain.usecase.email.SendEmailForPasswordChangeUseCase
+import com.daily.domain.usecase.email.SendEmailForSignUpUseCase
+import com.daily.domain.usecase.email.VerifyAuthKeyUseCase
 import com.daily.presentation.viewmodel.util.UiState
 import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel

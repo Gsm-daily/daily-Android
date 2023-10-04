@@ -1,4 +1,4 @@
-package com.daily.domain.usecase
+package com.daily.domain.usecase.email
 
 import com.daily.domain.repository.EmailRepository
 import javax.inject.Inject

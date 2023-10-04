@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daily.domain.model.auth.request.SignInRequest
 import com.daily.domain.model.auth.request.SignUpRequest
-import com.daily.domain.usecase.CheckDuplicateEmailUseCase
-import com.daily.domain.usecase.CheckDuplicateNameUseCase
-import com.daily.domain.usecase.SaveTokenUseCase
-import com.daily.domain.usecase.SignInUseCase
-import com.daily.domain.usecase.SignUpUseCase
+import com.daily.domain.usecase.auth.CheckDuplicateEmailUseCase
+import com.daily.domain.usecase.auth.CheckDuplicateNameUseCase
+import com.daily.domain.usecase.auth.SaveTokenUseCase
+import com.daily.domain.usecase.auth.SignInUseCase
+import com.daily.domain.usecase.auth.SignUpUseCase
 import com.daily.presentation.viewmodel.util.UiState
 import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel

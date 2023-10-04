@@ -1,4 +1,4 @@
-package com.daily.domain.usecase
+package com.daily.domain.usecase.image
 
 import com.daily.domain.repository.ImageRepository
 import okhttp3.MultipartBody

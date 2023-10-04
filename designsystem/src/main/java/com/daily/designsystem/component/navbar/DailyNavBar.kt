@@ -11,10 +11,8 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.daily.designsystem.component.util.DailyDimen
 import com.daily.designsystem.theme.DailyTheme
-
-private val NavBarHeight = 83.dp
 
 @Composable
 fun DailyNavBar(
@@ -30,7 +28,7 @@ fun DailyNavBar(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .height(NavBarHeight)
+                .height(DailyDimen.NavBarHeight)
                 .selectableGroup(),
             horizontalArrangement = Arrangement.SpaceBetween,
             content = content

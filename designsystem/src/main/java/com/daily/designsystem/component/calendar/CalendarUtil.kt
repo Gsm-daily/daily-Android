@@ -1,56 +1,29 @@
 package com.daily.designsystem.component.calendar
 
+import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.temporal.TemporalAdjusters
 
-object CalendarConstants {
-    const val SUNDAY = 7
-    const val SATURDAY = 6
-    const val MAX_ITEM_COUNT = 42
-}
+private const val DAYS_IN_WEEK = 7
 
-data class MonthDay(
-    val month: Int,
-    val day: Int
-)
+fun LocalDate.getDaysOfMonth(): List<LocalDate> {
+    val daysOfMonth = mutableListOf<LocalDate>()
+    val startOfMonth = this.withDayOfMonth(1)
+    val endOfMonth = this.withDayOfMonth(this.lengthOfMonth())
 
-fun LocalDate.getMonthDays(): List<MonthDay> {
-    val monthDays = mutableListOf<MonthDay>()
+    val firstSunday = startOfMonth.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
 
-    val startOfMonth = LocalDate.of(year, monthValue, 1)
-    val endOfMonth = LocalDate.of(year, monthValue, lengthOfMonth())
-
-    val startDayOfWeek = startOfMonth.dayOfWeek.value
-    val endDayOfWeek = endOfMonth.dayOfWeek.value
-
-    val startDayOfWeekData = if (startDayOfWeek == CalendarConstants.SUNDAY) 0 else startDayOfWeek
-    val endDayOfWeekData = when (endDayOfWeek) {
-        CalendarConstants.SUNDAY -> 6
-        CalendarConstants.SATURDAY -> 0
-        else -> 6 - endDayOfWeek
-    }
-
-    monthDays.addAll(startOfMonth.getPreviousDays(1..startDayOfWeekData).map {
-        MonthDay(month = it.monthValue, day = it.dayOfMonth)
+    daysOfMonth.addAll((0 until startOfMonth.dayOfWeek.value % DAYS_IN_WEEK).map {
+        firstSunday.plusDays(it.toLong())
     })
 
-    monthDays.addAll((1..lengthOfMonth()).map { MonthDay(month = startOfMonth.monthValue, it) })
-
-    monthDays.addAll(endOfMonth.getAfterDays(1..endDayOfWeekData).map {
-        MonthDay(month = it.monthValue, day = it.dayOfMonth)
+    daysOfMonth.addAll((1..this.lengthOfMonth()).map {
+        this.withDayOfMonth(it)
     })
 
-    if (monthDays.size < CalendarConstants.MAX_ITEM_COUNT) {
-        val lastDay = LocalDate.of(year, monthDays.last().month, monthDays.last().day)
+    daysOfMonth.addAll((1..(DAYS_IN_WEEK * 6) - daysOfMonth.size).map {
+        endOfMonth.plusDays(it.toLong())
+    })
 
-        repeat(7) { count ->
-            val date = lastDay.plusDays(count.toLong() + 1)
-
-            monthDays.add(MonthDay(month = date.monthValue, day = date.dayOfMonth))
-        }
-    }
-    return monthDays
+    return daysOfMonth
 }
-
-fun LocalDate.getPreviousDays(range: IntRange) = range.map { minusDays(it.toLong()) }
-
-fun LocalDate.getAfterDays(range: IntRange) = range.map { plusDays(it.toLong()) }

@@ -16,7 +16,7 @@ fun Modifier.dailyClickable(
 ) = composed {
     onClick?.let { onClick ->
         clickable(
-            onClick = { onClick() },
+            onClick = onClick,
             indication = if (rippleEnable)
                 rememberRipple(
                     color = rippleColor,

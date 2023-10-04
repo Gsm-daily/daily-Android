@@ -53,7 +53,7 @@ fun MainScreen(
                         .systemBarsPadding()
                 ) {
                     Spacer(modifier = modifier.height(182.dp))
-                    DailyCalendar(onClickItem = { })
+                    DailyCalendar(onDayClick = { })
                     Spacer(modifier = modifier.weight(1f))
                 }
             }

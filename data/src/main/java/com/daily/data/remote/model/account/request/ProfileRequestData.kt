@@ -1,4 +1,4 @@
-package com.daily.data.remote.model.request
+package com.daily.data.remote.model.account.request
 
 import com.daily.domain.model.request.ProfileRequest
 

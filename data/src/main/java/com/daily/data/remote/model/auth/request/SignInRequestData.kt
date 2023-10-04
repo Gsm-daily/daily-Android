@@ -1,4 +1,4 @@
-package com.daily.data.remote.model.request
+package com.daily.data.remote.model.auth.request
 
 import com.daily.domain.model.request.SignInRequest
 

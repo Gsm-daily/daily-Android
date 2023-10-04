@@ -1,4 +1,4 @@
-package com.daily.data.remote.model.request
+package com.daily.data.remote.model.email.request
 
 data class VerifyAuthKeyRequestData(
     val authKey: Int

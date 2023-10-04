@@ -1,7 +1,7 @@
 package com.daily.data.remote.network.api
 
-import com.daily.data.remote.model.response.DiaryResponseData
-import com.daily.data.remote.model.response.SeasonResponseData
+import com.daily.data.remote.model.diary.response.DiaryResponseData
+import com.daily.data.remote.model.diary.response.SeasonResponseData
 import retrofit2.http.GET
 
 interface DiaryApi {

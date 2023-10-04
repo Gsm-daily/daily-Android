@@ -1,8 +1,8 @@
 package com.daily.data.repository
 
 import com.daily.data.remote.datasource.diary.DiaryDataSource
-import com.daily.data.remote.model.response.asDiaryResponse
-import com.daily.data.remote.model.response.asSeasonResponse
+import com.daily.data.remote.model.diary.response.asDiaryResponse
+import com.daily.data.remote.model.diary.response.asSeasonResponse
 import com.daily.domain.model.response.DiaryResponse
 import com.daily.domain.model.response.SeasonResponse
 import com.daily.domain.repository.DiaryRepository

@@ -1,4 +1,4 @@
-package com.daily.data.remote.model.response
+package com.daily.data.remote.model.image.response
 
 import com.daily.domain.model.response.ImageResponse
 

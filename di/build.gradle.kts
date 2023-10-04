@@ -41,7 +41,6 @@ dependencies {
 
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
-    implementation(Dependency.Google.MATERIAL)
     implementation(Dependency.Google.HILT_ANDROID)
     kapt(Dependency.Google.HILT_COMPILER)
     implementation(Dependency.Libraries.RETROFIT)

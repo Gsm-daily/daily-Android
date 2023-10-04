@@ -9,7 +9,6 @@ android {
 
     defaultConfig {
         minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -40,7 +39,6 @@ dependencies {
 
     implementation(Dependency.AndroidX.CORE_KTX)
     implementation(Dependency.AndroidX.APP_COMPAT)
-    implementation(Dependency.Google.MATERIAL)
     implementation(Dependency.AndroidX.COMPOSE_RUNTIME)
     implementation(Dependency.AndroidX.COMPOSE_MATERIAL3)
     implementation(Dependency.AndroidX.COMPOSE_TOOLING)

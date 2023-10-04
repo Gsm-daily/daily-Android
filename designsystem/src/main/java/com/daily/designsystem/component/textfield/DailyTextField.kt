@@ -1,4 +1,4 @@
-package com.daily.designsystem.component
+package com.daily.designsystem.component.textfield
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -8,7 +8,6 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -35,9 +34,7 @@ fun DailyTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions(),
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    onValueChanged: (String) -> Unit
+    onValueChange: (String) -> Unit
 ) {
     val mergedTextStyle = textStyle.merge(TextStyle(color = textColor))
     val focusRequester by remember { mutableStateOf(FocusRequester()) }
@@ -45,8 +42,6 @@ fun DailyTextField(
     var isFocus by remember { mutableStateOf(false) }
 
     BasicTextField(
-        value = value,
-        onValueChange = onValueChanged,
         modifier = modifier
             .fillMaxWidth()
             .background(
@@ -60,9 +55,9 @@ fun DailyTextField(
             )
             .padding(horizontal = 16.dp, vertical = 18.dp)
             .focusRequester(focusRequester)
-            .onFocusChanged {
-                isFocus = it.isFocused
-            },
+            .onFocusChanged { isFocus = it.isFocused },
+        value = value,
+        onValueChange = onValueChange,
         enabled = enabled,
         textStyle = mergedTextStyle,
         visualTransformation = visualTransformation,
@@ -73,28 +68,14 @@ fun DailyTextField(
         cursorBrush = SolidColor(focusColor),
         decorationBox = { innerTextField ->
             Box(modifier = modifier.fillMaxWidth()) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    leadingIcon?.let { leadingIcon ->
-                        leadingIcon()
-                        Spacer(modifier = modifier.width(8.dp))
-                    }
-
-                    Box(modifier = modifier.weight(1f)) {
-                        if (value.isEmpty()) {
-                            Body2(
-                                text = hint,
-                                textColor = DailyTheme.color.Neutral40,
-                                maxLines = maxLines
-                            )
-                        }
-                        innerTextField()
-                    }
-
-                    trailingIcon?.let { trailingIcon ->
-                        Spacer(modifier = modifier.width(8.dp))
-                        trailingIcon()
-                    }
+                if (value.isEmpty()) {
+                    Body2(
+                        text = hint,
+                        textColor = DailyTheme.color.Neutral40,
+                        maxLines = maxLines
+                    )
                 }
+                innerTextField()
             }
         }
     )

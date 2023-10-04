@@ -28,6 +28,9 @@ object DailyColor {
         val CalendarWeekColor = Color(0x331C1C1E)
         val CalendarDayColor = Color(0xFF1C1C1E)
         val AnotherMonthColor = Color(0x801C1C1E)
+
+        val KakaoContainerColor = Color(0xFFFEE500)
+        val KakaoLabelColor = Color(0xD9000000)
     }
 }
 

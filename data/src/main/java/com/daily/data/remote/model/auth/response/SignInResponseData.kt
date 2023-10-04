@@ -1,6 +1,6 @@
 package com.daily.data.remote.model.auth.response
 
-import com.daily.domain.model.response.SignInResponse
+import com.daily.domain.model.auth.response.SignInResponse
 
 data class SignInResponseData(
     val accessToken: String,

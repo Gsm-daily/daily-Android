@@ -1,6 +1,6 @@
 package com.daily.domain.usecase
 
-import com.daily.domain.model.request.ProfileRequest
+import com.daily.domain.model.account.request.ProfileRequest
 import com.daily.domain.repository.AccountRepository
 import javax.inject.Inject
 

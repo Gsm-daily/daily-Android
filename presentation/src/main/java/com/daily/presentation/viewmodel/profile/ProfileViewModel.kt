@@ -3,10 +3,10 @@ package com.daily.presentation.viewmodel.profile
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daily.domain.model.response.DiaryResponse
-import com.daily.domain.model.response.ImageResponse
-import com.daily.domain.model.request.ProfileRequest
-import com.daily.domain.model.response.ProfileResponse
+import com.daily.domain.model.diary.response.DiaryResponse
+import com.daily.domain.model.image.response.ImageResponse
+import com.daily.domain.model.account.request.ProfileRequest
+import com.daily.domain.model.account.response.ProfileResponse
 import com.daily.domain.usecase.GetAllDiaryUseCase
 import com.daily.domain.usecase.GetProfileUseCase
 import com.daily.domain.usecase.ImageUploadUseCase

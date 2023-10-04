@@ -1,6 +1,6 @@
 package com.daily.data.remote.model.account.request
 
-import com.daily.domain.model.request.ProfileRequest
+import com.daily.domain.model.account.request.ProfileRequest
 
 data class ProfileRequestData(
     val name: String,

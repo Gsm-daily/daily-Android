@@ -1,4 +1,4 @@
-package com.daily.domain.model.request
+package com.daily.domain.model.account.request
 
 data class ProfileRequest(
     val name: String,

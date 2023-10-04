@@ -1,7 +1,7 @@
 package com.daily.domain.repository
 
-import com.daily.domain.model.response.DiaryResponse
-import com.daily.domain.model.response.SeasonResponse
+import com.daily.domain.model.diary.response.DiaryResponse
+import com.daily.domain.model.diary.response.SeasonResponse
 
 interface DiaryRepository {
     suspend fun getSeason(): SeasonResponse

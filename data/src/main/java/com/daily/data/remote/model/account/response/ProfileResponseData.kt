@@ -1,6 +1,6 @@
 package com.daily.data.remote.model.account.response
 
-import com.daily.domain.model.response.ProfileResponse
+import com.daily.domain.model.account.response.ProfileResponse
 
 data class ProfileResponseData(
     val name: String,

@@ -1,6 +1,6 @@
 package com.daily.domain.usecase
 
-import com.daily.domain.model.request.SignUpRequest
+import com.daily.domain.model.auth.request.SignUpRequest
 import com.daily.domain.repository.AuthRepository
 import javax.inject.Inject
 

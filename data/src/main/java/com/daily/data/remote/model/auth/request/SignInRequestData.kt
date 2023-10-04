@@ -1,6 +1,6 @@
 package com.daily.data.remote.model.auth.request
 
-import com.daily.domain.model.request.SignInRequest
+import com.daily.domain.model.auth.request.SignInRequest
 
 data class SignInRequestData(
     val email: String,

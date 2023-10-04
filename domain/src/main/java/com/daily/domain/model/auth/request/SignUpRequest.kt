@@ -1,4 +1,4 @@
-package com.daily.domain.model.request
+package com.daily.domain.model.auth.request
 
 data class SignUpRequest(
     val email: String,

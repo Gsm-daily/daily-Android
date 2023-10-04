@@ -1,4 +1,4 @@
-package com.daily.domain.model.response
+package com.daily.domain.model.auth.response
 
 data class SignInResponse(
     val accessToken: String,

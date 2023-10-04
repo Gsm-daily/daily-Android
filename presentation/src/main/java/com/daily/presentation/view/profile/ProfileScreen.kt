@@ -41,9 +41,9 @@ import com.daily.designsystem.theme.Caption1
 import com.daily.designsystem.theme.DailyColor
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.Subtitle1
-import com.daily.domain.model.response.ImageResponse
-import com.daily.domain.model.request.ProfileRequest
-import com.daily.domain.model.response.ProfileResponse
+import com.daily.domain.model.image.response.ImageResponse
+import com.daily.domain.model.account.request.ProfileRequest
+import com.daily.domain.model.account.response.ProfileResponse
 import com.daily.presentation.R
 import com.daily.presentation.viewmodel.profile.ProfileViewModel
 import com.daily.presentation.viewmodel.util.UiState

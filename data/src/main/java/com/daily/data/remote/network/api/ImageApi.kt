@@ -1,6 +1,6 @@
 package com.daily.data.remote.network.api
 
-import com.daily.data.remote.model.response.ImageResponseData
+import com.daily.data.remote.model.image.response.ImageResponseData
 import okhttp3.MultipartBody
 import retrofit2.http.Multipart
 import retrofit2.http.POST

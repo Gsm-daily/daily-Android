@@ -2,13 +2,13 @@ package com.daily.presentation.viewmodel.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daily.domain.model.request.ChangePasswordRequest
-import com.daily.domain.model.response.ThemeCountResponse
-import com.daily.domain.model.response.ThemeResponse
-import com.daily.domain.usecase.ChangePasswordUseCase
-import com.daily.domain.usecase.ChoiceThemeUseCase
-import com.daily.domain.usecase.GetThemeDiaryCountUseCase
-import com.daily.domain.usecase.GetThemeUseCase
+import com.daily.domain.model.auth.request.ChangePasswordRequest
+import com.daily.domain.model.account.response.ThemeCountResponse
+import com.daily.domain.model.account.response.ThemeResponse
+import com.daily.domain.usecase.auth.ChangePasswordUseCase
+import com.daily.domain.usecase.account.ChoiceThemeUseCase
+import com.daily.domain.usecase.account.GetThemeDiaryCountUseCase
+import com.daily.domain.usecase.account.GetThemeUseCase
 import com.daily.presentation.viewmodel.util.UiState
 import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel

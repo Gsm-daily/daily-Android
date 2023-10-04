@@ -1,14 +1,14 @@
 package com.daily.data.repository
 
 import com.daily.data.remote.datasource.account.AccountDataSource
-import com.daily.data.remote.model.request.asProfileRequestData
-import com.daily.data.remote.model.response.asProfileResponse
-import com.daily.data.remote.model.response.asThemeCountResponse
-import com.daily.data.remote.model.response.asThemeResponse
-import com.daily.domain.model.request.ProfileRequest
-import com.daily.domain.model.response.ProfileResponse
-import com.daily.domain.model.response.ThemeCountResponse
-import com.daily.domain.model.response.ThemeResponse
+import com.daily.data.remote.model.account.request.asProfileRequestData
+import com.daily.data.remote.model.account.response.asProfileResponse
+import com.daily.data.remote.model.account.response.asThemeCountResponse
+import com.daily.data.remote.model.account.response.asThemeResponse
+import com.daily.domain.model.account.request.ProfileRequest
+import com.daily.domain.model.account.response.ProfileResponse
+import com.daily.domain.model.account.response.ThemeCountResponse
+import com.daily.domain.model.account.response.ThemeResponse
 import com.daily.domain.repository.AccountRepository
 import javax.inject.Inject
 

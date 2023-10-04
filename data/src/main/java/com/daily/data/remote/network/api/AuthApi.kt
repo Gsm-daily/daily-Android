@@ -1,9 +1,9 @@
 package com.daily.data.remote.network.api
 
-import com.daily.data.remote.model.request.ChangePasswordRequestData
-import com.daily.data.remote.model.request.SignInRequestData
-import com.daily.data.remote.model.response.SignInResponseData
-import com.daily.data.remote.model.request.SignUpRequestData
+import com.daily.data.remote.model.auth.request.ChangePasswordRequestData
+import com.daily.data.remote.model.auth.request.SignInRequestData
+import com.daily.data.remote.model.auth.response.SignInResponseData
+import com.daily.data.remote.model.auth.request.SignUpRequestData
 import retrofit2.http.Body
 import retrofit2.http.PATCH
 import retrofit2.http.POST

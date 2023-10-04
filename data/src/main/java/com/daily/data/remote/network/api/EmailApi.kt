@@ -1,7 +1,7 @@
 package com.daily.data.remote.network.api
 
-import com.daily.data.remote.model.request.EmailRequestData
-import com.daily.data.remote.model.request.VerifyAuthKeyRequestData
+import com.daily.data.remote.model.email.request.EmailRequestData
+import com.daily.data.remote.model.email.request.VerifyAuthKeyRequestData
 import retrofit2.http.Body
 import retrofit2.http.POST
 

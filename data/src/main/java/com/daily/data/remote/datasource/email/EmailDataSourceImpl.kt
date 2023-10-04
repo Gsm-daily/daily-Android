@@ -1,7 +1,7 @@
 package com.daily.data.remote.datasource.email
 
-import com.daily.data.remote.model.request.EmailRequestData
-import com.daily.data.remote.model.request.VerifyAuthKeyRequestData
+import com.daily.data.remote.model.email.request.EmailRequestData
+import com.daily.data.remote.model.email.request.VerifyAuthKeyRequestData
 import com.daily.data.remote.network.api.EmailApi
 import com.daily.data.remote.util.safeApiCall
 import javax.inject.Inject

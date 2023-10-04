@@ -1,9 +1,9 @@
 package com.daily.data.remote.datasource.account
 
-import com.daily.data.remote.model.request.ProfileRequestData
-import com.daily.data.remote.model.response.ProfileResponseData
-import com.daily.data.remote.model.request.SelectThemeRequestData
-import com.daily.data.remote.model.response.ThemeResponseData
+import com.daily.data.remote.model.account.request.ProfileRequestData
+import com.daily.data.remote.model.account.response.ProfileResponseData
+import com.daily.data.remote.model.account.request.SelectThemeRequestData
+import com.daily.data.remote.model.account.response.ThemeResponseData
 import com.daily.data.remote.network.api.AccountApi
 import com.daily.data.remote.util.safeApiCall
 import javax.inject.Inject

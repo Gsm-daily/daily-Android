@@ -181,7 +181,7 @@ fun Subtitle0(
             bounded = bounded
         ),
         text = text,
-        style = DailyTypography.subtitle1,
+        style = DailyTypography.subtitle0,
         color = textColor,
         textAlign = textAlign,
         textDecoration = textDecoration,

@@ -30,7 +30,7 @@ import com.daily.navigation.DailyNavHost
 import com.daily.navigation.Destinations
 import com.daily.navigation.destinations
 import com.daily.navigation.navigateToDestination
-import com.daily.presentation.view.intro.navigation.introRoute
+import com.daily.presentation.view.main.navigation.mainRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -109,7 +109,7 @@ class MainActivity : androidx.activity.ComponentActivity() {
                     contentWindowInsets = WindowInsets(0.dp)
                 ) { paddingValues ->
                     Box(modifier = Modifier.padding(paddingValues)) {
-                        DailyNavHost(navController = navController, startDestination = introRoute)
+                        DailyNavHost(navController = navController, startDestination = mainRoute)
                     }
                 }
             }

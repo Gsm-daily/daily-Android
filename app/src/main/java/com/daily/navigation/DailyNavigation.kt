@@ -1,14 +1,16 @@
 package com.daily.navigation
 
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 
 fun NavController.navigateToDestination(route: String) {
-    val startRoute = this.graph.startDestinationRoute
+    val startRoute = this.graph.findStartDestination().id
 
     this.navigate(route) {
-        startRoute?.let {
-            popUpTo(it)
+        popUpTo(startRoute) {
+            saveState = true
         }
         launchSingleTop = true
+        restoreState = true
     }
 }

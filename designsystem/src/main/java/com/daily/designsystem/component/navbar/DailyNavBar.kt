@@ -17,21 +17,24 @@ import com.daily.designsystem.theme.DailyTheme
 @Composable
 fun DailyNavBar(
     modifier: Modifier = Modifier,
+    visibility: Boolean = false,
     backgroundColor: Color = DailyTheme.color.White,
     contentColor: Color = contentColorFor(backgroundColor = backgroundColor),
     content: @Composable RowScope.() -> Unit
 ) {
-    Surface(
-        color = backgroundColor,
-        contentColor = contentColor
-    ) {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .height(DailyDimen.NavBarHeight)
-                .selectableGroup(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            content = content
-        )
+    if (visibility) {
+        Surface(
+            color = backgroundColor,
+            contentColor = contentColor
+        ) {
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .height(DailyDimen.NavBarHeight)
+                    .selectableGroup(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                content = content
+            )
+        }
     }
 }

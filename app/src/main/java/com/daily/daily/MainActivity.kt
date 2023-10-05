@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -31,12 +30,11 @@ import com.daily.navigation.DailyNavHost
 import com.daily.navigation.Destinations
 import com.daily.navigation.destinations
 import com.daily.navigation.navigateToDestination
-import com.daily.presentation.view.auth.intro.navigation.introRoute
+import com.daily.presentation.view.intro.navigation.introRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : androidx.activity.ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

@@ -1,16 +1,11 @@
 package com.daily.daily
 
 import android.graphics.Color
-import android.os.Build
 import android.view.Window
-import androidx.annotation.RequiresApi
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.WindowCompat
 
-@RequiresApi(Build.VERSION_CODES.R)
 fun Window.setTransparentStatusBar() {
-    this.apply {
-        statusBarColor = Color.TRANSPARENT
-        setDecorFitsSystemWindows(false)
-        WindowInsetsControllerCompat(this, this.decorView).isAppearanceLightStatusBars = true
-    }
+    statusBarColor = Color.TRANSPARENT
+    WindowCompat.setDecorFitsSystemWindows(this, false)
+    WindowCompat.getInsetsController(this, this.decorView).isAppearanceLightStatusBars = true
 }

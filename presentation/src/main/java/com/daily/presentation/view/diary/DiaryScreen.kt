@@ -27,8 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.daily.designsystem.modifier.dailyClickable
-import com.daily.designsystem.theme.Body2
-import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.IcBack
 import com.daily.designsystem.theme.IcTrashCan
 import com.daily.designsystem.theme.IcWrite
@@ -37,7 +35,7 @@ import com.daily.presentation.R
 @Composable
 fun DiaryScreen(
     modifier: Modifier = Modifier,
-    isEditable: Boolean
+    date: String?
 ) {
     var content by remember { mutableStateOf("") }
 
@@ -52,7 +50,7 @@ fun DiaryScreen(
             .systemBarsPadding()
     ) {
         Spacer(modifier = modifier.height(16.dp))
-        DiaryTopBar(isEditable = isEditable)
+//        DiaryTopBar(isEditable = isEditable) TODO: 일기 조회 기능 추가한 후 수정
         Spacer(modifier = modifier.height(16.dp))
         BasicTextField(
             value = content,
@@ -64,18 +62,19 @@ fun DiaryScreen(
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp
             ),
-            readOnly = !isEditable,
+//            readOnly = !isEditable,  TODO: 일기 조회 기능 추가한 후 수정
             decorationBox = { innerTextField ->
                 Box(
                     modifier = modifier.fillMaxWidth(),
                     contentAlignment = Alignment.CenterStart
                 ) {
-                    if (content.isEmpty() && isEditable) {
-                        Body2(
-                            text = "적어!",
-                            textColor = DailyTheme.color.Hint,
-                        )
-                    }
+//                    TODO: 일기 조회 기능 추가한 후 수정
+//                    if (content.isEmpty() && isEditable) {
+//                        Body2(
+//                            text = "적어!",
+//                            textColor = DailyTheme.color.Hint,
+//                        )
+//                    }
                     innerTextField()
                 }
             }

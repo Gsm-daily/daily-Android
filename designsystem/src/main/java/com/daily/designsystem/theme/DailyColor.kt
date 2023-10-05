@@ -31,6 +31,8 @@ object DailyColor {
 
         val KakaoContainerColor = Color(0xFFFEE500)
         val KakaoLabelColor = Color(0xD9000000)
+
+        val BottomSheetColor = Color(0xB8FFFFFF)
     }
 }
 

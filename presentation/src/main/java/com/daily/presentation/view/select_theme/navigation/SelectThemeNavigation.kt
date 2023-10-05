@@ -1,10 +1,10 @@
-package com.daily.presentation.view.auth.select_theme.navigation
+package com.daily.presentation.view.select_theme.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.daily.presentation.view.auth.intro.navigation.introRoute
-import com.daily.presentation.view.auth.select_theme.SelectThemeScreen
+import com.daily.presentation.view.intro.navigation.introRoute
+import com.daily.presentation.view.select_theme.SelectThemeScreen
 
 const val selectThemeRoute = "select_theme"
 

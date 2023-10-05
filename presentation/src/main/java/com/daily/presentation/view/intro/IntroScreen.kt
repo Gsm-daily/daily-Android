@@ -1,4 +1,4 @@
-package com.daily.presentation.view.auth.intro
+package com.daily.presentation.view.intro
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image

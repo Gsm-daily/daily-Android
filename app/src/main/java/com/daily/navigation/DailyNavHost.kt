@@ -3,7 +3,7 @@ package com.daily.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.daily.presentation.view.auth.select_theme.navigation.selectThemeScreen
+import com.daily.presentation.view.select_theme.navigation.selectThemeScreen
 import com.daily.presentation.view.main.navigation.mainScreen
 import com.daily.presentation.view.main.navigation.navigateToMain
 import com.daily.presentation.view.my_theme.navigation.myThemeScreen

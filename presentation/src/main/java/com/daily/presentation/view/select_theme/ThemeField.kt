@@ -1,4 +1,4 @@
-package com.daily.presentation.view.auth.select_theme
+package com.daily.presentation.view.select_theme
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*

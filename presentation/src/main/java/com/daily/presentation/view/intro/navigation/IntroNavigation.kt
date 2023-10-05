@@ -1,8 +1,8 @@
-package com.daily.presentation.view.auth.intro.navigation
+package com.daily.presentation.view.intro.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.daily.presentation.view.auth.intro.IntroScreen
+import com.daily.presentation.view.intro.IntroScreen
 
 const val introRoute = "intro_route"
 

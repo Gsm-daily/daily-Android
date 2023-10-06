@@ -10,7 +10,6 @@ import com.daily.domain.usecase.account.ChoiceThemeUseCase
 import com.daily.domain.usecase.account.GetThemeDiaryCountUseCase
 import com.daily.domain.usecase.account.GetThemeUseCase
 import com.daily.presentation.viewmodel.util.UiState
-import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -41,16 +40,8 @@ class AccountViewModel @Inject constructor(
             choiceThemeUseCase(theme)
                 .onSuccess {
                     _choiceThemeUiState.value = UiState.Success()
-                }
-                .onFailure {
-                    it.exceptionHandling(
-                        badRequestAction = { _choiceThemeUiState.value = UiState.BadRequest },
-                        unauthorizedAction = { _choiceThemeUiState.value = UiState.Unauthorized },
-                        forbiddenAction = { _choiceThemeUiState.value = UiState.Forbidden },
-                        notFoundAction = { _choiceThemeUiState.value = UiState.NotFound },
-                        conflictAction = { _choiceThemeUiState.value = UiState.Conflict },
-                        unknownAction = { _choiceThemeUiState.value = UiState.Unknown }
-                    )
+                }.onFailure {
+                    _choiceThemeUiState.value = UiState.Error(it.message)
                 }
         }
     }
@@ -58,20 +49,12 @@ class AccountViewModel @Inject constructor(
     fun changePassword(email: String, newPassword: String) {
         viewModelScope.launch {
             changePasswordUseCase(
-                ChangePasswordRequest(
-                    email = email,
-                    newPassword = newPassword
-                )
+                ChangePasswordRequest(email = email, newPassword = newPassword)
             )
                 .onSuccess {
                     _changePasswordUiState.value = UiState.Success()
-                }
-                .onFailure {
-                    it.exceptionHandling(
-                        badRequestAction = { _changePasswordUiState.value = UiState.BadRequest },
-                        notFoundAction = { _changePasswordUiState.value = UiState.NotFound },
-                        unknownAction = { _changePasswordUiState.value = UiState.Unknown }
-                    )
+                }.onFailure {
+                    _changePasswordUiState.value = UiState.Error(it.message)
                 }
         }
     }
@@ -81,13 +64,8 @@ class AccountViewModel @Inject constructor(
             getThemeUseCase()
                 .onSuccess {
                     _myThemeUiState.value = UiState.Success(it)
-                }
-                .onFailure {
-                    it.exceptionHandling(
-                        unauthorizedAction = { _myThemeUiState.value = UiState.Unauthorized },
-                        forbiddenAction = { _myThemeUiState.value = UiState.Forbidden },
-                        notFoundAction = { _myThemeUiState.value = UiState.NotFound }
-                    )
+                }.onFailure {
+                    _myThemeUiState.value = UiState.Error(it.message)
                 }
         }
     }
@@ -97,13 +75,8 @@ class AccountViewModel @Inject constructor(
             getThemeDiaryCountUseCase(theme)
                 .onSuccess {
                     _countUiState.value = UiState.Success(it)
-                }
-                .onFailure {
-                    it.exceptionHandling(
-                        unauthorizedAction = { _countUiState.value = UiState.Unauthorized },
-                        forbiddenAction = { _countUiState.value = UiState.Forbidden },
-                        notFoundAction = { _countUiState.value = UiState.NotFound }
-                    )
+                }.onFailure {
+                    _countUiState.value = UiState.Error(it.message)
                 }
         }
     }

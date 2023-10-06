@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.daily.domain.model.diary.response.SeasonResponse
 import com.daily.domain.usecase.diary.GetSeasonUseCase
 import com.daily.presentation.viewmodel.util.UiState
-import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,13 +21,10 @@ class MainViewModel @Inject constructor(
     fun getSeason() {
         viewModelScope.launch {
             getSeasonUseCase()
-                .onSuccess { _uiState.value = UiState.Success(it) }
-                .onFailure {
-                    it.exceptionHandling(
-                        unauthorizedAction = { _uiState.value = UiState.Unauthorized },
-                        forbiddenAction = { _uiState.value = UiState.Forbidden },
-                        notFoundAction = { _uiState.value = UiState.NotFound }
-                    )
+                .onSuccess {
+                    _uiState.value = UiState.Success(it)
+                }.onFailure {
+                    _uiState.value = UiState.Error(it.message)
                 }
         }
     }

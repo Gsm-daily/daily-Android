@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
@@ -22,59 +21,75 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.daily.designsystem.modifier.dailyClickable
+import com.daily.designsystem.theme.Body2
+import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.IcBack
 import com.daily.designsystem.theme.IcTrashCan
 import com.daily.designsystem.theme.IcWrite
+import com.daily.designsystem.theme.notosanskr
 import com.daily.presentation.R
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun DiaryScreen(
     modifier: Modifier = Modifier,
     date: String?
 ) {
+    // TODO: 해당 날짜의 일기를 조회
     var content by remember { mutableStateOf("") }
+    var isEditable by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(start = 12.dp, end = 20.dp)
             .paint(
                 painter = painterResource(id = R.drawable.bg_diary),
                 contentScale = ContentScale.Crop,
             )
+            .padding(horizontal = 24.dp)
             .systemBarsPadding()
     ) {
-        Spacer(modifier = modifier.height(16.dp))
-//        DiaryTopBar(isEditable = isEditable) TODO: 일기 조회 기능 추가한 후 수정
-        Spacer(modifier = modifier.height(16.dp))
+        DiaryTopBar(
+            date = LocalDate.parse(date),
+            isEditable = isEditable,
+            onBackClick = { /* TODO: 뒤로가기 로직 */ },
+            onSaveClick = {
+                /* TODO: 일기 저장 로직 추가 */
+                isEditable = false
+            },
+            onEditClick = { isEditable = true },
+            onDeleteClick = { /* TODO: 일기 삭제 로직 */ }
+        )
         BasicTextField(
+            modifier = modifier.fillMaxWidth(),
             value = content,
             onValueChange = { content = it },
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(start = 8.dp, end = 4.dp),
             textStyle = TextStyle(
+                fontFamily = notosanskr,
                 fontWeight = FontWeight.Normal,
-                fontSize = 16.sp
+                fontSize = 16.sp,
+                platformStyle = PlatformTextStyle(includeFontPadding = false)
             ),
-//            readOnly = !isEditable,  TODO: 일기 조회 기능 추가한 후 수정
+            readOnly = !isEditable,
             decorationBox = { innerTextField ->
                 Box(
                     modifier = modifier.fillMaxWidth(),
                     contentAlignment = Alignment.CenterStart
                 ) {
-//                    TODO: 일기 조회 기능 추가한 후 수정
-//                    if (content.isEmpty() && isEditable) {
-//                        Body2(
-//                            text = "적어!",
-//                            textColor = DailyTheme.color.Hint,
-//                        )
-//                    }
+                    if (content.isEmpty() && isEditable) {
+                        Body2(
+                            text = "적어!",
+                            textColor = DailyTheme.color.Hint
+                        )
+                    }
                     innerTextField()
                 }
             }
@@ -85,39 +100,73 @@ fun DiaryScreen(
 @Composable
 fun DiaryTopBar(
     modifier: Modifier = Modifier,
-    isEditable: Boolean
+    date: LocalDate,
+    isEditable: Boolean,
+    onBackClick: () -> Unit,
+    onSaveClick: () -> Unit,
+    onEditClick: () -> Unit,
+    onDeleteClick: () -> Unit
 ) {
+    val formattedDate = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일").format(date)
+
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         IcBack(
+            modifier = modifier
+                .dailyClickable(
+                    rippleEnable = false,
+                    onClick = onBackClick
+                )
+                .padding(top = 2.dp),
             contentDescription = "back",
-            modifier = modifier.dailyClickable(rippleEnable = false) { }
         )
         Spacer(modifier = modifier.width(10.dp))
         Text(
-            text = "2005년 02월 10일",
-            fontWeight = FontWeight.Medium,
-            fontSize = 18.sp
+            text = formattedDate,
+            style = TextStyle(
+                fontFamily = notosanskr,
+                fontWeight = FontWeight.Medium,
+                fontSize = 18.sp,
+                platformStyle = PlatformTextStyle(includeFontPadding = false)
+            )
         )
         Spacer(modifier = modifier.weight(1f))
         if (isEditable) {
             Text(
+                modifier = Modifier.dailyClickable(
+                    rippleEnable = false,
+                    onClick = onSaveClick
+                ),
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
                 text = "저장"
             )
         } else {
             IcWrite(
-                contentDescription = "write_diary",
-                modifier = modifier.dailyClickable(rippleEnable = false) { }
+                modifier = modifier.dailyClickable(
+                    rippleEnable = false,
+                    onClick = onEditClick
+                ),
+                contentDescription = "write_diary"
             )
             Spacer(modifier = modifier.width(16.dp))
             IcTrashCan(
-                contentDescription = "delete_diary",
-                modifier = modifier.dailyClickable(rippleEnable = false) { }
+                modifier = modifier.dailyClickable(
+                    rippleEnable = false,
+                    onClick = onDeleteClick
+                ),
+                contentDescription = "delete_diary"
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun DiaryScreenPreview() {
+    DiaryScreen(date = LocalDate.now().toString())
 }

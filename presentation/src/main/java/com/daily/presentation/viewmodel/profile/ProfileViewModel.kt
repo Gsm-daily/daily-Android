@@ -1,6 +1,5 @@
 package com.daily.presentation.viewmodel.profile
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daily.domain.model.diary.response.DiaryResponse
@@ -12,7 +11,6 @@ import com.daily.domain.usecase.account.GetProfileUseCase
 import com.daily.domain.usecase.image.ImageUploadUseCase
 import com.daily.domain.usecase.account.UpdateProfileUseCase
 import com.daily.presentation.viewmodel.util.UiState
-import com.daily.presentation.viewmodel.util.exceptionHandling
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -41,12 +39,8 @@ class ProfileViewModel @Inject constructor(
             getProfileUseCase()
                 .onSuccess {
                     _profileUiState.value = UiState.Success(it)
-                }
-                .onFailure {
-                    it.exceptionHandling(
-                        unauthorizedAction = { _profileUiState.value = UiState.Unauthorized },
-                        notFoundAction = { _profileUiState.value = UiState.NotFound }
-                    )
+                }.onFailure {
+                    _profileUiState.value = UiState.Error(it.message)
                 }
         }
     }
@@ -55,14 +49,9 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             updateProfileUseCase(body)
                 .onSuccess {
-                    Log.d("updateProfile", "success")
-                }
-                .onFailure {
-                    it.exceptionHandling(
-                        badRequestAction = { Log.d("updateProfile", "badRequest") },
-                        unauthorizedAction = { Log.d("updateProfile", "unauthorized") },
-                        notFoundAction = { Log.d("updateProfile", "notFound") }
-                    )
+
+                }.onFailure {
+
                 }
         }
     }
@@ -72,11 +61,8 @@ class ProfileViewModel @Inject constructor(
             getAllDiaryUseCase()
                 .onSuccess {
                     _diaryUiState.value = UiState.Success(it)
-                }
-                .onFailure {
-                    it.exceptionHandling(
-                        unauthorizedAction = { _diaryUiState.value = UiState.Unauthorized }
-                    )
+                }.onFailure {
+                   _diaryUiState.value = UiState.Error(it.message)
                 }
         }
     }
@@ -86,11 +72,8 @@ class ProfileViewModel @Inject constructor(
             imageUploadUseCase(body)
                 .onSuccess {
                     _uploadUiState.value = UiState.Success(it)
-                }
-                .onFailure {
-                    it.exceptionHandling(
-                        badRequestAction = { _uploadUiState.value = UiState.BadRequest }
-                    )
+                }.onFailure {
+                    _uploadUiState.value = UiState.Error(it.message)
                 }
         }
     }

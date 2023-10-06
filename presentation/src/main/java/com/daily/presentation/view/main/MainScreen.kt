@@ -47,7 +47,7 @@ fun MainScreen(
                     modifier = modifier
                         .fillMaxSize()
                         .paint(
-                            painter = painterResource(id = background),
+                            painter = painterResource(id = R.drawable.bg_autumn),
                             contentScale = ContentScale.Crop
                         )
                         .systemBarsPadding()
@@ -58,10 +58,8 @@ fun MainScreen(
                 }
             }
         }
-        UiState.Unauthorized -> {}
-        UiState.Forbidden -> {}
-        UiState.NotFound -> {}
-        else -> {}
+        is UiState.Error -> TODO()
+        UiState.Loading -> TODO()
     }
 }
 

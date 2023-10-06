@@ -113,18 +113,13 @@ fun ProfileScreen(
                             }
                         }
                     }
-
-                    UiState.Loading -> {}
-                    UiState.Unauthorized -> {}
-                    else -> {} // 알 수 없는 오류
+                    is UiState.Error -> TODO()
+                    UiState.Loading -> TODO()
                 }
             }
         }
-
-        UiState.Loading -> {}
-        UiState.Unauthorized -> {}
-        UiState.NotFound -> {}
-        else -> {} // 알 수 없는 오류
+        is UiState.Error -> TODO()
+        UiState.Loading -> TODO()
     }
 }
 
@@ -139,7 +134,6 @@ fun DiaryHeader(
 ) {
     when (uploadUiState) {
         is UiState.Success -> updateProfile(uploadUiState.data!!.imageUrl)
-        UiState.BadRequest -> {}
         else -> {}
     }
 

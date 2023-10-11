@@ -15,154 +15,96 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daily.designsystem.theme.Caption1
 import com.daily.designsystem.theme.DailyColor
 import com.daily.designsystem.theme.DailyTheme
 import com.daily.designsystem.theme.Subtitle1
-import com.daily.domain.model.image.response.ImageResponse
-import com.daily.domain.model.account.request.ProfileRequest
-import com.daily.domain.model.account.response.ProfileResponse
 import com.daily.presentation.R
-import com.daily.presentation.viewmodel.profile.ProfileViewModel
-import com.daily.presentation.viewmodel.util.UiState
-import okhttp3.MultipartBody
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Composable
-fun ProfileScreen(
-    modifier: Modifier = Modifier,
-    viewModel: ProfileViewModel = hiltViewModel()
-) {
-    LaunchedEffect(Unit) {
-        viewModel.getProfile()
-    }
+fun ProfileScreen(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(DailyTheme.color.Background)
+            .systemBarsPadding()
+    ) {
+        val lazyListState = rememberLazyListState()
+        val showShadow by remember {
+            derivedStateOf { lazyListState.firstVisibleItemIndex > 0 }
+        }
 
-    val diaryUiState by viewModel.diaryUiState.collectAsStateWithLifecycle()
-    val uploadUiState by viewModel.uploadUiState.collectAsStateWithLifecycle()
-    val profileUiState by viewModel.profileUiState.collectAsStateWithLifecycle()
+        DiaryHeader(
+            modifier = Modifier.shadow(
+                elevation = if (showShadow) 16.dp else 0.dp,
+                spotColor = DailyColor.Shadow
+            ),
+            name = "데일리_선",
+            email = "s31011@gsm.hs.kr",
+        )
 
-    when (val profileState = profileUiState) {
-        is UiState.Success -> {
-            var profileImage by remember { mutableStateOf(profileState.data!!.profileUrl) }
+        LazyColumn(
+            state = lazyListState,
+            modifier = modifier.padding(horizontal = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(top = 16.dp),
+        ) {
+            items(20) {
+                val title = "화장실에서 선민재를 봤는데 선민재가 갑자기 넘어졌다."
+                val createdDate = LocalDate.now()
 
-            Column(
-                modifier = modifier
-                    .fillMaxSize()
-                    .background(DailyTheme.color.Background)
-                    .systemBarsPadding()
-            ) {
-                val listState = rememberLazyListState()
-                val showShadow by remember {
-                    derivedStateOf { listState.firstVisibleItemIndex > 0 }
-                }
-
-                DiaryHeader(
-                    profile = profileState.data!!,
-                    showShadow = showShadow,
-                    uploadUiState = uploadUiState,
-                    imageUpload = { viewModel.imageUpload(it) }
-                ) { url ->
-                    val profile = profileState.data
-
-                    viewModel.updateProfile(
-                        ProfileRequest(
-                            name = profile.name,
-                            email = profile.email,
-                            profileUrl = url
-                        )
-                    )
-                    profileImage = url
-                }
-
-                when (val diaryState = diaryUiState) {
-                    is UiState.Success -> {
-                        val diary = diaryState.data!!
-
-                        LazyColumn(
-                            state = listState,
-                            modifier = modifier.padding(horizontal = 20.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
-                            contentPadding = PaddingValues(top = 16.dp)
-                        ) {
-                            items(diary) {
-                                val month = it.date.monthValue
-                                val day = it.date.dayOfMonth
-
-                                DiaryItem(title = it.content, date = "${month}월 ${day}일")
-                            }
-                        }
-                    }
-                    is UiState.Error -> TODO()
-                    UiState.Loading -> TODO()
-                }
+                DiaryItem(title = title, createdDate = createdDate)
             }
         }
-        is UiState.Error -> TODO()
-        UiState.Loading -> TODO()
     }
 }
 
 @Composable
 fun DiaryHeader(
     modifier: Modifier = Modifier,
-    uploadUiState: UiState<ImageResponse>,
-    profile: ProfileResponse,
-    showShadow: Boolean,
-    imageUpload: (body: MultipartBody.Part) -> Unit,
-    updateProfile: (url: String) -> Unit
+    name: String,
+    email: String,
 ) {
-    when (uploadUiState) {
-        is UiState.Success -> updateProfile(uploadUiState.data!!.imageUrl)
-        else -> {}
-    }
-
     Surface(
-        modifier = modifier
-            .fillMaxWidth()
-            .shadow(
-                elevation = if (showShadow) 16.dp else 0.dp,
-                spotColor = DailyColor.Shadow
-            ),
+        modifier = modifier.fillMaxWidth(),
         color = DailyTheme.color.Background
     ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(start = 20.dp, end = 20.dp, top =  48.dp, bottom = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_profile),
                 contentDescription = "profile",
-                modifier = modifier.size(80.dp)
+                modifier = Modifier.size(80.dp)
             )
-            Spacer(modifier = modifier.width(16.dp))
-            Column(modifier = modifier.fillMaxWidth()) {
-                Subtitle1(text = profile.name)
-                Spacer(modifier = modifier.height(8.dp))
+            Column(modifier = Modifier.fillMaxWidth()) {
+                Subtitle1(text = name)
+                Spacer(modifier = Modifier.height(8.dp))
                 Caption1(
-                    text = profile.email,
+                    text = email,
                     textColor = DailyColor.Neutral30
                 )
             }
@@ -174,8 +116,10 @@ fun DiaryHeader(
 fun DiaryItem(
     modifier: Modifier = Modifier,
     title: String,
-    date: String
+    createdDate: LocalDate
 ) {
+    val formattedDate = DateTimeFormatter.ofPattern("MM월 dd일").format(createdDate)
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -193,11 +137,17 @@ fun DiaryItem(
         )
         Spacer(modifier = modifier.width(25.dp))
         Text(
-            text = date,
+            text = formattedDate,
             fontWeight = FontWeight.Medium,
             fontSize = 12.sp,
             color = DailyColor.Neutral40,
             maxLines = 1
         )
     }
+}
+
+@Preview
+@Composable
+fun ProfileScreenPreview() {
+    ProfileScreen()
 }

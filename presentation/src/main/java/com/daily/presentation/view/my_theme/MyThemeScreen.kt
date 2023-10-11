@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.daily.designsystem.modifier.dailyClickable
 import com.daily.designsystem.theme.IcBack
@@ -23,15 +24,21 @@ fun MyThemeScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(horizontal = 16.dp)
             .paint(
-                painter = painterResource(id = R.drawable.bg_ocean7),
+                painter = painterResource(id = R.drawable.bg_ocean_7),
                 contentScale = ContentScale.Crop,
             )
             .systemBarsPadding()
     ) {
-        Spacer(modifier = modifier.height(8.dp))
+        Spacer(modifier = modifier.height(13.dp))
         IcBack(
             contentDescription = "back",
             modifier = modifier.dailyClickable(rippleEnable = false) {  }
         )
     }
+}
+
+@Preview
+@Composable
+fun MyThemeScreenPreview() {
+    MyThemeScreen()
 }
